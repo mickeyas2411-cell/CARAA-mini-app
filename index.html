@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CARAA Mini App</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f7fa;
+      color: #222;
+    }
+
+    header {
+      background: linear-gradient(135deg, #047857, #10b981);
+      color: white;
+      padding: 22px 18px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 30px;
+      margin-bottom: 6px;
+    }
+
+    header p {
+      font-size: 14px;
+      opacity: 0.9;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    .welcome {
+      background: white;
+      border-radius: 16px;
+      padding: 25px;
+      text-align: center;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+      margin-bottom: 20px;
+    }
+
+    .welcome h2 {
+      color: #047857;
+      margin-bottom: 10px;
+    }
+
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    button {
+      border: none;
+      padding: 15px;
+      border-radius: 12px;
+      background: #047857;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #065f46;
+    }
+
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 15px;
+      margin-top: 15px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.06);
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      color: #777;
+      font-size: 13px;
+    }
+
+    @media (max-width: 600px) {
+      .buttons {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>CARAA</h1>
+    <p>CARAA Mini App</p>
+  </header>
+
+  <main class="container">
+
+    <section class="welcome">
+      <h2>Welcome to CARAA</h2>
+      <p>ወደ CARAA Mini App እንኳን በደህና መጡ!</p>
+
+      <div class="buttons">
+        <button onclick="showMessage('Cars')">
+          🚗 Cars
+        </button>
+
+        <button onclick="showMessage('Marketplace')">
+          🛒 Marketplace
+        </button>
+
+        <button onclick="showMessage('Sell')">
+          💰 Sell
+        </button>
+
+        <button onclick="showMessage('Profile')">
+          👤 Profile
+        </button>
+      </div>
+    </section>
+
+    <div id="result"></div>
+
+  </main>
+
+  <footer>
+    © 2026 CARAA Mini App
+  </footer>
+
+  <script>
+    function showMessage(page) {
+      document.getElementById("result").innerHTML = `
+        <div class="card">
+          <h3>${page}</h3>
+          <p>${page} section is ready.</p>
+        </div>
+      `;
+    }
+  </script>
+
+</body>
+</html>
