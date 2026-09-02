@@ -578,14 +578,6 @@ button{cursor:pointer}
   font-size:10px;
   font-weight:900;
 }
-.simpleWinnerPanel.autoCloseHint:after{
-  content:"5 ሰከንድ በኋላ ይዘጋል";
-  display:block;
-  margin-top:9px;
-  color:#8fdcff;
-  font-size:10px;
-  font-weight:900;
-}
 @media(max-width:680px){
   .endedHeroCard{flex-basis:190px;grid-template-columns:54px 1fr}
   .endedHeroCard img{width:54px;height:54px}
@@ -627,6 +619,834 @@ button{cursor:pointer}
   font-size:9px;
   font-weight:900;
   letter-spacing:.2px;
+}
+
+
+/* PAYMENT ACCOUNT OWNER + 3 PHOTO DISPLAY + BETTER SPECS */
+.accountOwner{
+  display:block!important;
+  margin-top:4px;
+  color:#8fdcff!important;
+  font-size:9px!important;
+  font-weight:1000!important;
+  letter-spacing:.2px;
+}
+.miniPhotoSlider{
+  position:relative;
+  width:100%;
+  height:100%;
+  overflow:hidden;
+  background:#eef1f5;
+}
+.miniPhotoSlider img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  padding:8px;
+  opacity:0;
+  animation:caraaPhotoSlide 9s infinite;
+}
+.miniPhotoCount{
+  position:absolute;
+  right:12px;
+  bottom:12px;
+  z-index:20;
+  padding:5px 8px;
+  border-radius:999px;
+  background:rgba(2,8,22,.72);
+  border:1px solid rgba(255,255,255,.15);
+  color:#fff;
+  font-size:9px;
+  font-weight:1000;
+  backdrop-filter:blur(8px);
+}
+@keyframes caraaPhotoSlide{
+  0%,28%{opacity:1}
+  34%,100%{opacity:0}
+}
+#supabaseRaffleCards .phoneInfo .specChips{
+  gap:6px!important;
+  margin-top:10px!important;
+  margin-bottom:12px!important;
+}
+#supabaseRaffleCards .phoneInfo .specChip{
+  min-height:24px!important;
+  padding:5px 8px!important;
+  border-radius:999px!important;
+  background:linear-gradient(135deg,rgba(37,99,235,.17),rgba(124,58,237,.13))!important;
+  border:1px solid rgba(34,211,238,.16)!important;
+  color:#eaf7ff!important;
+  font-size:10px!important;
+  font-weight:900!important;
+  box-shadow:inset 0 0 12px rgba(25,194,255,.04);
+}
+.endedHeroSlider{
+  width:100%!important;
+  padding:15px!important;
+}
+.endedHeroCard{
+  flex:0 0 100%!important;
+  grid-template-columns:92px 1fr!important;
+  padding:13px!important;
+  border-radius:20px!important;
+}
+.endedHeroCard img{
+  width:92px!important;
+  height:92px!important;
+}
+.endedHeroCard h4{
+  font-size:14px!important;
+}
+.endedHeroCard p{
+  font-size:10px!important;
+}
+@media(max-width:680px){
+  .endedHeroCard{
+    flex-basis:100%!important;
+    grid-template-columns:70px 1fr!important;
+  }
+  .endedHeroCard img{width:70px!important;height:70px!important}
+}
+
+
+.winnerAutoCloseText{
+  display:none;
+  margin-top:9px;
+  color:#8fdcff;
+  font-size:10px;
+  font-weight:900;
+}
+.simpleWinnerPanel.autoCloseHint .winnerAutoCloseText{display:block}
+
+
+/* FULL-SCREEN ENDED RAFFLE DISPLAY SLIDER */
+#home > .endedHeroSlider{
+  width:calc(100% - 32px)!important;
+  min-height:70dvh!important;
+  margin:16px auto!important;
+  padding:16px!important;
+  border-radius:28px!important;
+  background:
+    radial-gradient(circle at 85% 12%,rgba(25,194,255,.23),transparent 32%),
+    radial-gradient(circle at 12% 92%,rgba(124,58,237,.22),transparent 36%),
+    linear-gradient(145deg,#061126,#0c1433 55%,#080b20)!important;
+  border:1px solid rgba(34,211,238,.18)!important;
+  box-shadow:0 24px 70px rgba(0,0,0,.34)!important;
+  display:flex!important;
+  flex-direction:column!important;
+}
+#home > .endedHeroSlider .endedHeroHead{
+  padding:4px 4px 14px!important;
+  margin:0!important;
+}
+#home > .endedHeroSlider .endedHeroHead strong{
+  font-size:24px!important;
+  line-height:1.1!important;
+}
+#home > .endedHeroSlider .endedHeroHead small{
+  font-size:12px!important;
+}
+#home > .endedHeroSlider .endedHeroTrack{
+  flex:1!important;
+  min-height:0!important;
+  display:flex!important;
+  gap:14px!important;
+  overflow-x:auto!important;
+  scroll-snap-type:x mandatory!important;
+  padding:0 2px 8px!important;
+}
+#home > .endedHeroSlider .endedHeroCard{
+  flex:0 0 100%!important;
+  min-height:calc(70dvh - 85px)!important;
+  scroll-snap-align:center!important;
+  display:grid!important;
+  grid-template-columns:minmax(240px,45%) 1fr!important;
+  gap:18px!important;
+  align-items:center!important;
+  padding:18px!important;
+  border-radius:24px!important;
+  background:
+    radial-gradient(circle at 15% 15%,rgba(25,194,255,.16),transparent 35%),
+    linear-gradient(135deg,rgba(37,99,235,.18),rgba(124,58,237,.13))!important;
+  border:1px solid rgba(34,211,238,.18)!important;
+}
+.endedFullPhotoGrid{
+  width:100%;
+  height:100%;
+  min-height:320px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  grid-template-rows:1fr 1fr;
+  gap:10px;
+}
+.endedFullPhotoGrid img{
+  width:100%!important;
+  height:100%!important;
+  min-height:0!important;
+  border-radius:18px!important;
+  object-fit:contain!important;
+  background:#eef1f5!important;
+  padding:10px!important;
+}
+.endedFullPhotoGrid img:first-child{
+  grid-row:1 / span 2;
+}
+#home > .endedHeroSlider .endedHeroCard h4{
+  font-size:30px!important;
+  line-height:1.1!important;
+  white-space:normal!important;
+}
+#home > .endedHeroSlider .endedHeroCard .endedTag{
+  margin-top:12px!important;
+  font-size:12px!important;
+  padding:7px 11px!important;
+}
+#home > .endedHeroSlider .endedHeroCard p{
+  margin-top:15px!important;
+  font-size:16px!important;
+  line-height:1.7!important;
+}
+#home > .endedHeroSlider .endedHeroEmpty{
+  width:100%!important;
+  min-height:calc(70dvh - 85px)!important;
+  display:grid!important;
+  place-items:center!important;
+  font-size:18px!important;
+}
+.photoTriple{
+  width:100%;
+  height:100%;
+  display:grid;
+  grid-template-columns:2fr 1fr;
+  grid-template-rows:1fr 1fr;
+  gap:7px;
+  background:#eef1f5;
+  padding:8px;
+}
+.photoTriple img{
+  width:100%;
+  height:100%;
+  min-height:0;
+  object-fit:contain;
+  border-radius:12px;
+  background:#fff;
+}
+.photoTriple img:first-child{
+  grid-row:1 / span 2;
+}
+.photoTriple.two img:first-child{
+  grid-row:auto;
+  grid-column:1 / span 1;
+}
+@media(max-width:760px){
+  #home > .endedHeroSlider{
+    min-height:82dvh!important;
+    width:calc(100% - 24px)!important;
+    padding:13px!important;
+    border-radius:24px!important;
+  }
+  #home > .endedHeroSlider .endedHeroHead strong{font-size:20px!important}
+  #home > .endedHeroSlider .endedHeroCard{
+    grid-template-columns:1fr!important;
+    min-height:calc(82dvh - 85px)!important;
+    align-content:start!important;
+  }
+  .endedFullPhotoGrid{min-height:260px}
+  #home > .endedHeroSlider .endedHeroCard h4{font-size:22px!important}
+  #home > .endedHeroSlider .endedHeroCard p{font-size:13px!important}
+}
+
+
+/* FORCE CUSTOMER 3 PHOTOS VISIBLE */
+.phoneGallery .phoneMainImageTriple,
+.phoneGallery .photoTriple{
+  width:100%!important;
+  height:100%!important;
+  min-height:280px!important;
+  display:grid!important;
+  grid-template-columns:2fr 1fr!important;
+  grid-template-rows:1fr 1fr!important;
+  gap:7px!important;
+  background:#eef1f5!important;
+  padding:8px!important;
+}
+.phoneGallery .phoneMainImageTriple img,
+.phoneGallery .photoTriple img{
+  width:100%!important;
+  height:100%!important;
+  min-height:0!important;
+  object-fit:contain!important;
+  border-radius:12px!important;
+  background:#fff!important;
+  padding:5px!important;
+  opacity:1!important;
+  animation:none!important;
+  position:static!important;
+}
+.phoneGallery .phoneMainImageTriple img:first-child,
+.phoneGallery .photoTriple img:first-child{
+  grid-row:1 / span 2!important;
+}
+.phoneGallery .phoneMainImageTriple.two,
+.phoneGallery .photoTriple.two{
+  grid-template-columns:1fr 1fr!important;
+  grid-template-rows:1fr!important;
+}
+.phoneGallery .phoneMainImageTriple.two img:first-child,
+.phoneGallery .photoTriple.two img:first-child{
+  grid-row:auto!important;
+}
+.phoneGallery .miniPhotoCount{
+  position:absolute!important;
+  right:13px!important;
+  bottom:13px!important;
+  z-index:25!important;
+  padding:5px 8px!important;
+  border-radius:999px!important;
+  background:rgba(2,8,22,.78)!important;
+  border:1px solid rgba(255,255,255,.14)!important;
+  color:#fff!important;
+  font-size:9px!important;
+  font-weight:1000!important;
+}
+
+
+/* REAL FULL DISPLAY ENDED RAFFLE SLIDER */
+#home > .endedHeroSlider{
+  width:calc(100% - 24px)!important;
+  min-height:78dvh!important;
+  margin:14px auto 18px!important;
+  padding:16px!important;
+  border-radius:30px!important;
+  background:
+    radial-gradient(circle at 84% 12%,rgba(25,194,255,.24),transparent 34%),
+    radial-gradient(circle at 10% 92%,rgba(124,58,237,.25),transparent 38%),
+    linear-gradient(145deg,#061126,#0c1433 56%,#070a1c)!important;
+  border:1px solid rgba(34,211,238,.22)!important;
+  box-shadow:0 25px 80px rgba(0,0,0,.40)!important;
+  display:flex!important;
+  flex-direction:column!important;
+  overflow:hidden!important;
+}
+#home > .endedHeroSlider .endedHeroHead{
+  padding:4px 4px 14px!important;
+  margin:0!important;
+}
+#home > .endedHeroSlider .endedHeroHead strong{
+  font-size:26px!important;
+  font-weight:1000!important;
+  line-height:1.1!important;
+}
+#home > .endedHeroSlider .endedHeroHead small{
+  font-size:12px!important;
+  color:#8fdcff!important;
+}
+#home > .endedHeroSlider .endedHeroTrack{
+  flex:1!important;
+  min-height:0!important;
+  display:flex!important;
+  gap:16px!important;
+  overflow-x:auto!important;
+  overflow-y:hidden!important;
+  scroll-snap-type:x mandatory!important;
+  scroll-behavior:smooth!important;
+  padding:0 2px 10px!important;
+}
+#home > .endedHeroSlider .endedHeroTrack::-webkit-scrollbar{height:5px}
+#home > .endedHeroSlider .endedHeroTrack::-webkit-scrollbar-thumb{background:rgba(25,194,255,.35);border-radius:20px}
+#home > .endedHeroSlider .endedHeroCard{
+  flex:0 0 100%!important;
+  width:100%!important;
+  min-height:calc(78dvh - 92px)!important;
+  scroll-snap-align:center!important;
+  display:grid!important;
+  grid-template-columns:minmax(260px,46%) 1fr!important;
+  gap:22px!important;
+  align-items:center!important;
+  padding:22px!important;
+  border-radius:26px!important;
+  background:
+    radial-gradient(circle at 15% 15%,rgba(25,194,255,.18),transparent 36%),
+    linear-gradient(135deg,rgba(37,99,235,.20),rgba(124,58,237,.14))!important;
+  border:1px solid rgba(34,211,238,.22)!important;
+  box-shadow:inset 0 0 38px rgba(255,255,255,.035)!important;
+}
+.endedFullPhotoGrid{
+  width:100%!important;
+  height:100%!important;
+  min-height:430px!important;
+  display:grid!important;
+  grid-template-columns:2fr 1fr!important;
+  grid-template-rows:1fr 1fr!important;
+  gap:12px!important;
+  padding:12px!important;
+  border-radius:24px!important;
+  background:#eef1f5!important;
+}
+.endedFullPhotoGrid.count1{grid-template-columns:1fr!important;grid-template-rows:1fr!important}
+.endedFullPhotoGrid.count2{grid-template-columns:1fr 1fr!important;grid-template-rows:1fr!important}
+.endedFullPhotoGrid img{
+  width:100%!important;
+  height:100%!important;
+  object-fit:contain!important;
+  border-radius:18px!important;
+  background:#fff!important;
+  padding:10px!important;
+  position:static!important;
+  opacity:1!important;
+  animation:none!important;
+}
+.endedFullPhotoGrid.count3 img:first-child{
+  grid-row:1 / span 2!important;
+}
+#home > .endedHeroSlider .endedHeroCard h4{
+  font-size:34px!important;
+  line-height:1.1!important;
+  white-space:normal!important;
+  margin:0!important;
+}
+#home > .endedHeroSlider .endedHeroCard .endedTag{
+  margin-top:14px!important;
+  font-size:13px!important;
+  padding:8px 12px!important;
+}
+#home > .endedHeroSlider .endedHeroCard p{
+  margin-top:18px!important;
+  font-size:18px!important;
+  line-height:1.75!important;
+}
+.endedHeroDots{
+  display:flex;
+  justify-content:center;
+  gap:7px;
+  padding-top:10px;
+}
+.endedHeroDot{
+  width:8px;
+  height:8px;
+  border-radius:999px;
+  background:rgba(255,255,255,.25);
+}
+.endedHeroDot.active{
+  width:24px;
+  background:#19C2FF;
+}
+#home > .endedHeroSlider .endedHeroEmpty{
+  width:100%!important;
+  min-height:calc(78dvh - 92px)!important;
+  display:grid!important;
+  place-items:center!important;
+  font-size:18px!important;
+}
+.noPhoneImageBox,.noEndedPhoto{
+  display:grid!important;
+  place-items:center!important;
+  color:#64748b!important;
+  font-weight:1000!important;
+}
+@media(max-width:760px){
+  #home > .endedHeroSlider{
+    width:calc(100% - 20px)!important;
+    min-height:84dvh!important;
+    border-radius:24px!important;
+    padding:12px!important;
+  }
+  #home > .endedHeroSlider .endedHeroHead strong{font-size:20px!important}
+  #home > .endedHeroSlider .endedHeroCard{
+    grid-template-columns:1fr!important;
+    min-height:calc(84dvh - 92px)!important;
+    padding:14px!important;
+    align-content:start!important;
+  }
+  .endedFullPhotoGrid{
+    min-height:300px!important;
+    gap:8px!important;
+    padding:8px!important;
+    border-radius:18px!important;
+  }
+  #home > .endedHeroSlider .endedHeroCard h4{font-size:24px!important}
+  #home > .endedHeroSlider .endedHeroCard p{font-size:13px!important}
+}
+
+
+/* LANGUAGE REPAINT SUPPORT */
+[data-i18n], [data-i18n-placeholder]{transition:none}
+
+
+/* STRONG DRAW BUZZ + PAUSE */
+.simpleRollCard.strongBuzz{
+  animation:strongDrawBuzz .055s linear infinite, glowPulse .5s ease-in-out infinite alternate!important;
+}
+.simpleRollCard.finalPause{
+  animation:finalWinnerPulse .55s ease-in-out infinite alternate!important;
+  border-color:rgba(247,201,72,.72)!important;
+  box-shadow:0 0 70px rgba(247,201,72,.36),0 24px 70px rgba(0,0,0,.48)!important;
+}
+.simpleRollNumber.slowPulse{
+  animation:numberSlowPulse .45s ease-in-out infinite alternate!important;
+}
+@keyframes strongDrawBuzz{
+  0%{transform:translate(0,0) rotate(0) scale(.99)}
+  20%{transform:translate(4px,-2px) rotate(.55deg) scale(1.01)}
+  40%{transform:translate(-3px,3px) rotate(-.55deg) scale(1)}
+  60%{transform:translate(3px,2px) rotate(.35deg) scale(1.01)}
+  80%{transform:translate(-2px,-3px) rotate(-.35deg) scale(.99)}
+  100%{transform:translate(0,0) rotate(0) scale(1)}
+}
+@keyframes glowPulse{
+  from{box-shadow:0 0 35px rgba(25,194,255,.28),0 22px 60px rgba(0,0,0,.45)}
+  to{box-shadow:0 0 65px rgba(124,58,237,.42),0 22px 60px rgba(0,0,0,.45)}
+}
+@keyframes finalWinnerPulse{
+  from{transform:scale(.98)}
+  to{transform:scale(1.04)}
+}
+@keyframes numberSlowPulse{
+  from{letter-spacing:1px;text-shadow:0 0 22px rgba(25,194,255,.5)}
+  to{letter-spacing:4px;text-shadow:0 0 38px rgba(247,201,72,.7)}
+}
+
+
+/* CLEAR PAYMENT OWNER */
+.paymentTitleWithOwner{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:space-between!important;
+  gap:10px!important;
+  flex-wrap:wrap!important;
+}
+.paymentOwnerBadge{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  padding:5px 9px!important;
+  border-radius:999px!important;
+  background:linear-gradient(135deg,rgba(25,194,255,.18),rgba(124,58,237,.18))!important;
+  border:1px solid rgba(34,211,238,.32)!important;
+  color:#ffffff!important;
+  font-size:11px!important;
+  font-weight:1000!important;
+  letter-spacing:.2px!important;
+}
+.paymentAccount .accountOwner{
+  display:block!important;
+  margin-top:5px!important;
+  color:#8fdcff!important;
+  font-size:11px!important;
+  font-weight:1000!important;
+  line-height:1.25!important;
+}
+.paymentAccount .accountOwner b{
+  color:#ffffff!important;
+  font-weight:1000!important;
+}
+
+
+/* FINAL CUSTOMER PHOTO + SPECS UNDER PHOTO */
+.phoneGallery{
+  min-height:340px!important;
+  height:auto!important;
+  display:flex!important;
+  flex-direction:column!important;
+}
+.phoneGallery .phoneBadge{
+  position:absolute!important;
+}
+.phoneGallery .phoneMainImage,
+.phoneGallery .photoTriple{
+  flex:1 1 auto!important;
+  min-height:260px!important;
+}
+.phoneGallery .photoTriple{
+  position:relative!important;
+  width:100%!important;
+  display:grid!important;
+  grid-template-columns:2fr 1fr!important;
+  grid-template-rows:1fr 1fr!important;
+  gap:7px!important;
+  background:#eef1f5!important;
+  padding:8px!important;
+}
+.phoneGallery .photoTriple img{
+  width:100%!important;
+  height:100%!important;
+  min-height:0!important;
+  object-fit:contain!important;
+  border-radius:12px!important;
+  background:#fff!important;
+  padding:5px!important;
+  opacity:1!important;
+  position:static!important;
+  animation:none!important;
+  display:block!important;
+}
+.phoneGallery .photoTriple img:first-child{
+  grid-row:1 / span 2!important;
+}
+.phoneGallery .photoTriple.two{
+  grid-template-columns:1fr 1fr!important;
+  grid-template-rows:1fr!important;
+}
+.phoneGallery .photoTriple.two img:first-child{
+  grid-row:auto!important;
+}
+.gallerySpecBoxes{
+  position:relative!important;
+  z-index:8!important;
+  display:flex!important;
+  gap:5px!important;
+  flex-wrap:wrap!important;
+  padding:8px 9px 10px!important;
+  background:linear-gradient(180deg,rgba(3,6,17,.02),rgba(3,6,17,.18))!important;
+}
+.gallerySpecBox{
+  flex:0 0 auto!important;
+  max-width:48%!important;
+  padding:5px 8px!important;
+  border-radius:999px!important;
+  background:rgba(6,17,38,.78)!important;
+  border:1px solid rgba(34,211,238,.22)!important;
+  color:#eaf7ff!important;
+  font-size:9px!important;
+  font-weight:900!important;
+  white-space:nowrap!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+  backdrop-filter:blur(8px)!important;
+}
+.phoneInfo .specChips{
+  display:none!important;
+}
+.noPhoneImageBox{
+  display:grid!important;
+  place-items:center!important;
+  color:#64748b!important;
+  font-weight:1000!important;
+  background:#eef1f5!important;
+}
+
+
+/* FINAL FULL DISPLAY ENDED SLIDER */
+#home > .endedHeroSlider{
+  width:calc(100% - 16px)!important;
+  min-height:88dvh!important;
+  margin:8px auto 18px!important;
+  padding:14px!important;
+  border-radius:28px!important;
+  background:
+    radial-gradient(circle at 84% 12%,rgba(25,194,255,.25),transparent 35%),
+    radial-gradient(circle at 10% 92%,rgba(124,58,237,.27),transparent 39%),
+    linear-gradient(145deg,#061126,#0c1433 56%,#070a1c)!important;
+  border:1px solid rgba(34,211,238,.24)!important;
+  box-shadow:0 25px 90px rgba(0,0,0,.45)!important;
+  display:flex!important;
+  flex-direction:column!important;
+  overflow:hidden!important;
+}
+#home > .endedHeroSlider .endedHeroHead{
+  padding:3px 4px 12px!important;
+  margin:0!important;
+}
+#home > .endedHeroSlider .endedHeroHead strong{
+  font-size:25px!important;
+  font-weight:1000!important;
+  line-height:1.1!important;
+}
+#home > .endedHeroSlider .endedHeroHead small{
+  font-size:12px!important;
+  color:#8fdcff!important;
+}
+#home > .endedHeroSlider .endedHeroTrack{
+  flex:1!important;
+  min-height:0!important;
+  display:flex!important;
+  gap:14px!important;
+  overflow-x:auto!important;
+  overflow-y:hidden!important;
+  scroll-snap-type:x mandatory!important;
+  scroll-behavior:smooth!important;
+  padding:0 1px 8px!important;
+}
+#home > .endedHeroSlider .endedHeroCard{
+  flex:0 0 100%!important;
+  width:100%!important;
+  min-height:calc(88dvh - 82px)!important;
+  scroll-snap-align:center!important;
+  display:grid!important;
+  grid-template-columns:minmax(260px,48%) 1fr!important;
+  gap:18px!important;
+  align-items:center!important;
+  padding:18px!important;
+  border-radius:24px!important;
+  background:
+    radial-gradient(circle at 15% 15%,rgba(25,194,255,.18),transparent 36%),
+    linear-gradient(135deg,rgba(37,99,235,.22),rgba(124,58,237,.15))!important;
+  border:1px solid rgba(34,211,238,.22)!important;
+}
+.endedFullPhotoGrid{
+  width:100%!important;
+  height:100%!important;
+  min-height:450px!important;
+  display:grid!important;
+  grid-template-columns:2fr 1fr!important;
+  grid-template-rows:1fr 1fr!important;
+  gap:10px!important;
+  padding:10px!important;
+  border-radius:22px!important;
+  background:#eef1f5!important;
+}
+.endedFullPhotoGrid.count1{grid-template-columns:1fr!important;grid-template-rows:1fr!important}
+.endedFullPhotoGrid.count2{grid-template-columns:1fr 1fr!important;grid-template-rows:1fr!important}
+.endedFullPhotoGrid img{
+  width:100%!important;
+  height:100%!important;
+  object-fit:contain!important;
+  border-radius:16px!important;
+  background:#fff!important;
+  padding:10px!important;
+  opacity:1!important;
+  position:static!important;
+  animation:none!important;
+}
+.endedFullPhotoGrid.count3 img:first-child{
+  grid-row:1 / span 2!important;
+}
+#home > .endedHeroSlider .endedHeroCard h4{
+  font-size:34px!important;
+  line-height:1.1!important;
+  white-space:normal!important;
+  margin:0!important;
+}
+#home > .endedHeroSlider .endedHeroCard .endedTag{
+  margin-top:14px!important;
+  font-size:13px!important;
+  padding:8px 12px!important;
+}
+#home > .endedHeroSlider .endedHeroCard p{
+  margin-top:18px!important;
+  font-size:18px!important;
+  line-height:1.75!important;
+}
+.endedHeroDots{
+  display:flex!important;
+  justify-content:center!important;
+  gap:7px!important;
+  padding-top:10px!important;
+}
+.endedHeroDot{
+  width:8px!important;
+  height:8px!important;
+  border-radius:999px!important;
+  background:rgba(255,255,255,.25)!important;
+}
+.endedHeroDot.active{
+  width:25px!important;
+  background:#19C2FF!important;
+}
+@media(max-width:760px){
+  #home > .endedHeroSlider{
+    min-height:92dvh!important;
+    width:calc(100% - 12px)!important;
+    padding:10px!important;
+    border-radius:24px!important;
+  }
+  #home > .endedHeroSlider .endedHeroHead strong{font-size:20px!important}
+  #home > .endedHeroSlider .endedHeroCard{
+    grid-template-columns:1fr!important;
+    min-height:calc(92dvh - 82px)!important;
+    padding:12px!important;
+    align-content:start!important;
+  }
+  .endedFullPhotoGrid{
+    min-height:330px!important;
+    gap:8px!important;
+    padding:8px!important;
+    border-radius:18px!important;
+  }
+  #home > .endedHeroSlider .endedHeroCard h4{font-size:24px!important}
+  #home > .endedHeroSlider .endedHeroCard p{font-size:13px!important}
+}
+
+
+/* COUNTDOWN DONE -> FULLSCREEN AD */
+body.launchAdFullscreen{
+  overflow:hidden!important;
+}
+body.launchAdFullscreen .header,
+body.launchAdFullscreen .bottomNav{
+  opacity:0!important;
+  pointer-events:none!important;
+}
+body.launchAdFullscreen #home .launchDisplay{
+  position:fixed!important;
+  inset:0!important;
+  z-index:9500!important;
+  width:100vw!important;
+  height:100dvh!important;
+  margin:0!important;
+  border-radius:0!important;
+  padding:18px!important;
+  display:flex!important;
+  flex-direction:column!important;
+  justify-content:center!important;
+  overflow:auto!important;
+  background:
+    radial-gradient(circle at 82% 12%,rgba(25,194,255,.22),transparent 35%),
+    radial-gradient(circle at 12% 88%,rgba(124,58,237,.26),transparent 36%),
+    linear-gradient(145deg,#020817,#071733 55%,#0c0825)!important;
+}
+body.launchAdFullscreen #home .launchCountdownArea,
+body.launchAdFullscreen #home .adShowcase{
+  max-width:980px!important;
+  width:100%!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+}
+.launchEnterAppBtn{
+  display:none;
+  width:min(520px,92%);
+  margin:16px auto 0;
+  border:0;
+  border-radius:18px;
+  padding:15px 18px;
+  color:#fff;
+  font-weight:1000;
+  font-size:15px;
+  background:linear-gradient(135deg,#19C2FF,#2563EB,#7C3AED);
+  box-shadow:0 18px 45px rgba(37,99,235,.35);
+}
+body.launchAdFullscreen .launchEnterAppBtn{
+  display:block!important;
+}
+.launchDoneText{
+  display:none;
+  text-align:center;
+  margin:8px auto 0;
+}
+body.launchAdFullscreen .launchDoneText{
+  display:block!important;
+}
+.launchDoneText strong{
+  display:block;
+  font-size:28px;
+  font-weight:1000;
+}
+.launchDoneText small{
+  display:block;
+  margin-top:5px;
+  color:#8fdcff;
+  font-weight:900;
+}
+
+
+/* EXTRA STRONG DRAW PAUSE */
+.simpleRollCard.strongBuzz{
+  animation:strongDrawBuzz .05s linear infinite, glowPulse .45s ease-in-out infinite alternate!important;
+}
+.simpleRollCard.finalPause{
+  animation:finalWinnerPulse .55s ease-in-out infinite alternate!important;
 }
 
 /* PROFILE */
@@ -926,11 +1746,11 @@ button{cursor:pointer}
 
     <div class="endedHeroSlider" id="endedHeroSlider">
       <div class="endedHeroHead">
-        <strong>ያለቁ እጣዎች</strong>
-        <small>የወጡ አሸናፊዎች</small>
+        <strong data-i18n="endedRaffles">ያለቁ እጣዎች</strong>
+        <small data-i18n="endedWinners">የወጡ አሸናፊዎች</small>
       </div>
       <div class="endedHeroTrack" id="endedHeroTrack">
-        <div class="endedHeroEmpty">ገና የወጣ እጣ የለም</div>
+        <div class="endedHeroEmpty" data-i18n="historyEmpty">ገና የወጣ እጣ የለም</div>
       </div>
     </div>
 
@@ -958,7 +1778,7 @@ button{cursor:pointer}
           <div class="adTag" data-i18n="newYearSpecial">🎉 የአዲስ ዓመት ልዩ እጣ</div>
           <div class="adTitle">iPhone 17 Pro Max</div>
           <div class="adSub" data-i18n="iphone17Ad">iPhone 17 Pro Max በልዩ የአዲስ ዓመት እጣ ያሸንፉ።</div>
-          <div class="adPrice">300 ብር</div>
+          <div class="adPrice" data-price="300">300 ብር</div>
         </div>
       </div>
       <div class="adSlide">
@@ -968,7 +1788,7 @@ button{cursor:pointer}
           <div class="adTag" data-i18n="meskelSpecial">✝️ ለመስቀል ልዩ እጣ</div>
           <div class="adTitle" data-i18n="fullFurniture">ሙሉ የቤት እቃ</div>
           <div class="adSub" data-i18n="furnitureList">7 ሲት ሶፋ • 55 ኢንች TV • Center Table • TV Stand • ቁምሳጥን</div>
-          <div class="adPrice">500 ብር</div>
+          <div class="adPrice" data-price="500">500 ብር</div>
         </div>
       </div>
       <div class="adSlide">
@@ -978,13 +1798,16 @@ button{cursor:pointer}
           <div class="adTag" data-i18n="gamingSpecial">🎮 የአዲስ ዓመት Gaming ልዩ እጣ</div>
           <div class="adTitle">Gaming Laptop</div>
           <div class="adSub" data-i18n="gamingAd">ከፍተኛ አፈጻጸም ያለው Gaming Laptop በልዩ እጣ።</div>
-          <div class="adPrice">100 ብር</div>
+          <div class="adPrice" data-price="100">100 ብር</div>
         </div>
       </div>
     </div>
     <button class="adArrow right" onclick="changeAd(1)">›</button>
     <div class="adDots" id="adDots"></div>
   </div>
+
+  <div class="launchDoneText"><strong data-i18n="launchDoneTitle">CARAA ተጀምሯል!</strong><small data-i18n="launchDoneSub">አሁን እጣ መቁረጥ ይችላሉ</small></div>
+  <button class="launchEnterAppBtn" onclick="enterCaraaApp()" data-i18n="enterApp">🎟️ እጣ ለመቁረጥ ግባ</button>
 </section>
 
 <section class="hero">
@@ -1016,25 +1839,25 @@ button{cursor:pointer}
   <div class="simpleDrawWrap">
     <div class="simpleDrawTop">
       <div>
-        <div class="simpleBadge">● LIVE DRAW</div>
+        <div class="simpleBadge" data-i18n="liveDigitalDraw">● LIVE DRAW</div>
         <h1 data-i18n="drawPageTitle">የእጣ ማውጫ</h1>
         <p data-i18n="drawPageText">ስልክ ይምረጡ፣ የተቆረጠውን እጣ ብዛት እና የእጣውን ሁኔታ ይከታተሉ።</p>
       </div>
-      <button class="simpleHistoryBtn" onclick="openDrawHistory()">🏆 History</button>
+      <button class="simpleHistoryBtn" onclick="openDrawHistory()" data-i18n="historyBtn">🏆 History</button>
     </div>
 
     <div class="simpleDrawLayout">
       <div class="simpleMainColumn">
         <section class="simpleProgressCard">
           <div class="simpleSelected">
-            <small>የተመረጠው ስልክ</small>
+            <small data-i18n="selectedPhone">የተመረጠው ስልክ</small>
             <strong id="winnerName">CARAA</strong>
             <span id="simpleTicketPrice">0 ብር</span>
           </div>
 
           <div class="simpleCircle" id="simpleCircle">
             <div class="simpleCircleInner">
-              <small>የተቆረጠ</small>
+              <small data-i18n="sold">የተቆረጠ</small>
               <strong><span id="simpleSoldBig">0</span>/<span id="simpleTotalBig">1000</span></strong>
               <b id="simplePercent">0%</b>
             </div>
@@ -1048,26 +1871,26 @@ button{cursor:pointer}
 
         <section class="simpleStatsGrid">
           <div class="simpleStat">
-            <small>የተቆረጠ</small>
+            <small data-i18n="sold">የተቆረጠ</small>
             <strong id="soldStat">0</strong>
           </div>
           <div class="simpleStat">
-            <small>ያልተቆረጠ</small>
+            <small data-i18n="remaining">ያልተቆረጠ</small>
             <strong id="freeStat">1000</strong>
           </div>
           <div class="simpleStat">
-            <small>ጠቅላላ</small>
+            <small data-i18n="totalLabel">ጠቅላላ</small>
             <strong id="totalStat">1000</strong>
           </div>
           <div class="simpleStat">
-            <small>አሸናፊ</small>
+            <small data-i18n="winner">አሸናፊ</small>
             <strong id="simpleWinnerStat">---</strong>
           </div>
         </section>
 
         <section class="simpleStatus">
-          <strong id="drawStatusText">እጣው ለመጀመር ዝግጁ ነው</strong>
-          <small id="drawStatusSub">1000/1000 ሲሞላ እና countdown ሲያልቅ አሸናፊው በserver ይመረጣል።</small>
+          <strong id="drawStatusText" data-i18n="readyStatus">እጣው ለመጀመር ዝግጁ ነው</strong>
+          <small id="drawStatusSub" data-i18n="readySub">1000/1000 ሲሞላ እና countdown ሲያልቅ አሸናፊው በserver ይመረጣል።</small>
         </section>
 
         <div class="simplePhaseRow">
@@ -1081,8 +1904,8 @@ button{cursor:pointer}
 
       <aside class="simplePhoneSide">
         <div class="simpleSideHead">
-          <strong>ስልኮች</strong>
-          <small>ሲነኩት progress ይታያል</small>
+          <strong data-i18n="phones">ስልኮች</strong>
+          <small data-i18n="tapProgress">ሲነኩት progress ይታያል</small>
         </div>
         <div class="simplePhoneTabs" id="supabaseDrawPhones"></div>
       </aside>
@@ -1095,13 +1918,14 @@ button{cursor:pointer}
       <div class="winnerName" id="winnerNameAlt">CARAA</div>
       <div class="winnerUserLine" id="winnerUserLine">@---</div>
       <div class="winnerPhoneLine" id="winnerPhoneLine">---</div>
+      <div class="winnerAutoCloseText" id="winnerAutoCloseText" data-i18n="autoCloseText">5 ሰከንድ በኋላ ይዘጋል</div>
     </div>
 
     <div class="simpleRollOverlay" id="simpleRollOverlay">
       <div class="simpleRollCard" id="simpleRollCard">
-        <div class="simpleRollTop">FAST DRAW</div>
+        <div class="simpleRollTop" data-i18n="fastDraw">FAST DRAW</div>
         <div class="simpleRollNumber" id="simpleRollNumber">#---</div>
-        <div class="simpleRollSub" id="simpleRollSub">ቁጥሮች በፍጥነት እየተዘዋወሩ...</div>
+        <div class="simpleRollSub" id="simpleRollSub" data-i18n="rollFast">ቁጥሮች በፍጥነት እየተዘዋወሩ...</div>
         <div class="simpleRollMeta">
           <span id="simpleRollPrize">CARAA</span>
           <span id="simpleRollUser">@---</span>
@@ -1120,11 +1944,11 @@ button{cursor:pointer}
   <div class="simpleHistoryModal" id="drawHistoryModal">
     <div class="simpleHistoryBox">
       <div class="simpleHistoryHead">
-        <strong>🏆 የወጡ እጣዎች History</strong>
+        <strong data-i18n="historyTitle">🏆 የወጡ እጣዎች History</strong>
         <button onclick="closeDrawHistory()">×</button>
       </div>
       <div class="simpleHistoryList" id="drawHistoryList">
-        <div class="simpleHistoryEmpty">History ገና የለም</div>
+        <div class="simpleHistoryEmpty" data-i18n="historyEmpty">History ገና የለም</div>
       </div>
     </div>
   </div>
@@ -1185,11 +2009,11 @@ button{cursor:pointer}
   <div class="modalBox">
     <div class="modalHead"><h2 data-i18n="customerInfo">የተጠቃሚ መረጃ</h2><button class="close" onclick="closeCheckout()">×</button></div>
     <div class="selectedTicketBox"><small data-i18n="selectedTicket">የተመረጠ እጣ</small><strong id="checkoutTicketNo">#---</strong></div>
-    <div class="formGroup"><label data-i18n="fullName">ሙሉ ስም</label><input class="formInput" id="customerName" type="text" placeholder="ሙሉ ስም"></div>
+    <div class="formGroup"><label data-i18n="fullName">ሙሉ ስም</label><input class="formInput" id="customerName" type="text" placeholder="ሙሉ ስም" data-i18n-placeholder="fullName"></div>
     <div class="formGroup"><label data-i18n="phoneNumber">ስልክ ቁጥር</label><input class="formInput" id="customerPhone" type="tel" inputmode="tel" placeholder="09XXXXXXXX / 07XXXXXXXX"></div>
-    <div class="paymentTitle" data-i18n="paymentAccounts">የክፍያ አካውንቶች</div>
-    <div class="paymentAccount"><div><small>Telebirr</small><strong>092 401 4747</strong></div><button type="button" onclick="copyAccount('0924014747',this)" data-i18n="copy">ኮፒ</button></div>
-    <div class="paymentAccount"><div><small data-i18n="cbe">ንግድ ባንክ</small><strong>1000650355451</strong></div><button type="button" onclick="copyAccount('1000650355451',this)" data-i18n="copy">ኮፒ</button></div>
+    <div class="paymentTitle paymentTitleWithOwner"><span data-i18n="paymentAccounts">የክፍያ አካውንቶች</span><b class="paymentOwnerBadge">Yitbarek Kassa</b></div>
+    <div class="paymentAccount"><div><small data-i18n="telebirr">Telebirr</small><strong>092 401 4747</strong><small class="accountOwner"><span data-i18n="accountOwner">የአካውንት ባለቤት</span>: <b>Yitbarek Kassa</b></small></div><button type="button" onclick="copyAccount('0924014747',this)" data-i18n="copy">ኮፒ</button></div>
+    <div class="paymentAccount"><div><small data-i18n="cbe">ንግድ ባንክ</small><strong>1000650355451</strong><small class="accountOwner"><span data-i18n="accountOwner">የአካውንት ባለቤት</span>: <b>Yitbarek Kassa</b></small></div><button type="button" onclick="copyAccount('1000650355451',this)" data-i18n="copy">ኮፒ</button></div>
     <div class="formGroup"><label data-i18n="paymentScreenshot">የክፍያ ስክሪን ሹት</label><label class="uploadBox" for="paymentScreenshot"><span>📷</span><strong data-i18n="chooseScreenshot">ስክሪን ሹት ይምረጡ</strong><small id="screenshotName">JPG / PNG</small></label><input id="paymentScreenshot" type="file" accept="image/*" hidden onchange="previewScreenshot(this)"><div class="screenshotPreview" id="screenshotPreview"></div></div>
     <button class="confirm" onclick="confirmTicket()" data-i18n="confirmTicket">🎟️ ለማረጋገጥ ላክ</button>
   </div>
@@ -1213,6 +2037,7 @@ let approvedTicketInfoByKey=new Map();
    STATE + DEMO STORAGE
 ========================= */
 let language="am";
+try{language=localStorage.getItem("caraa_language")||"am";}catch(e){}
 let selectedNumber=null;
 let drawPhoneIndex=0;
 let drawing=false;
@@ -1279,17 +2104,312 @@ activeStatus:"🔴 CARAA hojii irra jira",activeSub:"1000/1000 yoo guutame baafa
 winnerStatus:"🏆 Mo'ataan filatameera",winnerSubPrefix:"Lakkoofsi ",winnerSubSuffix:" mo'ataa ta'eera"
 }};
 
+Object.assign(T.am,{
+  historyBtn:"🏆 History",
+  selectedPhone:"የተመረጠው ስልክ",
+  totalLabel:"ጠቅላላ",
+  phones:"ስልኮች",
+  tapProgress:"ሲነኩት progress ይታያል",
+  historyTitle:"🏆 የወጡ እጣዎች History",
+  historyEmpty:"History ገና የለም",
+  endedRaffles:"ያለቁ እጣዎች",
+  endedWinners:"የወጡ አሸናፊዎች",
+  endedTag:"ያለቀ እጣ",
+  winnerWord:"አሸናፊ",
+  winnerSoon:"አሸናፊ በቅርብ",
+  countdownWord:"COUNTDOWN",
+  soldProgress:"ተቆርጧል",
+  remainingShort:"ቀሪ",
+  historySaved:"አሸናፊው History ውስጥ ተቀምጧል።",
+  newRaffleSoon:"አዲስ እጣ በቅርብ",
+  allEndedText:"አሁን ያሉት እጣዎች አልቀዋል። የወጡትን ከላይ በHistory slider ይመልከቱ።",
+  rollFast:"ቁጥሮች በፍጥነት እየተዘዋወሩ...",
+  verifyingNumber:"ቁጥሩ እየተረጋገጠ ነው...",
+  winnerFound:"✅ አሸናፊ ተገኝቷል",
+  birr:"ብር",
+  br:"ብር",
+  photos:"ፎቶዎች",
+  accountOwner:"የአካውንት ባለቤት",
+  fastDraw:"FAST DRAW",
+  liveDraw:"● ቀጥታ እጣ",
+  selectedPhoneText:"የተመረጠው ስልክ",
+  totalTicketsText:"ጠቅላላ እጣ",
+  caraaUser:"CARAA User",
+  telegramUser:"Telegram User",
+  telegramConnected:"✈ Telegram ተገናኝቷል",
+  browserPreview:"✈ Browser ማሳያ",
+  pendingShort:"PENDING",
+  approvedShort:"APPROVED",
+  allRafflesEnded:"ሁሉም እጣ አልቋል። አዲስ እጣ እስኪገባ ይጠብቁ።",
+  raffleEnded:"ይህ እጣ አልቋል።",
+  activeRaffleNotFound:"ACTIVE raffle አልተገኘም።",
+  submitStepPrefix:"እጣው አልተላከም።",
+  countdownStarted:"⏳ የእጣው ቆጠራ ተጀምሯል",
+  countdownStartedSub:"ጊዜው ሲያልቅ አሸናፊው በራሱ ይመረጣል",
+  approvedCountSub:"APPROVED ነው። ሁሉም ሲሞላ countdown ይጀምራል።",
+  drawNotReady:"እጣው ገና አልወጣም። 100% ሲሞላ እና countdown ሲያልቅ በserver ይወጣል።",
+  autoCloseText:"5 ሰከንድ በኋላ ይዘጋል",
+  live:"LIVE",
+  inHistory:"History ውስጥ ገብቷል",
+
+  noPhoto:"ፎቶ የለም",
+  activePhones:"በእጣ የሚገኙ ስልኮች",
+  ticketPrice:"የእጣ ዋጋ",
+  perEntry:"በአንድ እጣ",
+  phoneOwner:"ስልክ",
+  display:"ማሳያ",
+
+  telebirr:"Telebirr",
+  photoLoadError:"ፎቶ አልተጫነም",
+  enterApp:"🎟️ እጣ ለመቁረጥ ግባ",
+  launchDoneTitle:"CARAA ተጀምሯል!",
+  launchDoneSub:"አሁን እጣ መቁረጥ ይችላሉ",
+});
+Object.assign(T.oro,{
+  historyBtn:"🏆 Seenaa",
+  selectedPhone:"Bilbila filatame",
+  totalLabel:"Waliigala",
+  phones:"Bilbiloota",
+  tapProgress:"Tuqii progress isaa ilaali",
+  historyTitle:"🏆 Seenaa Carraa Ba'e",
+  historyEmpty:"Seenaa hanga ammaatti hin jiru",
+  endedRaffles:"Carraa xumurame",
+  endedWinners:"Mo'attoota ba'an",
+  endedTag:"Carraa xumurame",
+  winnerWord:"Mo'ataa",
+  winnerSoon:"Mo'ataan dhi soon",
+  countdownWord:"COUNTDOWN",
+  soldProgress:"bitame",
+  remainingShort:"hafe",
+  historySaved:"Mo'ataan History keessatti kaa'ameera.",
+  newRaffleSoon:"Carraan haaraan dhiyoo",
+  allEndedText:"Carraan amma jiru hundi xumurameera. Kan ba'e slider History irraa ilaalaa.",
+  rollFast:"Lakkoofsotni saffisaan naanna'aa jiru...",
+  verifyingNumber:"Lakkoofsi mirkanaa'aa jira...",
+  winnerFound:"✅ Mo'ataan argameera",
+  birr:"Br",
+  br:"Br",
+  photos:"suuraa",
+  accountOwner:"Abbaa herregaa",
+  fastDraw:"BAAFATA ARIIFACHIISAA",
+  liveDraw:"● BAAFATA KALLATTII",
+  selectedPhoneText:"Bilbila filatame",
+  totalTicketsText:"Carraa waliigalaa",
+  caraaUser:"Fayyadamaa CARAA",
+  telegramUser:"Fayyadamaa Telegram",
+  telegramConnected:"✈ Telegram walqabateera",
+  browserPreview:"✈ Mul'ata Browser",
+  pendingShort:"EEGAA JIRA",
+  approvedShort:"MIRKANAAYE",
+  allRafflesEnded:"Carraan hundi xumurameera. Carraa haaraa eegaa.",
+  raffleEnded:"Carraan kun xumurameera.",
+  activeRaffleNotFound:"Carraan ACTIVE hin argamne.",
+  submitStepPrefix:"Carraan hin ergamne.",
+  countdownStarted:"⏳ Lakkaa'amni carraa jalqabeera",
+  countdownStartedSub:"Yeroon yoo xumurame mo'ataan ofumaan filatama",
+  approvedCountSub:"mirkanaa'eera. Hundi yoo guutame countdown ni jalqaba.",
+  drawNotReady:"Carraan ammallee hin baane. 100% yoo guutame fi countdown yoo xumurame server irraa ni ba'a.",
+  autoCloseText:"Sekondii 5 booda ni cufama",
+  live:"KALLATTII",
+  inHistory:"Seenaa keessatti galeera",
+
+  noPhoto:"Suuraa hin jiru",
+  activePhones:"Bilbiloota Carraan Argaman",
+  ticketPrice:"Gatii Carraa",
+  perEntry:"Carraa tokkoof",
+  phoneOwner:"Bilbila",
+  display:"Agarsiisa",
+
+  telebirr:"Telebirr",
+  photoLoadError:"Suuraan hin fe'amne",
+  enterApp:"🎟️ Carraa bitachuuf seeni",
+  launchDoneTitle:"CARAA jalqabameera!",
+  launchDoneSub:"Amma carraa bitachuu dandeessu",
+});
+function tx(k){
+  return (T[language]&&T[language][k]) || (T.am&&T.am[k]) || k;
+}
+
+function refreshPriceLanguage(){
+  document.querySelectorAll("[data-price]").forEach(el=>{
+    el.textContent=Number(el.dataset.price||0).toLocaleString()+" "+tx("birr");
+  });
+  const priceEl=document.getElementById("simpleTicketPrice");
+  const raffle=supabaseRaffles[drawPhoneIndex]||supabaseRaffles[0];
+  if(priceEl && raffle) priceEl.textContent=Number(raffle.ticket_price||0).toLocaleString()+" "+tx("birr");
+}
+
+
+
+function translateLooseText(){
+  const pairs={
+    oro:[
+      ["የክፍያ አካውንቶች","Herrega Kaffaltii"],
+      ["የአካውንት ባለቤት","Abbaa herregaa"],
+      ["የተመረጠ እጣ","Carraa filatame"],
+      ["ሙሉ ስም","Maqaa Guutuu"],
+      ["ስልክ ቁጥር","Lakkoofsa Bilbilaa"],
+      ["የክፍያ ስክሪን ሹት","Screenshot Kaffaltii"],
+      ["ስክሪን ሹት ይምረጡ","Screenshot filadhu"],
+      ["ለማረጋገጥ ላክ","Mirkaneessaaf ergi"],
+      ["ንግድ ባንክ","Baankii Daldalaa"],
+      ["ኮፒ","COPY"],
+      ["ቀጥል","Itti fufi"],
+      ["ቁጥር ይምረጡ","Lakkoofsa filadhaa"],
+      ["የተቆረጠ","Kan Bitame"],
+      ["ያልተቆረጠ","Kan Hafe"],
+      ["የተቆረጡ","Kan Bitame"],
+      ["ያልተቆረጡ","Kan Hafe"],
+      ["ሆም","Fuula Jalqabaa"],
+      ["እጣ ማውጫ","Baafata Carraa"],
+      ["ፕሮፋይል","Profaayilii"],
+      ["ቀጥታ እጣ","Carraa Kallattii"],
+      ["የሚፈልጉት ስልክ የእርስዎ ሊሆን ይችላል!","Bilbilli barbaaddan kan keessan ta'uu danda'a!"],
+      ["ቁጥርዎን ይምረጡ፣ እድልዎን ይሞክሩ፣ ቀጣዩ አሸናፊ እርስዎ ሊሆኑ ይችላሉ።","Lakkoofsa keessan filadhaa, carraa keessan yaalaa; mo'ataan itti aanu isin ta'uu danda'a."],
+      ["እጣዎን አሁን ይቁረጡ","Carraa keessan amma bitadhaa"],
+      ["ቁጥር ለመምረጥ","Lakkoofsa filachuuf"],
+      ["ከ1–1000 ይምረጡ","1–1000 keessaa filadhaa"],
+      ["የእድል እጣ","Haala Carraa"],
+      ["የእጣ ሁኔታውን ይከታተሉ","Haala carraa hordofaa"],
+      ["በእጣ የሚገኙ ስልኮች","Bilbiloota Carraan Argaman"],
+      ["የእጣ ማውጫ","Baafata Carraa"],
+      ["ስልክ ይምረጡ፣ የተቆረጠውን እጣ ብዛት እና የእጣውን ሁኔታ ይከታተሉ።","Bilbila filadhaa, carraa bitame fi haala isaa hordofaa."],
+      ["የተመረጠው ስልክ","Bilbila filatame"],
+      ["ጠቅላላ","Waliigala"],
+      ["አሸናፊ","Mo'ataa"],
+      ["ስልኮች","Bilbiloota"],
+      ["ያለቁ እጣዎች","Carraa xumurame"],
+      ["የወጡ አሸናፊዎች","Mo'attoota ba'an"],
+      ["ያለቀ እጣ","Carraa xumurame"],
+      ["የእኔ እጣዎች","Carraa Koo"],
+      ["ለሀሳብና አስተያየት","Yaadaa fi gorsaaf"],
+      ["የቆረጥኳቸው እጣዎች","Carraa Ani Bite"],
+      ["ታላቅ የCARAA ማስታወቂያ","Beeksisa Guddaa CARAA"],
+      ["CARAA በቅርቡ ይጀምራል!","CARAA Yeroo Dhiyootti Ni Jalqaba!"],
+      ["መጀመሪያ፦","Jalqaba:"],
+      ["መጀመሪያው እስኪደርስ የሚቀረው ጊዜ","Yeroo Jalqabni Hanga Ga'utti Hafe"],
+      ["ቀን","Guyyaa"],["ሰዓት","Sa'aatii"],["ደቂቃ","Daqiiqaa"],["ሰከንድ","Sekondii"],
+      ["ብር","Br"],["History","Seenaa"],["LIVE","KALLATTII"],["Winner","Mo'ataa"]
+    ],
+    am:[
+      ["Herrega Kaffaltii","የክፍያ አካውንቶች"],
+      ["Abbaa herregaa","የአካውንት ባለቤት"],
+      ["Carraa filatame","የተመረጠ እጣ"],
+      ["Maqaa Guutuu","ሙሉ ስም"],
+      ["Lakkoofsa Bilbilaa","ስልክ ቁጥር"],
+      ["Screenshot Kaffaltii","የክፍያ ስክሪን ሹት"],
+      ["Screenshot filadhu","ስክሪን ሹት ይምረጡ"],
+      ["Mirkaneessaaf ergi","ለማረጋገጥ ላክ"],
+      ["Baankii Daldalaa","ንግድ ባንክ"],
+      ["COPY","ኮፒ"],
+      ["Itti fufi","ቀጥል"],
+      ["Lakkoofsa filadhaa","ቁጥር ይምረጡ"],
+      ["Kan Bitame","የተቆረጠ"],
+      ["Kan Hafe","ያልተቆረጠ"],
+      ["Fuula Jalqabaa","ሆም"],
+      ["Baafata Carraa","እጣ ማውጫ"],
+      ["Profaayilii","ፕሮፋይል"],
+      ["Carraa Kallattii","ቀጥታ እጣ"],
+      ["Bilbilli barbaaddan kan keessan ta'uu danda'a!","የሚፈልጉት ስልክ የእርስዎ ሊሆን ይችላል!"],
+      ["Lakkoofsa keessan filadhaa, carraa keessan yaalaa; mo'ataan itti aanu isin ta'uu danda'a.","ቁጥርዎን ይምረጡ፣ እድልዎን ይሞክሩ፣ ቀጣዩ አሸናፊ እርስዎ ሊሆኑ ይችላሉ።"],
+      ["Carraa keessan amma bitadhaa","እጣዎን አሁን ይቁረጡ"],
+      ["Lakkoofsa filachuuf","ቁጥር ለመምረጥ"],
+      ["1–1000 keessaa filadhaa","ከ1–1000 ይምረጡ"],
+      ["Haala Carraa","የእድል እጣ"],
+      ["Haala carraa hordofaa","የእጣ ሁኔታውን ይከታተሉ"],
+      ["Bilbiloota Carraan Argaman","በእጣ የሚገኙ ስልኮች"],
+      ["Bilbila filadhaa, carraa bitame fi haala isaa hordofaa.","ስልክ ይምረጡ፣ የተቆረጠውን እጣ ብዛት እና የእጣውን ሁኔታ ይከታተሉ።"],
+      ["Bilbila filatame","የተመረጠው ስልክ"],
+      ["Waliigala","ጠቅላላ"],
+      ["Mo'ataa","አሸናፊ"],
+      ["Bilbiloota","ስልኮች"],
+      ["Carraa xumurame","ያለቁ እጣዎች"],
+      ["Mo'attoota ba'an","የወጡ አሸናፊዎች"],
+      ["Carraa Koo","የእኔ እጣዎች"],
+      ["Yaadaa fi gorsaaf","ለሀሳብና አስተያየት"],
+      ["Carraa Ani Bite","የቆረጥኳቸው እጣዎች"],
+      ["Beeksisa Guddaa CARAA","ታላቅ የCARAA ማስታወቂያ"],
+      ["CARAA Yeroo Dhiyootti Ni Jalqaba!","CARAA በቅርቡ ይጀምራል!"],
+      ["Jalqaba:","መጀመሪያ፦"],
+      ["Yeroo Jalqabni Hanga Ga'utti Hafe","መጀመሪያው እስኪደርስ የሚቀረው ጊዜ"],
+      ["Guyyaa","ቀን"],["Sa'aatii","ሰዓት"],["Daqiiqaa","ደቂቃ"],["Sekondii","ሰከንድ"],
+      ["Br","ብር"],["Seenaa","History"],["KALLATTII","LIVE"]
+    ]
+  };
+  const list=pairs[language]||[];
+  const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,{
+    acceptNode(node){
+      const p=node.parentElement;
+      if(!p) return NodeFilter.FILTER_REJECT;
+      if(["SCRIPT","STYLE","TEXTAREA","INPUT"].includes(p.tagName)) return NodeFilter.FILTER_REJECT;
+      const t=node.nodeValue;
+      if(!t || !t.trim()) return NodeFilter.FILTER_REJECT;
+      return NodeFilter.FILTER_ACCEPT;
+    }
+  });
+  const nodes=[];
+  while(walker.nextNode()) nodes.push(walker.currentNode);
+  nodes.forEach(n=>{
+    let v=n.nodeValue;
+    list.forEach(([from,to])=>{v=v.split(from).join(to);});
+    n.nodeValue=v;
+  });
+  document.querySelectorAll("[data-price]").forEach(el=>{
+    el.textContent=Number(el.dataset.price||0).toLocaleString()+" "+tx("birr");
+  });
+}
+
+let __caraaTranslationObserver=null;
+function startLanguageObserver(){
+  if(__caraaTranslationObserver) return;
+  __caraaTranslationObserver=new MutationObserver(()=>{
+    clearTimeout(window.__caraaTranslateTimer);
+    window.__caraaTranslateTimer=setTimeout(()=>{
+      try{translateLooseText();refreshPriceLanguage();}catch(e){}
+    },70);
+  });
+  __caraaTranslationObserver.observe(document.body,{childList:true,subtree:true,characterData:true});
+}
+
+
 function applyLanguage(){
   document.documentElement.lang=language==="am"?"am":"om";
+
   document.querySelectorAll("[data-i18n]").forEach(el=>{
     const k=el.dataset.i18n;
-    if(T[language][k]!==undefined) el.textContent=T[language][k];
+    if(T[language] && T[language][k]!==undefined) el.textContent=T[language][k];
   });
-  document.getElementById("languageBtn").textContent=language==="am"?"አማ / ORO":"ORO / አማ";
+  document.querySelectorAll("[data-i18n-placeholder]").forEach(el=>{
+    const k=el.dataset.i18nPlaceholder;
+    if(T[language] && T[language][k]!==undefined) el.placeholder=T[language][k];
+  });
+
+  const languageBtn=document.getElementById("languageBtn");
+  if(languageBtn) languageBtn.textContent=language==="am"?"አማ / ORO":"ORO / አማ";
+
+  refreshPriceLanguage();
   refreshDynamicLanguage();
   renderProfile();
+  renderEndedHeroSlider();
+  updateSupabaseDrawState();
+  translateLooseText();
+  startLanguageObserver();
+
+  if(Array.isArray(supabaseRaffles) && supabaseRaffles.length && !window.__caraaLangRendering){
+    window.__caraaLangRendering=true;
+    loadSupabaseRaffles().finally(()=>{
+      window.__caraaLangRendering=false;
+      setTimeout(()=>{refreshPriceLanguage();translateLooseText();renderEndedHeroSlider();},100);
+    });
+  }
 }
-function changeLanguage(){language=language==="am"?"oro":"am";applyLanguage();}
+function changeLanguage(){
+  language=language==="am"?"oro":"am";
+  try{localStorage.setItem("caraa_language",language);}catch(e){}
+  applyLanguage();
+  setTimeout(()=>{refreshPriceLanguage();translateLooseText();renderEndedHeroSlider();},120);
+  setTimeout(()=>{refreshPriceLanguage();translateLooseText();renderEndedHeroSlider();},450);
+}
 
 /* =========================
    TELEGRAM PROFILE
@@ -1307,25 +2427,109 @@ function initTelegram(){
 }
 function renderProfile(){
   const nameEl=document.getElementById("profileName"),userEl=document.getElementById("profileUsername"),avatar=document.getElementById("profileAvatar"),badge=document.getElementById("telegramBadge");
-  let displayName="CARAA User",username="@guest",photo="";
-  if(tgUser){displayName=[tgUser.first_name,tgUser.last_name].filter(Boolean).join(" ")||"CARAA User";username=tgUser.username?"@"+tgUser.username:"Telegram User";photo=tgUser.photo_url||"";badge.textContent="✈ Telegram Connected";}else{badge.textContent="✈ Browser Preview";}
-  nameEl.textContent=displayName;userEl.textContent=username;avatar.innerHTML=photo?`<img src="${photo}" alt="Profile">`:(displayName.charAt(0)||"C").toUpperCase();
+  let displayName=tx("caraaUser"),username="@guest",photo="";
+  if(tgUser){
+    displayName=[tgUser.first_name,tgUser.last_name].filter(Boolean).join(" ")||tx("caraaUser");
+    username=tgUser.username?"@"+tgUser.username:tx("telegramUser");
+    photo=tgUser.photo_url||"";
+    if(badge) badge.textContent=tx("telegramConnected");
+  }else{
+    if(badge) badge.textContent=tx("browserPreview");
+  }
+  if(nameEl) nameEl.textContent=displayName;
+  if(userEl) userEl.textContent=username;
+  if(avatar) avatar.innerHTML=photo?`<img src="${photo}" alt="Profile">`:(displayName.charAt(0)||"C").toUpperCase();
+
   const visible=myTickets.filter(t=>["pending","approved"].includes(String(t.status||"pending").toLowerCase()));
   const pending=visible.filter(t=>String(t.status||"").toLowerCase()==="pending");
   const approved=visible.filter(t=>String(t.status||"").toLowerCase()==="approved");
-  document.getElementById("myTicketCount").textContent=visible.length;
-  document.getElementById("ticketCountLabel").textContent=`${pending.length} PENDING • ${approved.length} APPROVED`;
-  const list=document.getElementById("myTicketList");list.innerHTML="";
-  if(!visible.length){list.innerHTML=`<div class="emptyTickets">${T[language].noTickets}</div>`;return;}
+  const countEl=document.getElementById("myTicketCount");
+  const labelEl=document.getElementById("ticketCountLabel");
+  if(countEl) countEl.textContent=visible.length;
+  if(labelEl) labelEl.textContent=`${pending.length} ${tx("pendingShort")} • ${approved.length} ${tx("approvedShort")}`;
+
+  const list=document.getElementById("myTicketList");
+  if(!list) return;
+  list.innerHTML="";
+  if(!visible.length){
+    list.innerHTML=`<div class="emptyTickets">${T[language].noTickets}</div>`;
+    return;
+  }
   [...visible].reverse().forEach(t=>{
     const status=String(t.status||"pending").toLowerCase();
-    const label=status==="approved"?"APPROVED":"PENDING";
-    const div=document.createElement("div");div.className="myTicket";
+    const label=status==="approved"?tx("approvedShort"):tx("pendingShort");
+    const div=document.createElement("div");
+    div.className="myTicket";
     div.innerHTML=`<div class="ticketNo">#${String(t.number).padStart(3,"0")}</div><div class="ticketMeta"><h4>${escapeHtml(t.prize||drawNames[0])}</h4><p>${escapeHtml(t.name)} • ${escapeHtml(t.phone)}<br>${escapeHtml(t.date||"")}<br>${label}</p></div><div class="ticketStatus">${label}</div>`;
     list.appendChild(div);
   });
 }
 function escapeHtml(s){return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));}
+
+function getRaffleImages(r){
+  let raw=r?.phone_image_url ?? r?.photo ?? "";
+  if(Array.isArray(raw)){
+    return raw.map(x=>String(x||"").trim()).filter(Boolean).slice(0,3);
+  }
+  raw=String(raw||"").trim();
+  if(!raw) return [];
+  try{
+    const parsed=JSON.parse(raw);
+    if(Array.isArray(parsed)){
+      return parsed.map(x=>String(x||"").trim()).filter(Boolean).slice(0,3);
+    }
+  }catch(e){}
+  return raw
+    .split(/\|\||\n/)
+    .map(x=>x.trim())
+    .filter(Boolean)
+    .slice(0,3);
+}
+function firstRaffleImage(r){
+  return getRaffleImages(r)[0]||"";
+}
+function imgErrorFallback(img){
+  img.onerror=null;
+  img.style.display="none";
+  const p=img.parentElement;
+  if(p && !p.querySelector(".imgLoadError")){
+    const d=document.createElement("div");
+    d.className="imgLoadError";
+    d.textContent=tx("photoLoadError");
+    d.style.cssText="display:grid;place-items:center;min-height:80px;color:#64748b;font-weight:900;font-size:11px;background:#eef1f5;border-radius:12px;padding:10px";
+    p.appendChild(d);
+  }
+}
+function renderRafflePhoto(r,cls="phoneMainImage"){
+  const imgs=getRaffleImages(r);
+  if(!imgs.length){
+    return `<div class="${cls} noPhoneImageBox">${tx("noPhoto")}</div>`;
+  }
+  if(imgs.length===1){
+    return `<img class="${cls}" src="${escapeHtml(imgs[0])}" onerror="imgErrorFallback(this)" alt="${escapeHtml(r.phone_name||"CARAA")}">`;
+  }
+  return `<div class="${cls} photoTriple ${imgs.length===2?"two":""}">
+    ${imgs.map(url=>`<img src="${escapeHtml(url)}" onerror="imgErrorFallback(this)" alt="${escapeHtml(r.phone_name||"CARAA")}">`).join("")}
+    <span class="miniPhotoCount">${imgs.length} ${tx("photos")}</span>
+  </div>`;
+}
+function renderSpecBoxes(r,limit=4){
+  const specs=String(r?.specification||"")
+    .split(/[\n,•|]+/)
+    .map(x=>x.trim())
+    .filter(Boolean)
+    .slice(0,limit);
+  if(!specs.length) return "";
+  return `<div class="gallerySpecBoxes">${specs.map(x=>`<span class="gallerySpecBox">${escapeHtml(x)}</span>`).join("")}</div>`;
+}
+function renderEndedRafflePhotos(r){
+  const imgs=getRaffleImages(r);
+  if(!imgs.length) return `<div class="endedFullPhotoGrid noEndedPhoto">${tx("noPhoto")}</div>`;
+  return `<div class="endedFullPhotoGrid count${imgs.length}">
+    ${imgs.map(url=>`<img src="${escapeHtml(url)}" onerror="imgErrorFallback(this)" alt="${escapeHtml(r.phone_name||"CARAA")}">`).join("")}
+  </div>`;
+}
+
 
 /* =========================
    IMAGES
@@ -1426,7 +2630,7 @@ function openTickets(productIndex=drawPhoneIndex){
   if(productIndex==="choose"){
     const firstOpen=firstOpenRaffleIndex();
     if(firstOpen<0){
-      alert("ሁሉም እጣ አልቋል። አዲስ እጣ እስኪገባ ይጠብቁ።");
+      alert(tx("allRafflesEnded"));
       return;
     }
     ticketProductIndex=firstOpen;
@@ -1439,7 +2643,7 @@ function openTickets(productIndex=drawPhoneIndex){
 
   const raffle=supabaseRaffles[ticketProductIndex]||supabaseRaffles[0];
   if(raffleIsEnded(raffle)){
-    alert("ይህ እጣ አልቋል።");
+    alert(tx("raffleEnded"));
     return;
   }
 
@@ -1449,7 +2653,7 @@ function openTickets(productIndex=drawPhoneIndex){
 function chooseTicketPhone(index,btn){
   const raffle=supabaseRaffles[index];
   if(raffleIsEnded(raffle)){
-    alert("ይህ እጣ አልቋል።");
+    alert(tx("raffleEnded"));
     return;
   }
   ticketProductIndex=index;
@@ -1496,28 +2700,74 @@ function continueCheckout(){
 function normalizePhone(v){let p=String(v||"").replace(/[\s\-()]/g,"");if(/^0[79]\d{8}$/.test(p))return "+251"+p.slice(1);if(/^251[79]\d{8}$/.test(p))return "+"+p;if(/^\+251[79]\d{8}$/.test(p))return p;return null;}
 function previewScreenshot(input){const file=input.files&&input.files[0],box=document.getElementById("screenshotPreview"),name=document.getElementById("screenshotName");if(!file){box.className="screenshotPreview";box.innerHTML="";name.textContent="JPG / PNG";return;}if(!file.type.startsWith("image/")){input.value="";alert(T[language].screenshotRequired);return;}name.textContent=file.name;const r=new FileReader();r.onload=e=>{box.innerHTML=`<img src="${e.target.result}" alt="Payment screenshot">`;box.className="screenshotPreview show";};r.readAsDataURL(file);}
 async function copyAccount(value,btn){try{await navigator.clipboard.writeText(value);}catch(e){const x=document.createElement("textarea");x.value=value;document.body.appendChild(x);x.select();document.execCommand("copy");x.remove();}const old=btn.textContent;btn.textContent=T[language].copied;setTimeout(()=>btn.textContent=T[language].copy,1200);}
+async 
+function caraSafeUUID(){
+  try{
+    if(window.crypto && typeof crypto.randomUUID==="function"){
+      return crypto.randomUUID();
+    }
+  }catch(e){}
+  return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g,c=>{
+    const r=Math.random()*16|0;
+    const v=c==="x"?r:(r&0x3|0x8);
+    return v.toString(16);
+  });
+}
+
+function caraErrorText(err){
+  if(!err) return "Unknown error";
+  if(typeof err==="string") return err;
+  const parts=[];
+  if(err.message) parts.push(err.message);
+  if(err.error_description) parts.push(err.error_description);
+  if(err.details) parts.push(err.details);
+  if(err.hint) parts.push("Hint: "+err.hint);
+  if(err.code) parts.push("Code: "+err.code);
+  if(err.statusCode) parts.push("Status: "+err.statusCode);
+  if(err.status) parts.push("Status: "+err.status);
+  if(parts.length) return parts.join(" | ");
+  try{return JSON.stringify(err);}catch(e){return String(err);}
+}
+
 async function confirmTicket(){
-  const name=document.getElementById("customerName").value.trim();
-  const phone=normalizePhone(document.getElementById("customerPhone").value);
-  const file=document.getElementById("paymentScreenshot").files[0];
-
-  if(!name || !phone){alert(T[language].fillCustomer);return;}
-  if(!file){alert(T[language].screenshotRequired);return;}
-  if(selectedNumber===null){alert(T[language].noNumber);closeCheckout();return;}
-
-  const raffle=supabaseRaffles[ticketProductIndex]||supabaseRaffles[0];
-  if(!raffle){alert("ACTIVE raffle አልተገኘም።");return;}
-
-  const ticketId=crypto.randomUUID();
-  const safeName=String(file.name||"payment.jpg").replace(/[^a-zA-Z0-9._-]/g,"_");
-  const proofPath=`${raffle.id}/${Date.now()}_${crypto.randomUUID()}_${safeName}`;
+  let stage="START";
+  let ticketId=null;
+  let proofPath=null;
 
   try{
+    stage="READ_FORM";
+    const name=document.getElementById("customerName").value.trim();
+    const phone=normalizePhone(document.getElementById("customerPhone").value);
+    const file=document.getElementById("paymentScreenshot").files[0];
+
+    if(!name || !phone){alert(T[language].fillCustomer);return;}
+    if(!file){alert(T[language].screenshotRequired);return;}
+    if(selectedNumber===null){alert(T[language].noNumber);closeCheckout();return;}
+
+    stage="CHECK_RAFFLE";
+    const raffle=supabaseRaffles[ticketProductIndex]||supabaseRaffles[0];
+    if(!raffle){alert(tx("activeRaffleNotFound"));return;}
+    if(typeof raffleIsEnded==="function" && raffleIsEnded(raffle)){
+      alert(tx("raffleEnded"));
+      return;
+    }
+
+    stage="CREATE_ID";
+    ticketId=caraSafeUUID();
+    const safeName=String(file.name||"payment.jpg").replace(/[^a-zA-Z0-9._-]/g,"_");
+    proofPath=`${raffle.id}/${Date.now()}_${caraSafeUUID()}_${safeName}`;
+
+    stage="UPLOAD_SCREENSHOT";
     const {error:uploadError}=await sb.storage
       .from("payment-proofs")
-      .upload(proofPath,file,{contentType:file.type||"image/jpeg",upsert:false});
+      .upload(proofPath,file,{
+        contentType:file.type||"image/jpeg",
+        cacheControl:"3600",
+        upsert:false
+      });
     if(uploadError) throw uploadError;
 
+    stage="CREATE_TICKET";
     const {error:ticketError}=await sb.from("tickets").insert({
       id:ticketId,
       raffle_id:raffle.id,
@@ -1529,10 +2779,11 @@ async function confirmTicket(){
       status:"PENDING"
     });
     if(ticketError){
-      await sb.storage.from("payment-proofs").remove([proofPath]);
+      try{ await sb.storage.from("payment-proofs").remove([proofPath]); }catch(e){}
       throw ticketError;
     }
 
+    stage="CREATE_PAYMENT";
     const {error:paymentError}=await sb.from("payments").insert({
       ticket_id:ticketId,
       amount:Number(raffle.ticket_price||0),
@@ -1542,6 +2793,7 @@ async function confirmTicket(){
     });
     if(paymentError) throw paymentError;
 
+    stage="LOCAL_SAVE";
     myTickets.push({
       id:ticketId,
       raffle_id:raffle.id,
@@ -1564,12 +2816,13 @@ async function confirmTicket(){
     renderProfile();
     alert(T[language].ticketSuccess);
     showPage("profile");
+
   }catch(err){
-    console.error("CARAA ticket/payment submit:",err);
-    alert("እጣው አልተላከም። Console ላይ ያለውን error ይመልከቱ።");
+    console.error("CARAA ticket/payment submit:",stage,err);
+    const msg=caraErrorText(err);
+    alert(tx("submitStepPrefix")+"\n\nSTEP: "+stage+"\nERROR: "+msg);
   }
 }
-
 
 async function syncTicketStatuses(){
   try{
@@ -1717,37 +2970,66 @@ function animateDbWinner(finalNumber, raffle){
   const approved=Array.from(approvedByRaffle.get(raffle.id)||new Set()).map(Number);
   const animationNumbers=approved.length?approved:[Number(finalNumber)];
 
-  if(winner) winner.classList.remove("show");
+  if(winner){
+    winner.classList.remove("show");
+    winner.classList.remove("autoCloseHint");
+  }
   setWinnerVisibleInfo(raffle,finalNumber);
 
   if(overlay) overlay.classList.add("show");
-  if(rollCard) rollCard.classList.add("buzz");
-  if(rollSub) rollSub.textContent="ቁጥሮች በፍጥነት እየተዘዋወሩ...";
-  if(rollNumber) rollNumber.textContent="#---";
+  if(rollCard){
+    rollCard.classList.add("buzz");
+    rollCard.classList.add("strongBuzz");
+    rollCard.classList.remove("finalPause");
+  }
+  if(rollNumber){
+    rollNumber.classList.remove("slowPulse");
+    rollNumber.textContent="#---";
+  }
+  if(rollSub) rollSub.textContent=tx("rollFast");
 
   setPhase("stepLocked",T[language].locked);
-  document.getElementById("drawStatusText").textContent=T[language].drawingStatus;
-  document.getElementById("drawStatusSub").textContent=T[language].drawingSub;
+  const statusText=document.getElementById("drawStatusText");
+  const statusSub=document.getElementById("drawStatusSub");
+  if(statusText) statusText.textContent=T[language].drawingStatus;
+  if(statusSub) statusSub.textContent=T[language].drawingSub;
 
   setTimeout(()=>setPhase("stepDrawing",T[language].drawing),250);
 
   let count=0;
-  let speed=28;
-  const roll=setInterval(()=>{
+  let delay=24;
+  function nextRoll(){
     const preview=animationNumbers[Math.floor(Math.random()*animationNumbers.length)];
     if(rollNumber) rollNumber.textContent="#"+String(preview).padStart(3,"0");
     count++;
 
-    if(count===38){
+    if(count===75){
       setPhase("stepVerify",T[language].verifying);
-      if(rollSub) rollSub.textContent="ቁጥሩ እየተረጋገጠ ነው...";
+      if(rollSub) rollSub.textContent=tx("verifyingNumber");
+      if(rollNumber) rollNumber.classList.add("slowPulse");
     }
 
-    if(count>=70){
-      clearInterval(roll);
-      if(rollCard) rollCard.classList.remove("buzz");
-      if(rollNumber) rollNumber.textContent="#"+String(finalNumber).padStart(3,"0");
-      if(rollSub) rollSub.textContent="✅ አሸናፊ ተገኝቷል";
+    if(count<105){
+      if(count>74) delay=70;
+      setTimeout(nextRoll,delay);
+      return;
+    }
+
+    // Real pause before final reveal
+    if(rollSub) rollSub.textContent=tx("verifyingNumber");
+    if(rollNumber) rollNumber.textContent="•••";
+    if(rollCard){
+      rollCard.classList.remove("buzz");
+      rollCard.classList.remove("strongBuzz");
+      rollCard.classList.add("finalPause");
+    }
+
+    setTimeout(()=>{
+      if(rollNumber){
+        rollNumber.classList.remove("slowPulse");
+        rollNumber.textContent="#"+String(finalNumber).padStart(3,"0");
+      }
+      if(rollSub) rollSub.textContent=tx("winnerFound");
 
       setTimeout(()=>{
         setPhase("stepWinner",T[language].winner);
@@ -1762,13 +3044,14 @@ function animateDbWinner(finalNumber, raffle){
         if(simpleWinnerStat) simpleWinnerStat.textContent="#"+String(finalNumber).padStart(3,"0");
         renderEndedHeroSlider();
 
-        document.getElementById("drawStatusText").textContent=T[language].winnerStatus;
-        document.getElementById("drawStatusSub").textContent=
+        if(statusText) statusText.textContent=T[language].winnerStatus;
+        if(statusSub) statusSub.textContent=
           T[language].winnerSubPrefix+String(finalNumber).padStart(3,"0")+T[language].winnerSubSuffix;
 
         setTimeout(()=>{
           if(overlay) overlay.classList.remove("show");
-        },1300);
+          if(rollCard) rollCard.classList.remove("finalPause");
+        },1800);
 
         setTimeout(()=>{
           if(winner){
@@ -1776,17 +3059,18 @@ function animateDbWinner(finalNumber, raffle){
             winner.classList.remove("autoCloseHint");
           }
           setPhase("stepReady",T[language].ready);
-          document.getElementById("drawStatusText").textContent=T[language].winnerStatus;
-          document.getElementById("drawStatusSub").textContent="አሸናፊው History ውስጥ ተቀምጧል።";
-        },5000);
+          if(statusText) statusText.textContent=T[language].winnerStatus;
+          if(statusSub) statusSub.textContent=tx("historySaved");
+          translateLooseText();
+        },7000);
 
         drawing=false;
         drawEnergy=0;
-      },850);
-    }
-  },speed);
+      },1600);
+    },1300);
+  }
+  nextRoll();
 }
-
 
 function updateSupabaseDrawState(){
   const raffle=supabaseRaffles[drawPhoneIndex]||supabaseRaffles[0];
@@ -1816,7 +3100,7 @@ function updateSupabaseDrawState(){
   if(soldBig) soldBig.textContent=approved.toLocaleString();
   if(totalBig) totalBig.textContent=total.toLocaleString();
   if(percentEl) percentEl.textContent=percent+"%";
-  if(priceEl) priceEl.textContent=Number(raffle.ticket_price||0).toLocaleString()+" ብር";
+  if(priceEl) priceEl.textContent=Number(raffle.ticket_price||0).toLocaleString()+" "+tx("birr");
   if(winnerStat) winnerStat.textContent=raffle.winner_ticket_number ? "#"+String(raffle.winner_ticket_number).padStart(3,"0") : "---";
   if(raffle.winner_ticket_number) setWinnerVisibleInfo(raffle,Number(raffle.winner_ticket_number));
 
@@ -1824,7 +3108,7 @@ function updateSupabaseDrawState(){
   const countdownEl=document.getElementById("countdown");
 
   if(state==="DRAWN" && raffle.winner_ticket_number){
-    countdownEl.textContent="00 ቀን 00:00:00";
+    countdownEl.textContent="00 "+tx("days")+" 00:00:00";
     const key=raffle.id+":"+raffle.winner_ticket_number;
     if(renderedWinnerKey!==key && !drawing){
       renderedWinnerKey=key;
@@ -1841,27 +3125,49 @@ function updateSupabaseDrawState(){
     const h=Math.floor((diff%86400000)/3600000);
     const m=Math.floor((diff%3600000)/60000);
     const sec=Math.floor((diff%60000)/1000);
-    const dayWord=language==="am"?"ቀን":"Guyyaa";
-    countdownEl.textContent=
-      `${String(d).padStart(2,"0")} ${dayWord} ${String(h).padStart(2,"0")}:${String(m).padStart(2,"0")}:${String(sec).padStart(2,"0")}`;
+    const dayWord=tx("days");
+    if(countdownEl) countdownEl.textContent=`${String(d).padStart(2,"0")} ${dayWord} ${String(h).padStart(2,"0")}:${String(m).padStart(2,"0")}:${String(sec).padStart(2,"0")}`;
     setPhase("stepLocked",T[language].locked);
-    document.getElementById("drawStatusText").textContent=
-      language==="am"?"⏳ የእጣው ቆጠራ ተጀምሯል":"⏳ Yeroon baafataa jalqabeera";
-    document.getElementById("drawStatusSub").textContent=
-      language==="am"?"ጊዜው ሲያልቅ አሸናፊው በራሱ ይመረጣል":"Yeroon yoo xumurame mo'ataan ofumaan filatama";
+    document.getElementById("drawStatusText").textContent=tx("countdownStarted");
+    document.getElementById("drawStatusSub").textContent=tx("countdownStartedSub");
     return;
   }
 
-  countdownEl.textContent="--";
+  if(countdownEl) countdownEl.textContent="--";
   setPhase("stepReady",T[language].ready);
   document.getElementById("drawStatusText").textContent=T[language].readyStatus;
-  document.getElementById("drawStatusSub").textContent=
-    `${approved}/${total} `+(language==="am"?"APPROVED ነው። ሁሉም ሲሞላ countdown ይጀምራል።":"APPROVED dha. Hundi yoo guutame countdown jalqaba.");
+  document.getElementById("drawStatusSub").textContent=`${approved}/${total} ${tx("approvedCountSub")}`;
 }
 
 
 
+let endedSlideTimer=null;
+let endedSlideIndex=0;
+
+function startEndedAutoSlide(){
+  const track=document.getElementById("endedHeroTrack");
+  if(!track) return;
+  const cards=[...track.querySelectorAll(".endedHeroCard")];
+  if(endedSlideTimer) clearInterval(endedSlideTimer);
+  if(cards.length<=1) return;
+
+  function syncDots(){
+    const dots=[...document.querySelectorAll(".endedHeroDot")];
+    dots.forEach((d,i)=>d.classList.toggle("active",i===endedSlideIndex));
+  }
+  syncDots();
+
+  endedSlideTimer=setInterval(()=>{
+    const current=[...track.querySelectorAll(".endedHeroCard")];
+    if(!current.length) return;
+    endedSlideIndex=(endedSlideIndex+1)%current.length;
+    current[endedSlideIndex].scrollIntoView({behavior:"smooth",inline:"center",block:"nearest"});
+    syncDots();
+  },4300);
+}
+
 function renderEndedHeroSlider(){
+  const slider=document.getElementById("endedHeroSlider");
   const track=document.getElementById("endedHeroTrack");
   if(!track) return;
 
@@ -1870,34 +3176,53 @@ function renderEndedHeroSlider(){
     .sort((a,b)=>String(b.drawn_at||b.updated_at||"").localeCompare(String(a.drawn_at||a.updated_at||"")));
 
   if(!ended.length){
-    track.innerHTML='<div class="endedHeroEmpty">ገና የወጣ እጣ የለም</div>';
+    track.innerHTML=`<div class="endedHeroEmpty">${tx("historyEmpty")}</div>`;
+    const oldDots=document.getElementById("endedHeroDots");
+    if(oldDots) oldDots.remove();
+    if(endedSlideTimer) clearInterval(endedSlideTimer);
     return;
   }
 
-  track.innerHTML=ended.map(r=>{
+  endedSlideIndex=0;
+  track.innerHTML=ended.map((r,idx)=>{
     const no=Number(r.winner_ticket_number||0);
     const info=no?getWinnerInfo(r.id,no):{username:"",name:"",phone:""};
-    const user=no?winnerDisplayUser(info):"አሸናፊ በቅርብ";
+    const user=no?winnerDisplayUser(info):tx("winnerSoon");
     const phone=no?winnerDisplayPhone(info):"";
-    const winner=no?("#"+String(no).padStart(3,"0")):"COUNTDOWN";
-    return `<div class="endedHeroCard">
-      ${r.phone_image_url?`<img src="${escapeHtml(r.phone_image_url)}" alt="${escapeHtml(r.phone_name||"CARAA")}">`:`<div></div>`}
+    const winner=no?("#"+String(no).padStart(3,"0")):tx("countdownWord");
+    return `<div class="endedHeroCard" data-ended-index="${idx}">
+      ${renderEndedRafflePhotos(r)}
       <div>
         <h4>${escapeHtml(r.phone_name||"CARAA")}</h4>
-        <span class="endedTag">ያለቀ እጣ</span>
-        <p>Winner: <b>${winner}</b><br>${escapeHtml(user)}${phone?`<br>📞 ${escapeHtml(phone)}`:""}</p>
+        <span class="endedTag">${tx("endedTag")}</span>
+        <p>${tx("winnerWord")}: <b>${winner}</b><br>${escapeHtml(user)}${phone?`<br>📞 ${escapeHtml(phone)}`:""}</p>
       </div>
     </div>`;
   }).join("");
+
+  let dots=document.getElementById("endedHeroDots");
+  if(!dots && slider){
+    dots=document.createElement("div");
+    dots.id="endedHeroDots";
+    dots.className="endedHeroDots";
+    slider.appendChild(dots);
+  }
+  if(dots){
+    dots.innerHTML=ended.map((_,i)=>`<span class="endedHeroDot ${i===0?"active":""}" onclick="endedSlideIndex=${i};document.querySelectorAll('.endedHeroCard')[${i}]?.scrollIntoView({behavior:'smooth',inline:'center',block:'nearest'});document.querySelectorAll('.endedHeroDot').forEach((d,j)=>d.classList.toggle('active',j===${i}))"></span>`).join("");
+  }
+
+  startEndedAutoSlide();
 }
 
 async function loadSupabaseRaffles(){
   try{
     const {data,error}=await sb.from("raffles").select("*").order("created_at",{ascending:false});
     if(error)throw error;
+
     supabaseRaffles=(data||[]).filter(r=>String(r.status||"").trim().toUpperCase()==="ACTIVE");
     approvedByRaffle=new Map();
     approvedTicketInfoByKey=new Map();
+
     if(supabaseRaffles.length){
       const raffleIds=supabaseRaffles.map(r=>r.id);
       const {data:approved,error:approvedError}=await sb
@@ -1915,7 +3240,9 @@ async function loadSupabaseRaffles(){
         });
       });
     }
+
     drawNames=supabaseRaffles.map(r=>r.phone_name);
+
     const ticketChooser=document.getElementById("ticketPhoneChooser");
     if(ticketChooser){
       ticketChooser.innerHTML=supabaseRaffles
@@ -1926,6 +3253,7 @@ async function loadSupabaseRaffles(){
           ${escapeHtml(r.phone_name)}
         </button>`).join("");
     }
+
     const drawWrap=document.getElementById("supabaseDrawPhones");
     if(drawPhoneIndex>=supabaseRaffles.length) drawPhoneIndex=0;
     if(drawWrap){
@@ -1933,23 +3261,30 @@ async function loadSupabaseRaffles(){
         .map((r,i)=>({r,i,ended:raffleIsEnded(r)}))
         .sort((a,b)=>Number(a.ended)-Number(b.ended))
         .map(({r,i,ended})=>{
-        const approvedCount=(approvedByRaffle.get(r.id)||new Set()).size;
-        const totalCount=Number(r.total_tickets||1000);
-        const remainCount=Math.max(0,totalCount-approvedCount);
-        return `
-        <div class="drawPhoneChoice ${i===drawPhoneIndex?"active":""} ${ended?"endedDrawPhone":""}" onclick="selectDrawPhone(${i})">
-          ${r.phone_image_url?`<img class="choiceImg" src="${escapeHtml(r.phone_image_url)}" alt="${escapeHtml(r.phone_name)}">`:""}
-          <div class="choiceBody">
-            <h3>${escapeHtml(r.phone_name)}</h3>
-            <div class="choicePrice">${ended?"ያለቀ እጣ":Number(r.ticket_price||0).toLocaleString()+" ብር"}</div>
-            <div class="choiceStats">${approvedCount}/${totalCount} ተቆርጧል • ${ended?"History ውስጥ ገብቷል":"ቀሪ "+remainCount}</div>
-          </div>
-        </div>`;
-      }).join("");
+          const approvedCount=(approvedByRaffle.get(r.id)||new Set()).size;
+          const totalCount=Number(r.total_tickets||1000);
+          const remainCount=Math.max(0,totalCount-approvedCount);
+          const img=firstRaffleImage(r);
+          return `
+          <div class="drawPhoneChoice ${i===drawPhoneIndex?"active":""} ${ended?"endedDrawPhone":""}" onclick="selectDrawPhone(${i})">
+            ${img?`<img class="choiceImg" src="${escapeHtml(img)}" alt="${escapeHtml(r.phone_name)}">`:""}
+            <div class="choiceBody">
+              <h3>${escapeHtml(r.phone_name)}</h3>
+              <div class="choicePrice">${ended?tx("endedTag"):Number(r.ticket_price||0).toLocaleString()+" "+tx("birr")}</div>
+              <div class="choiceStats">${approvedCount}/${totalCount} ${tx("soldProgress")} • ${ended?tx("inHistory"):tx("remainingShort")+" "+remainCount}</div>
+            </div>
+          </div>`;
+        }).join("");
       if(drawNames[drawPhoneIndex]) document.getElementById("winnerName").textContent=drawNames[drawPhoneIndex];
     }
+
     const wrap=document.getElementById("supabaseRaffleCards");
-    if(!wrap)return;
+    if(!wrap){
+      renderEndedHeroSlider();
+      updateSupabaseDrawState();
+      return;
+    }
+
     const openHomeRaffles=supabaseRaffles
       .map((r,i)=>({r,i}))
       .filter(x=>!raffleIsEnded(x.r));
@@ -1959,8 +3294,8 @@ async function loadSupabaseRaffles(){
         <div class="phoneRow">
           <div class="phoneCard emptyActiveRaffle">
             <div class="phoneInfo">
-              <h3>አዲስ እጣ በቅርብ</h3>
-              <p class="emptyActiveText">አሁን ያሉት እጣዎች አልቀዋል። የወጡትን ከላይ በHistory slider ይመልከቱ።</p>
+              <h3>${tx("newRaffleSoon")}</h3>
+              <p class="emptyActiveText">${tx("allEndedText")}</p>
             </div>
           </div>
         </div>`;
@@ -1973,8 +3308,9 @@ async function loadSupabaseRaffles(){
         <div class="phoneRow">
           <div class="phoneCard">
             <div class="phoneGallery">
-              <span class="phoneBadge">LIVE</span>
-              ${r.phone_image_url?`<img class="phoneMainImage" src="${escapeHtml(r.phone_image_url)}" alt="${escapeHtml(r.phone_name)}">`:""}
+              <span class="phoneBadge">${T[language].liveRaffle||"LIVE"}</span>
+              ${renderRafflePhoto(r,"phoneMainImage")}
+              ${renderSpecBoxes(r)}
             </div>
             <div class="phoneInfo">
               <h3>${escapeHtml(r.phone_name)}</h3>
@@ -1986,17 +3322,18 @@ async function loadSupabaseRaffles(){
                   .map(x=>`<span class="specChip">${escapeHtml(x)}</span>`)
                   .join("")
               }</div>
-              <div class="phonePrice">${Number(r.ticket_price||0).toLocaleString()} ብር</div>
+              <div class="phonePrice">${Number(r.ticket_price||0).toLocaleString()} ${tx("birr")}</div>
               <div class="raffleCounts">
-                <span>የተቆረጠ: <b>${approvedCount}</b></span>
-                <span>ቀሪ: <b>${remainCount}</b></span>
+                <span>${T[language].sold}: <b>${approvedCount}</b></span>
+                <span>${T[language].remaining}: <b>${remainCount}</b></span>
               </div>
-              <button class="confirm" type="button" onclick="openTickets(${i})">🎟️ እጣ ለመቁረጥ</button>
+              <button class="confirm" type="button" onclick="openTickets(${i})">${T[language].cutRaffle}</button>
             </div>
           </div>
         </div>`;
       }).join("");
     }
+
     renderEndedHeroSlider();
     updateSupabaseDrawState();
   }catch(err){
@@ -2016,13 +3353,27 @@ function getDiff(){
   const m=Math.floor(diff/60000);const s=Math.floor((diff%60000)/1000);
   return{done:false,d,h,m,s};
 }
+
+function activateLaunchAdIfDone(){
+  const x=getDiff();
+  if(x.done && !sessionStorage.getItem("caraa_launch_ad_closed")){
+    document.body.classList.add("launchAdFullscreen");
+  }
+}
+function enterCaraaApp(){
+  try{sessionStorage.setItem("caraa_launch_ad_closed","1");}catch(e){}
+  document.body.classList.remove("launchAdFullscreen");
+  const target=document.getElementById("supabaseRaffleCards")||document.querySelector(".hero");
+  if(target) target.scrollIntoView({behavior:"smooth",block:"start"});
+}
+
 function updateHomeCountdown(){
   const x=getDiff();
   document.getElementById("homeDays").textContent=String(x.d).padStart(2,"0");
   document.getElementById("homeHours").textContent=String(x.h).padStart(2,"0");
   document.getElementById("homeMinutes").textContent=String(x.m).padStart(2,"0");
   document.getElementById("homeSeconds").textContent=String(x.s).padStart(2,"0");
-  if(x.done){launchCountdownFinished=true;checkAutoDraw();}
+  if(x.done){launchCountdownFinished=true;activateLaunchAdIfDone();checkAutoDraw();}
 }
 function updateCountdown(){
   updateSupabaseDrawState();
@@ -2044,14 +3395,14 @@ function refreshDynamicLanguage(){
 function manualSimpleDrawClick(){
   const raffle=supabaseRaffles[drawPhoneIndex]||supabaseRaffles[0];
   if(!raffle){
-    alert("እባክዎ መጀመሪያ እጣ ያለው ስልክ በAdmin ይፍጠሩ።");
+    alert(tx("activeRaffleNotFound"));
     return;
   }
   const state=String(raffle.draw_status||"WAITING").toUpperCase();
   if(state==="DRAWN" && raffle.winner_ticket_number){
     animateDbWinner(Number(raffle.winner_ticket_number),raffle);
   }else{
-    alert("እጣው ገና አልወጣም። 100% ሲሞላ እና countdown ሲያልቅ በserver ይወጣል።");
+    alert(tx("drawNotReady"));
   }
 }
 
@@ -2066,7 +3417,7 @@ function openDrawHistory(){
     .sort((a,b)=>String(b.drawn_at||b.updated_at||"").localeCompare(String(a.drawn_at||a.updated_at||"")));
 
   if(!drawn.length){
-    list.innerHTML='<div class="simpleHistoryEmpty">History ገና የለም</div>';
+    list.innerHTML=`<div class="simpleHistoryEmpty">${tx("historyEmpty")}</div>`;
   }else{
     list.innerHTML=drawn.map(r=>{
       const when=r.drawn_at?new Date(r.drawn_at).toLocaleString():"";
@@ -2087,7 +3438,6 @@ function openDrawHistory(){
   }
   modal.classList.add("show");
 }
-
 
 function closeDrawHistory(){
   const modal=document.getElementById("drawHistoryModal");
