@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="am">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>CARAA Admin</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#050816;--panel:#0b1024;--panel2:#111936;--line:rgba(255,255,255,.09);--text:#f7f8ff;--muted:#8f9aba;--blue:#2563eb;--violet:#7c3aed;--cyan:#22d3ee;--green:#22c55e;--red:#ef4444;--gold:#fbbf24}
+body{font-family:Arial,sans-serif;background:radial-gradient(circle at top,#111a42 0,#070b1b 38%,#03050d 100%);color:var(--text);min-height:100vh}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+.hidden{display:none!important}
+.login{min-height:100vh;display:grid;place-items:center;padding:20px}
+.loginCard{width:min(420px,100%);background:rgba(11,16,36,.92);border:1px solid var(--line);border-radius:24px;padding:28px;box-shadow:0 30px 80px #0008;backdrop-filter:blur(18px)}
+.brand{text-align:center;margin-bottom:25px}
+.logo{width:72px;height:72px;margin:auto;display:grid;place-items:center;filter:drop-shadow(0 0 12px rgba(37,99,235,.35)) drop-shadow(0 0 14px rgba(124,58,237,.20))}
+.logo svg{width:100%;height:100%;display:block}
+.logo.small{width:42px;height:42px;margin:0}
+.brand h1{margin-top:12px;font-size:28px}.brand p{color:var(--muted);margin-top:5px}
+.field{margin:13px 0}.field label{display:block;color:#cbd5e1;font-size:12px;font-weight:800;margin-bottom:7px}
+.field input,.field textarea,.field select{width:100%;border:1px solid var(--line);background:#070b19;color:white;border-radius:12px;padding:13px;outline:none}
+.field textarea{min-height:90px;resize:vertical}
+.primary{border:0;border-radius:12px;padding:13px 16px;color:white;font-weight:900;background:linear-gradient(135deg,var(--blue),var(--violet))}
+.loginCard .primary{width:100%;margin-top:8px}
+.demo{margin-top:16px;padding:12px;background:#ffffff08;border:1px solid var(--line);border-radius:12px;color:var(--muted);font-size:12px;line-height:1.7}
+.app{display:grid;grid-template-columns:245px 1fr;min-height:100vh}
+.sidebar{background:#060a18;border-right:1px solid var(--line);padding:18px;position:sticky;top:0;height:100vh}
+.sideBrand{display:flex;gap:10px;align-items:center;margin-bottom:25px}.sideBrand .logo{width:42px;height:42px;margin:0}.sideBrand strong{font-size:18px}.sideBrand small{display:block;color:var(--muted)}
+.nav button{width:100%;border:0;background:transparent;color:#aeb8d3;padding:12px;border-radius:11px;text-align:left;margin:3px 0;font-weight:800}.nav button.active,.nav button:hover{color:white;background:linear-gradient(90deg,#2563eb2d,#7c3aed22)}
+.sideBottom{position:absolute;bottom:18px;left:18px;right:18px}.roleBadge{padding:9px;border-radius:10px;background:#7c3aed20;color:#c4b5fd;text-align:center;font-size:11px;font-weight:900;margin-bottom:8px}.logout{width:100%;padding:10px;border-radius:10px;border:1px solid #ef444455;background:#ef444411;color:#fca5a5;font-weight:900}
+.main{padding:22px;min-width:0}.topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}.topbar h2{font-size:24px}.topbar p{color:var(--muted);font-size:12px;margin-top:4px}.userBox{text-align:right}.userBox strong{display:block}.userBox small{color:var(--muted)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}.stat{background:linear-gradient(145deg,#101733,#090e20);border:1px solid var(--line);border-radius:17px;padding:17px}.stat small{color:var(--muted);font-weight:700}.stat strong{display:block;font-size:26px;margin-top:7px}
+.panel{background:rgba(11,16,36,.82);border:1px solid var(--line);border-radius:18px;padding:18px;margin-bottom:16px}.panelHead{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:15px}.panelHead h3{font-size:17px}.panelHead p{color:var(--muted);font-size:11px;margin-top:3px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:13px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}
+.photoBox{border:1px dashed #64748b;border-radius:14px;padding:15px;text-align:center;color:var(--muted)}.photoBox img{width:100%;height:180px;object-fit:contain;border-radius:10px;margin-bottom:10px;background:#030611}
+.actions{display:flex;gap:7px;flex-wrap:wrap}.btn{border:1px solid var(--line);background:#ffffff08;color:white;padding:8px 11px;border-radius:9px;font-size:11px;font-weight:900}.btn.green{color:#86efac;border-color:#22c55e55;background:#22c55e11}.btn.red{color:#fca5a5;border-color:#ef444455;background:#ef444411}.btn.gold{color:#fde68a;border-color:#fbbf2455;background:#fbbf2411}
+.tableWrap{overflow:auto}table{width:100%;border-collapse:collapse;min-width:700px}th,td{text-align:left;padding:12px 9px;border-bottom:1px solid var(--line);font-size:12px}th{color:#8490af}.status{display:inline-block;padding:5px 8px;border-radius:999px;font-size:9px;font-weight:1000}.pending{background:#fbbf2418;color:#fde68a}.approved,.active{background:#22c55e18;color:#86efac}.rejected,.closed{background:#ef444418;color:#fca5a5}.paused{background:#64748b33;color:#cbd5e1}
+.raffleCards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.raffle{border:1px solid var(--line);background:#080d20;border-radius:16px;padding:12px}.raffle img{width:100%;height:145px;object-fit:contain;background:#030611;border-radius:12px}.raffle h4{margin-top:10px}.raffle p{color:var(--muted);font-size:11px;margin:5px 0}.raffle .actions{margin-top:10px}
+.permission{display:flex;justify-content:space-between;align-items:center;padding:10px;background:#ffffff06;border-radius:10px;margin:7px 0}.permission input{width:18px;height:18px}
+.section{display:none}.section.active{display:block}
+.modal{position:fixed;inset:0;background:#000b;display:none;place-items:center;padding:18px;z-index:20}.modal.show{display:grid}.modalCard{width:min(600px,100%);max-height:90vh;overflow:auto;background:#0b1024;border:1px solid var(--line);border-radius:20px;padding:20px}.modalHead{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px}.close{border:0;background:#ffffff10;color:white;width:34px;height:34px;border-radius:10px}
+
+.proofBtn{border:1px solid #2563eb66;background:#2563eb18;color:#93c5fd;padding:7px 10px;border-radius:9px;font-size:10px;font-weight:900}
+.proofViewer{display:grid;gap:12px}
+.proofImageWrap{min-height:260px;border:1px solid var(--line);background:#02050d;border-radius:15px;display:grid;place-items:center;overflow:hidden}
+.proofImageWrap img{max-width:100%;max-height:65vh;object-fit:contain;display:block}
+.proofFallback{padding:35px;text-align:center;color:var(--muted);line-height:1.7}
+.proofMeta{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.proofMeta div{background:#ffffff07;border:1px solid var(--line);border-radius:10px;padding:10px}
+.proofMeta small{display:block;color:var(--muted);font-size:9px;margin-bottom:4px}
+.proofDecision{display:flex;gap:9px}
+.proofDecision button{flex:1}
+@media(max-width:600px){.proofMeta{grid-template-columns:1fr}}
+
+@media(max-width:900px){.app{grid-template-columns:75px 1fr}.sidebar{padding:12px}.sideBrand div:last-child,.nav span,.sideBottom .roleBadge{display:none}.sideBrand .logo{margin:auto}.nav button{text-align:center;font-size:18px}.sideBottom{left:10px;right:10px}.stats{grid-template-columns:1fr 1fr}.raffleCards{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.main{padding:13px}.stats,.grid2,.grid3,.raffleCards{grid-template-columns:1fr}.topbar{align-items:flex-start}.userBox{display:none}}
+
+/* SPECIFICATION WRITER BOX */
+.specWriterField{
+  padding:13px;
+  border-radius:18px;
+  background:
+    radial-gradient(circle at 100% 0%,rgba(34,211,238,.12),transparent 34%),
+    linear-gradient(135deg,rgba(37,99,235,.10),rgba(124,58,237,.10));
+  border:1px solid rgba(34,211,238,.18);
+}
+.specWriterBox{
+  min-height:125px!important;
+  resize:vertical;
+  line-height:1.55;
+  background:#050b1d!important;
+  border:1px solid rgba(34,211,238,.32)!important;
+  box-shadow:inset 0 0 0 1px rgba(124,58,237,.13),0 0 22px rgba(37,99,235,.10);
+}
+.specWriterBox:focus{
+  border-color:#22d3ee!important;
+  box-shadow:0 0 0 3px rgba(34,211,238,.14),0 0 28px rgba(37,99,235,.18);
+}
+.specWriterHint{
+  display:block;
+  margin-top:8px;
+  color:#8fdcff;
+  font-size:10px;
+  font-weight:800;
+  line-height:1.4;
+}
+
+
+/* 3 PHONE PHOTOS */
+.rafflePreviewGrid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
+  margin-bottom:10px;
+}
+.rafflePreviewGrid img{
+  width:100%;
+  height:105px;
+  object-fit:contain;
+  border-radius:12px;
+  background:#030611;
+  border:1px solid rgba(34,211,238,.18);
+}
+.photoHint{
+  display:block;
+  margin-top:8px;
+  color:#8fdcff;
+  font-size:10px;
+  font-weight:800;
+}
+.adminRafflePhotoWrap{
+  position:relative;
+  height:145px;
+  border-radius:12px;
+  overflow:hidden;
+  background:#030611;
+}
+.adminRafflePhotoWrap img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+}
+.adminRafflePhotoWrap span{
+  position:absolute;
+  right:8px;
+  bottom:8px;
+  padding:4px 7px;
+  border-radius:999px;
+  background:rgba(2,8,22,.78);
+  border:1px solid rgba(255,255,255,.14);
+  color:#fff;
+  font-size:9px;
+  font-weight:1000;
+}
+
+
+/* RELIABLE 3 SEPARATE PHOTO UPLOADS */
+.threePhotoInputs{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
+  margin-bottom:10px;
+}
+.threePhotoInputs label{
+  display:block;
+  padding:10px;
+  border-radius:14px;
+  background:linear-gradient(135deg,rgba(37,99,235,.12),rgba(124,58,237,.10));
+  border:1px solid rgba(34,211,238,.18);
+  color:#dbeafe;
+  font-size:11px;
+  font-weight:900;
+}
+.threePhotoInputs input{
+  margin-top:7px;
+  padding:8px!important;
+  font-size:10px;
+}
+.adminRafflePhotoWrap.multi{
+  display:grid;
+  grid-template-columns:2fr 1fr;
+  grid-template-rows:1fr 1fr;
+  gap:6px;
+  padding:6px;
+}
+.adminRafflePhotoWrap.multi img{
+  border-radius:9px;
+  background:#fff;
+}
+.adminRafflePhotoWrap.multi img:first-child{
+  grid-row:1 / span 2;
+}
+@media(max-width:700px){
+  .threePhotoInputs{grid-template-columns:1fr}
+}
+
+
+/* ADMIN SHOW ALL 3 SAVED PHOTOS */
+.adminRafflePhotoWrap.multi{
+  display:grid!important;
+  grid-template-columns:2fr 1fr!important;
+  grid-template-rows:1fr 1fr!important;
+  gap:6px!important;
+  padding:6px!important;
+}
+.adminRafflePhotoWrap.count2{
+  grid-template-columns:1fr 1fr!important;
+  grid-template-rows:1fr!important;
+}
+.adminRafflePhotoWrap.multi img{
+  width:100%!important;
+  height:100%!important;
+  object-fit:contain!important;
+  border-radius:9px!important;
+  background:#fff!important;
+}
+.adminRafflePhotoWrap.count3 img:first-child{
+  grid-row:1 / span 2!important;
+}
+
+</style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+
+<div id="loginPage" class="login">
+  <div class="loginCard">
+    <div class="brand"><div class="logo"><svg viewBox="0 0 100 100" aria-label="CARAA logo"><defs><linearGradient id="adminLogoGradientLogin" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#19C2FF"/><stop offset="45%" stop-color="#2563EB"/><stop offset="78%" stop-color="#7C3AED"/><stop offset="100%" stop-color="#D946EF"/></linearGradient></defs><path d="M79 18C68 8 53 5 39 9C21 14 10 30 10 50C10 70 22 87 41 92C56 96 71 91 81 80L68 67C62 73 54 77 46 77C31 77 22 66 22 51C22 36 31 24 46 23C54 22 61 25 67 31Z" fill="url(#adminLogoGradientLogin)"/><path d="M50 36L68 65H58L50 52L42 65H32Z" fill="#fff"/></svg></div><h1>CARAA</h1><p>Master Admin & Admin Panel</p></div>
+    <div class="field"><label>Email</label><input id="loginUser" type="email" autocomplete="username" placeholder="Master/Admin email"></div>
+    <div class="field"><label>Password</label><input id="loginPass" type="password" placeholder="Password"></div>
+    <button class="primary" onclick="login()">LOGIN</button>
+    <div class="demo">SUPABASE LOGIN<br><b>Master/Admin:</b> በSupabase Authentication ላይ የተፈጠረ Email + Password</div>
+  </div>
+</div>
+
+<div id="adminApp" class="app hidden">
+  <aside class="sidebar">
+    <div class="sideBrand"><div class="logo small"><svg viewBox="0 0 100 100" aria-label="CARAA logo"><defs><linearGradient id="adminLogoGradientSide" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#19C2FF"/><stop offset="45%" stop-color="#2563EB"/><stop offset="78%" stop-color="#7C3AED"/><stop offset="100%" stop-color="#D946EF"/></linearGradient></defs><path d="M79 18C68 8 53 5 39 9C21 14 10 30 10 50C10 70 22 87 41 92C56 96 71 91 81 80L68 67C62 73 54 77 46 77C31 77 22 66 22 51C22 36 31 24 46 23C54 22 61 25 67 31Z" fill="url(#adminLogoGradientSide)"/><path d="M50 36L68 65H58L50 52L42 65H32Z" fill="#fff"/></svg></div><div><strong>CARAA</strong><small>Control Center</small></div></div>
+    <div class="nav">
+      <button class="active" onclick="go('dashboard',this)">⌂ <span>Dashboard</span></button>
+      <button onclick="go('raffles',this)">◈ <span>እጣዎች</span></button>
+      <button onclick="go('payments',this)">▣ <span>Payments</span></button>
+      <button onclick="go('accounts',this)">▤ <span>ሂሳብ</span></button>
+      <button id="adminsNav" onclick="go('admins',this)">♟ <span>Admins</span></button>
+      <button id="settingsNav" onclick="go('settings',this)">⚙ <span>Settings</span></button>
+    </div>
+    <div class="sideBottom"><div id="roleBadge" class="roleBadge"></div><button class="logout" onclick="logout()">↪</button></div>
+  </aside>
+
+  <main class="main">
+    <div class="topbar"><div><h2 id="pageTitle">Dashboard</h2><p>CARAA Administration System</p></div><div class="userBox"><strong id="currentName"></strong><small id="currentRole"></small></div></div>
+
+    <section id="dashboard" class="section active">
+      <div class="stats">
+        <div class="stat"><small>Active Raffles</small><strong id="activeCount">0</strong></div>
+        <div class="stat"><small>Pending Payments</small><strong id="pendingCount">0</strong></div>
+        <div class="stat"><small>Approved Tickets</small><strong id="approvedCount">0</strong></div>
+        <div class="stat"><small>Total Admins</small><strong id="adminCount">0</strong></div>
+      </div>
+      <div class="panel">
+        <div class="panelHead"><div><h3>Recent Pending Payments</h3><p>የክፍያ ማረጋገጫ የሚጠብቁ</p></div></div>
+        <div class="tableWrap"><table><thead><tr><th>Customer</th><th>Phone</th><th>Raffle</th><th>No.</th><th>Amount</th><th>Status</th></tr></thead><tbody id="recentPayments"></tbody></table></div>
+      </div>
+    </section>
+
+    <section id="raffles" class="section">
+      <div class="panel">
+        <div class="panelHead"><div><h3>እጣዎች</h3><p>ስልክ፣ ፎቶ፣ ዋጋ እና የእጣ ብዛት ያስተዳድሩ</p></div><button id="createRaffleBtn" class="primary" onclick="openRaffleModal()">+ አዲስ እጣ</button></div>
+        <div id="raffleCards" class="raffleCards"></div>
+      </div>
+    </section>
+
+    <section id="payments" class="section">
+      <div class="panel">
+        <div class="panelHead"><div><h3>Payment Approval</h3><p>PENDING ክፍያዎችን Approve / Reject ያድርጉ</p></div></div>
+        <div class="tableWrap"><table><thead><tr><th>Customer</th><th>Phone</th><th>Raffle</th><th>Ticket</th><th>Amount</th><th>Proof</th><th>Status</th><th>Action</th></tr></thead><tbody id="paymentRows"></tbody></table></div>
+      </div>
+    </section>
+
+    <section id="admins" class="section">
+      <div class="panel">
+        <div class="panelHead"><div><h3>Admin Management</h3><p>Master Admin ብቻ Admin መፍጠርና permission መቆጣጠር ይችላል</p></div><button class="primary" onclick="openAdminModal()">+ Add Admin</button></div>
+        <div class="tableWrap"><table><thead><tr><th>Name</th><th>Username</th><th>Role</th><th>Permissions</th><th>Action</th></tr></thead><tbody id="adminRows"></tbody></table></div>
+      </div>
+    </section>
+
+    <section id="accounts" class="section">
+      <div class="stats">
+        <div class="stat"><small>የዛሬ ገቢ</small><strong id="todayRevenue">0 Br</strong></div>
+        <div class="stat"><small>የሳምንት ገቢ</small><strong id="weekRevenue">0 Br</strong></div>
+        <div class="stat"><small>የወር ገቢ</small><strong id="monthRevenue">0 Br</strong></div>
+        <div class="stat"><small>አጠቃላይ ገቢ</small><strong id="totalRevenue">0 Br</strong></div>
+      </div>
+      <div class="panel">
+        <div class="panelHead"><div><h3>የገቢ ሂሳብ</h3><p>APPROVED የሆኑ ክፍያዎች ብቻ በሂሳብ ውስጥ ይገባሉ</p></div></div>
+        <div class="tableWrap"><table><thead><tr><th>Customer</th><th>Raffle</th><th>Ticket</th><th>Amount</th><th>Date</th></tr></thead><tbody id="accountRows"></tbody></table></div>
+      </div>
+    </section>
+
+    <section id="settings" class="section">
+      <div class="panel">
+        <div class="panelHead"><div><h3>Master Admin Settings</h3><p>የMaster Admin Username እና Password መቀየሪያ</p></div></div>
+        <div class="grid2">
+          <div class="field"><label>አዲስ Username</label><input id="newMasterUser" autocomplete="off"></div>
+          <div class="field"><label>የአሁኑ Password</label><input id="oldMasterPass" type="password" autocomplete="current-password"></div>
+          <div class="field"><label>አዲስ Password</label><input id="newMasterPass" type="password"></div>
+          <div class="field"><label>አዲስ Password ድገም</label><input id="confirmMasterPass" type="password"></div>
+        </div>
+        <button class="primary" onclick="changeMasterCredentials()">SAVE CHANGES</button>
+      </div>
+    </section>
+  </main>
+</div>
+
+<div id="raffleModal" class="modal">
+ <div class="modalCard">
+  <div class="modalHead"><h3>አዲስ እጣ ፍጠር</h3><button class="close" onclick="closeModal('raffleModal')">×</button></div>
+  <div class="grid2">
+   <div class="field"><label>የስልኩ ስም</label><input id="rName" placeholder="Samsung Galaxy S24 Ultra"></div>
+   <div class="field"><label>የአንድ እጣ ዋጋ (ብር)</label><input id="rPrice" type="number" placeholder="100"></div>
+   <div class="field"><label>ጠቅላላ የእጣ ብዛት</label><input id="rTickets" type="number" value="1000"></div>
+   <div class="field"><label>Auto Draw Time (ደቂቃ)</label><input id="rDrawMinutes" type="number" min="1" value="60" placeholder="60"></div>
+   <div class="field"><label>Status</label><select id="rStatus"><option>ACTIVE</option><option>PAUSED</option></select></div>
+  </div>
+  <div class="field specWriterField"><label>Specification</label><textarea id="rSpecs" class="specWriterBox" placeholder="Storage, RAM, Camera, Color..."></textarea><small class="specWriterHint">ለምሳሌ፦ 256GB Storage • 12GB RAM • 200MP Camera • Titanium Color</small></div>
+  <div class="field threePhotoField">
+    <label>የስልኩ ፎቶዎች — እስከ 3</label>
+    <div class="photoBox">
+      <div class="threePhotoInputs">
+        <label>Photo 1<input id="rPhoto1" type="file" accept="image/*" onchange="previewRafflePhotos()"></label>
+        <label>Photo 2<input id="rPhoto2" type="file" accept="image/*" onchange="previewRafflePhotos()"></label>
+        <label>Photo 3<input id="rPhoto3" type="file" accept="image/*" onchange="previewRafflePhotos()"></label>
+      </div>
+      <div id="rafflePreviewGrid" class="rafflePreviewGrid"></div>
+      <small class="photoHint">እያንዳንዱን ፎቶ በተለየ box ይምረጡ። 3ቱም በcustomer card ላይ ይታያሉ።</small>
+    </div>
+  </div>
+  <button class="primary" onclick="saveRaffle()">CREATE RAFFLE</button>
+ </div>
+</div>
+
+<div id="adminModal" class="modal">
+ <div class="modalCard">
+  <div class="modalHead"><h3>Add Admin</h3><button class="close" onclick="closeModal('adminModal')">×</button></div>
+  <div class="grid2">
+   <div class="field"><label>Full Name</label><input id="aName"></div>
+   <div class="field"><label>Username</label><input id="aUser"></div>
+   <div class="field"><label>Auth User UUID</label><input id="aAuthId" placeholder="Supabase Authentication User ID"></div>
+  </div>
+  <h4 style="margin:12px 0">Permissions</h4>
+  <div class="permission"><span>Create Raffle</span><input id="pCreate" type="checkbox" checked></div>
+  <div class="permission"><span>Edit / Pause Raffle</span><input id="pEdit" type="checkbox" checked></div>
+  <div class="permission"><span>Approve / Reject Payment</span><input id="pPayment" type="checkbox" checked></div>
+  <div class="permission"><span>Start Draw</span><input id="pDraw" type="checkbox"></div>
+  <button class="primary" style="margin-top:14px" onclick="saveAdmin()">CREATE ADMIN</button>
+ </div>
+</div>
+
+
+<div id="proofModal" class="modal">
+ <div class="modalCard">
+  <div class="modalHead"><h3>Payment Screenshot Confirmation</h3><button class="close" onclick="closeModal('proofModal')">×</button></div>
+  <div class="proofViewer">
+    <div class="proofImageWrap" id="proofImageWrap"></div>
+    <div class="proofMeta">
+      <div><small>Customer</small><strong id="proofCustomer">-</strong></div>
+      <div><small>Phone</small><strong id="proofPhone">-</strong></div>
+      <div><small>Raffle</small><strong id="proofRaffle">-</strong></div>
+      <div><small>Ticket / Amount</small><strong id="proofTicketAmount">-</strong></div>
+    </div>
+    <div class="proofDecision" id="proofDecision">
+      <button class="btn green" onclick="confirmProof('APPROVED')">✓ CONFIRM</button>
+      <button class="btn red" onclick="confirmProof('REJECTED')">✕ REJECT</button>
+    </div>
+  </div>
+ </div>
+</div>
+
+
+<script>
+const SUPABASE_URL="https://knwnxmxzlleuizchxbgn.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY="sb_publishable_yiFBmF7yzA_VBROGwFvNiQ_HbnVoLep";
+const sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY);
+
+let currentUser=null;
+let authUser=null;
+let admins=[];
+let raffles=[];
+let payments=[];
+let rafflePhotoFile=null;
+let rafflePhotoFiles=[];
+let currentProofId=null;
+
+
+function adminSafeUUID(){
+  try{
+    if(window.crypto && typeof crypto.randomUUID==="function") return crypto.randomUUID();
+  }catch(e){}
+  return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g,c=>{
+    const r=Math.random()*16|0;
+    const v=c==="x"?r:(r&0x3|0x8);
+    return v.toString(16);
+  });
+}
+function getRaffleImagesAdmin(r){
+  let raw=r?.phone_image_url||r?.photo||"";
+  if(Array.isArray(raw)) return raw.map(x=>String(x||"").trim()).filter(Boolean).slice(0,3);
+  raw=String(raw||"").trim();
+  if(!raw) return [];
+  try{
+    const parsed=JSON.parse(raw);
+    if(Array.isArray(parsed)) return parsed.map(x=>String(x||"").trim()).filter(Boolean).slice(0,3);
+  }catch(e){}
+  return raw.split(/\|\||\n/).map(x=>x.trim()).filter(Boolean).slice(0,3);
+}
+
+function firstRaffleImageAdmin(r){
+  return getRaffleImagesAdmin(r)[0]||"";
+}
+function renderAdminRafflePhoto(r){
+  const imgs=getRaffleImagesAdmin(r);
+  if(!imgs.length){
+    return `<div style="height:145px;display:grid;place-items:center;background:#030611;border-radius:12px;color:#64748b">PHONE PHOTO</div>`;
+  }
+  return `<div class="adminRafflePhotoWrap ${imgs.length>1?"multi":""} count${imgs.length}">
+    ${imgs.map(url=>`<img src="${escapeHtml(url)}" alt="${escapeHtml(r.name||r.phone_name||"CARAA")}">`).join("")}
+    ${imgs.length>1?`<span>${imgs.length} photos</span>`:""}
+  </div>`;
+}
+
+const el=id=>document.getElementById(id);
+
+function permissionList(a){
+  if(!a)return [];
+  if(a.role==="MASTER")return ["ALL"];
+  const out=[];
+  if(a.can_create_raffle)out.push("CREATE_RAFFLE");
+  if(a.can_edit_raffle)out.push("EDIT_RAFFLE");
+  if(a.can_approve_payment)out.push("PAYMENT");
+  if(a.can_start_draw)out.push("DRAW");
+  return out;
+}
+function normalizeAdmin(a){
+  return {
+    ...a,
+    name:a.full_name,
+    permissions:permissionList(a)
+  };
+}
+function has(permission){
+  return !!currentUser && (currentUser.role==="MASTER" || currentUser.permissions.includes(permission));
+}
+function escapeHtml(v){
+  return String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
+}
+function showError(prefix,err){
+  console.error(prefix,err);
+  alert(prefix+"\n"+(err?.message||err||"Unknown error"));
+}
+
+async function login(){
+  const email=el("loginUser").value.trim();
+  const password=el("loginPass").value;
+  if(!email||!password)return alert("Email እና Password ያስገቡ።");
+
+  const btn=document.querySelector("#loginPage .primary");
+  const old=btn.textContent; btn.disabled=true; btn.textContent="CONNECTING...";
+  try{
+    const {data,error}=await sb.auth.signInWithPassword({email,password});
+    if(error)throw error;
+    authUser=data.user;
+    await loadCurrentAdmin();
+    el("loginPage").classList.add("hidden");
+    el("adminApp").classList.remove("hidden");
+    setupUser();
+    await loadAll();
+  }catch(err){
+    await sb.auth.signOut();
+    currentUser=null; authUser=null;
+    showError("Login አልተሳካም።",err);
+  }finally{
+    btn.disabled=false; btn.textContent=old;
+  }
+}
+
+async function loadCurrentAdmin(){
+  const user=(await sb.auth.getUser()).data.user;
+  if(!user)throw new Error("Authentication session የለም።");
+  authUser=user;
+  const {data,error}=await sb.from("admins").select("*").eq("auth_user_id",user.id).eq("is_active",true).single();
+  if(error)throw new Error("ይህ Auth user CARAA admins table ጋር አልተገናኘም። "+error.message);
+  currentUser=normalizeAdmin(data);
+}
+
+async function logout(){
+  await sb.auth.signOut();
+  currentUser=null; authUser=null; admins=[]; raffles=[]; payments=[];
+  el("adminApp").classList.add("hidden");
+  el("loginPage").classList.remove("hidden");
+  el("loginPass").value="";
+}
+
+function setupUser(){
+  el("currentName").textContent=currentUser.name;
+  el("currentRole").textContent=currentUser.role;
+  el("roleBadge").textContent=currentUser.role;
+  el("adminsNav").classList.toggle("hidden",currentUser.role!=="MASTER");
+  el("settingsNav").classList.toggle("hidden",currentUser.role!=="MASTER");
+  el("createRaffleBtn").classList.toggle("hidden",!has("CREATE_RAFFLE"));
+}
+
+function go(id,btn){
+  if((id==="admins"||id==="settings")&&currentUser.role!=="MASTER")return;
+  document.querySelectorAll(".section").forEach(x=>x.classList.remove("active"));
+  el(id).classList.add("active");
+  if(id==="settings"&&currentUser.role==="MASTER")el("newMasterUser").value=currentUser.username||"";
+  document.querySelectorAll(".nav button").forEach(x=>x.classList.remove("active"));
+  if(btn)btn.classList.add("active");
+  el("pageTitle").textContent={dashboard:"Dashboard",raffles:"እጣዎች",payments:"Payments",accounts:"ሂሳብ",admins:"Admins",settings:"Settings"}[id]||id;
+  renderAll();
+}
+
+async function loadAll(){
+  await Promise.all([loadAdmins(),loadRaffles(),loadPayments()]);
+  renderAll();
+}
+async function loadAdmins(){
+  const {data,error}=await sb.from("admins").select("*").order("created_at",{ascending:true});
+  if(error)throw error;
+  admins=(data||[]).map(normalizeAdmin);
+}
+async function loadRaffles(){
+  const {data,error}=await sb.from("raffles").select("*").order("created_at",{ascending:false});
+  if(error)throw error;
+  raffles=(data||[]).map(r=>({
+    ...r,name:r.phone_name,price:Number(r.ticket_price),total:r.total_tickets,
+    specs:r.specification||"",photo:r.phone_image_url||""
+  }));
+}
+async function loadPayments(){
+  const {data,error}=await sb.from("payments")
+    .select("id,amount,payment_method,screenshot_url,status,created_at,reviewed_at,ticket_id,tickets!inner(id,ticket_number,customer_name,customer_phone,status,raffle_id,raffles!inner(id,phone_name))")
+    .order("created_at",{ascending:false});
+  if(error)throw error;
+  payments=(data||[]).map(p=>({
+    id:p.id,
+    ticketId:p.ticket_id,
+    name:p.tickets.customer_name,
+    phone:p.tickets.customer_phone,
+    raffle:p.tickets.raffles?.phone_name||"-",
+    raffleId:p.tickets.raffle_id,
+    ticket:p.tickets.ticket_number,
+    amount:Number(p.amount||0),
+    proof:p.screenshot_url||"",
+    proofPath:p.screenshot_url||"",
+    status:p.status,
+    ticketStatus:p.tickets.status,
+    date:p.reviewed_at||p.created_at,
+    created_at:p.created_at
+  }));
+}
+
+function renderAll(){
+  renderStats();renderRaffles();renderPayments();renderAccounts();renderAdmins();
+}
+function startOfDay(d){return new Date(d.getFullYear(),d.getMonth(),d.getDate())}
+function startOfWeek(d){let x=startOfDay(d),day=(x.getDay()+6)%7;x.setDate(x.getDate()-day);return x}
+function startOfMonth(d){return new Date(d.getFullYear(),d.getMonth(),1)}
+function renderAccounts(){
+  const now=new Date(),approved=payments.filter(x=>x.status==="APPROVED");
+  const sumSince=start=>approved.filter(x=>new Date(x.date)>=start).reduce((a,x)=>a+Number(x.amount||0),0);
+  const total=approved.reduce((a,x)=>a+Number(x.amount||0),0);
+  el("todayRevenue").textContent=sumSince(startOfDay(now)).toLocaleString()+" Br";
+  el("weekRevenue").textContent=sumSince(startOfWeek(now)).toLocaleString()+" Br";
+  el("monthRevenue").textContent=sumSince(startOfMonth(now)).toLocaleString()+" Br";
+  el("totalRevenue").textContent=total.toLocaleString()+" Br";
+  el("accountRows").innerHTML=approved.map(x=>`<tr><td>${escapeHtml(x.name)}</td><td>${escapeHtml(x.raffle)}</td><td>#${x.ticket}</td><td>${x.amount.toLocaleString()} Br</td><td>${new Date(x.date).toLocaleString()}</td></tr>`).join("")||'<tr><td colspan="5">Approved payment የለም</td></tr>';
+}
+function renderStats(){
+  el("activeCount").textContent=raffles.filter(x=>x.status==="ACTIVE").length;
+  el("pendingCount").textContent=payments.filter(x=>x.status==="PENDING").length;
+  el("approvedCount").textContent=payments.filter(x=>x.status==="APPROVED").length;
+  el("adminCount").textContent=admins.filter(x=>x.role==="ADMIN").length;
+  el("recentPayments").innerHTML=payments.filter(x=>x.status==="PENDING").slice(0,5).map(x=>`<tr><td>${escapeHtml(x.name)}</td><td>${escapeHtml(x.phone)}</td><td>${escapeHtml(x.raffle)}</td><td>#${x.ticket}</td><td>${x.amount} Br</td><td><span class="status pending">PENDING</span></td></tr>`).join("")||'<tr><td colspan="6">No pending payments</td></tr>';
+}
+function renderRaffles(){
+  el("raffleCards").innerHTML=raffles.map(r=>`<div class="raffle">
+    ${renderAdminRafflePhoto(r)}
+    <h4>${escapeHtml(r.name)}</h4><p>${escapeHtml(r.specs||"No specification")}</p>
+    <p><b>${r.price} Br</b> / Ticket • ${r.total} Tickets</p>
+    <p>⏱ Auto Draw: <b>${Number(r.auto_draw_minutes||60)} ደቂቃ</b></p>
+    <span class="status ${r.status.toLowerCase()}">${r.status}</span>
+    <div class="actions">
+      ${has("EDIT_RAFFLE")&&r.status!=="CLOSED"?`<button class="btn gold" onclick="toggleRaffle('${r.id}')">${r.status==="ACTIVE"?"PAUSE":"ACTIVATE"}</button>`:""}
+      ${currentUser.role==="MASTER"&&r.status!=="CLOSED"?`<button class="btn red" onclick="closeRaffle('${r.id}')">CLOSE</button>`:""}
+    </div></div>`).join("")||'<div style="color:#94a3b8">እጣ ገና የለም።</div>';
+}
+function renderPayments(){
+  el("paymentRows").innerHTML=payments.map(x=>`<tr>
+    <td>${escapeHtml(x.name)}</td><td>${escapeHtml(x.phone)}</td><td>${escapeHtml(x.raffle)}</td>
+    <td>#${x.ticket}</td><td>${x.amount} Br</td>
+    <td><button class="proofBtn" onclick="openProof('${x.id}')">VIEW SCREENSHOT</button></td>
+    <td><span class="status ${x.status.toLowerCase()}">${x.status}</span></td>
+    <td><div class="actions">${x.status==="PENDING"&&has("PAYMENT")?`<button class="btn green" onclick="openProof('${x.id}')">Confirm</button><button class="btn red" onclick="setPayment('${x.id}','REJECTED')">Reject</button>`:"-"}</div></td>
+  </tr>`).join("")||'<tr><td colspan="8">Payment የለም</td></tr>';
+}
+
+async function openProof(id){
+  const x=payments.find(p=>String(p.id)===String(id));if(!x)return;
+  currentProofId=x.id;
+  el("proofCustomer").textContent=x.name||"-";
+  el("proofPhone").textContent=x.phone||"-";
+  el("proofRaffle").textContent=x.raffle||"-";
+  el("proofTicketAmount").textContent=`#${x.ticket} • ${x.amount} Br`;
+  el("proofImageWrap").innerHTML='<div class="proofFallback">Loading screenshot...</div>';
+  try{
+    if(!x.proofPath)throw new Error("Screenshot URL የለም።");
+    if(/^https?:\/\//i.test(x.proofPath)){
+      el("proofImageWrap").innerHTML=`<img src="${escapeHtml(x.proofPath)}" alt="Payment screenshot">`;
+    }else{
+      const {data,error}=await sb.storage.from("payment-proofs").createSignedUrl(x.proofPath,300);
+      if(error)throw error;
+      el("proofImageWrap").innerHTML=`<img src="${data.signedUrl}" alt="Payment screenshot">`;
+    }
+  }catch(err){
+    el("proofImageWrap").innerHTML=`<div class="proofFallback"><b>${escapeHtml(x.proof||"No screenshot")}</b><br><br><small>${escapeHtml(err.message||err)}</small></div>`;
+  }
+  el("proofDecision").classList.toggle("hidden",!(x.status==="PENDING"&&has("PAYMENT")));
+  el("proofModal").classList.add("show");
+}
+async function confirmProof(status){
+  if(currentProofId==null)return;
+  await setPayment(currentProofId,status);
+  closeModal("proofModal");
+  currentProofId=null;
+}
+async function setPayment(id,status){
+  if(!has("PAYMENT"))return alert("Permission የለዎትም።");
+  const x=payments.find(p=>String(p.id)===String(id));if(!x)return;
+  try{
+    const now=new Date().toISOString();
+    const {error:pErr}=await sb.from("payments").update({
+      status,reviewed_at:now,reviewed_by:currentUser.id
+    }).eq("id",id);
+    if(pErr)throw pErr;
+    const ticketUpdate=status==="APPROVED"
+      ? {status:"APPROVED",approved_at:now}
+      : {status:"REJECTED",approved_at:null};
+    const {error:tErr}=await sb.from("tickets").update(ticketUpdate).eq("id",x.ticketId);
+    if(tErr)throw tErr;
+    await loadPayments(); renderAll();
+  }catch(err){showError("Payment update አልተሳካም።",err);}
+}
+
+function openRaffleModal(){
+  if(!has("CREATE_RAFFLE"))return alert("Permission የለዎትም።");
+  el("raffleModal").classList.add("show");
+}
+
+function selectedRafflePhotoFiles(){
+  return ["rPhoto1","rPhoto2","rPhoto3"]
+    .map(id=>el(id)?.files?.[0])
+    .filter(Boolean)
+    .filter(f=>/^image\//i.test(f.type))
+    .slice(0,3);
+}
+
+function previewRafflePhotos(){
+  rafflePhotoFiles=selectedRafflePhotoFiles();
+  rafflePhotoFile=rafflePhotoFiles[0]||null;
+  const grid=el("rafflePreviewGrid");
+  if(grid){
+    grid.innerHTML=rafflePhotoFiles.length
+      ? rafflePhotoFiles.map(f=>`<img src="${URL.createObjectURL(f)}" alt="phone preview">`).join("")
+      : "";
+  }
+}
+
+function previewRafflePhoto(input){ previewRafflePhotos(); }
+
+async function saveRaffle(){
+  if(!has("CREATE_RAFFLE"))return;
+  const name=el("rName").value.trim(),price=Number(el("rPrice").value),total=Number(el("rTickets").value),drawMinutes=Number(el("rDrawMinutes").value);
+  if(!name||!price||!total||!drawMinutes||drawMinutes<1)return alert("የስልኩን ስም፣ ዋጋ፣ የእጣ ብዛት እና Auto Draw Time ያስገቡ።");
+  try{
+    let phone_image_url=null;
+    const files=selectedRafflePhotoFiles();
+    if(files.length){
+      const urls=[];
+      for(const f of files){
+        const ext=(f.name.split(".").pop()||"jpg").replace(/[^a-z0-9]/gi,"")||"jpg";
+        const path=`raffles/${adminSafeUUID()}.${ext}`;
+        const {error:uErr}=await sb.storage.from("raffle-images").upload(path,f,{upsert:false,contentType:f.type||"image/jpeg"});
+        if(uErr)throw uErr;
+        urls.push(sb.storage.from("raffle-images").getPublicUrl(path).data.publicUrl);
+      }
+      phone_image_url=urls.join("||");
+    }
+    const {error}=await sb.from("raffles").insert({
+      phone_name:name,
+      phone_image_url,
+      specification:el("rSpecs").value.trim()||null,
+      ticket_price:price,
+      total_tickets:total,
+      auto_draw_minutes:drawMinutes,
+      status:el("rStatus").value,
+      created_by:currentUser.id
+    });
+    if(error)throw error;
+
+    closeModal("raffleModal");
+    el("rName").value="";
+    el("rPrice").value="";
+    el("rTickets").value=1000;
+    el("rDrawMinutes").value=60;
+    el("rSpecs").value="";
+    ["rPhoto1","rPhoto2","rPhoto3"].forEach(id=>{const x=el(id); if(x) x.value="";});
+    rafflePhotoFile=null;
+    rafflePhotoFiles=[];
+    const grid=el("rafflePreviewGrid"); if(grid) grid.innerHTML="";
+    await loadRaffles();
+    renderAll();
+  }catch(err){
+    showError("Raffle create አልተሳካም።",err);
+  }
+}
+async function toggleRaffle(id){
+  if(!has("EDIT_RAFFLE"))return;
+  const r=raffles.find(x=>String(x.id)===String(id));if(!r||r.status==="CLOSED")return;
+  const status=r.status==="ACTIVE"?"PAUSED":"ACTIVE";
+  const {error}=await sb.from("raffles").update({status,updated_at:new Date().toISOString()}).eq("id",id);
+  if(error)return showError("Raffle update አልተሳካም።",error);
+  await loadRaffles();renderAll();
+}
+async function closeRaffle(id){
+  if(currentUser.role!=="MASTER"||!confirm("ይህን እጣ CLOSE ማድረግ ይፈልጋሉ?"))return;
+  const {error}=await sb.from("raffles").update({status:"CLOSED",updated_at:new Date().toISOString()}).eq("id",id);
+  if(error)return showError("Raffle close አልተሳካም።",error);
+  await loadRaffles();renderAll();
+}
+
+function openAdminModal(){
+  if(currentUser.role!=="MASTER")return;
+  el("adminModal").classList.add("show");
+}
+async function saveAdmin(){
+  if(currentUser.role!=="MASTER")return;
+  const name=el("aName").value.trim(),username=el("aUser").value.trim(),authId=el("aAuthId").value.trim();
+  if(!name||!username||!authId)return alert("Full Name, Username እና Auth User UUID ያስገቡ።");
+  try{
+    const row={
+      auth_user_id:authId,full_name:name,username,role:"ADMIN",is_active:true,
+      can_create_raffle:el("pCreate").checked,
+      can_edit_raffle:el("pEdit").checked,
+      can_approve_payment:el("pPayment").checked,
+      can_start_draw:el("pDraw").checked
+    };
+    const {error}=await sb.from("admins").insert(row);
+    if(error)throw error;
+    closeModal("adminModal");
+    el("aName").value="";el("aUser").value="";el("aAuthId").value="";
+    await loadAdmins();renderAll();
+  }catch(err){showError("Admin record create አልተሳካም።",err);}
+}
+function renderAdmins(){
+  if(!currentUser||currentUser.role!=="MASTER")return;
+  el("adminRows").innerHTML=admins.map(a=>`<tr>
+    <td>${escapeHtml(a.name)}</td><td>${escapeHtml(a.username)}</td>
+    <td><span class="status ${a.role==="MASTER"?"active":"paused"}">${a.role}</span></td>
+    <td>${escapeHtml(a.permissions.join(", "))}</td>
+    <td>${a.role==="ADMIN"?`<button class="btn red" onclick="deleteAdmin('${a.id}')">Delete</button>`:"Protected"}</td>
+  </tr>`).join("");
+}
+async function deleteAdmin(id){
+  if(currentUser.role!=="MASTER"||!confirm("Admin record ይጥፋ?"))return;
+  const {error}=await sb.from("admins").delete().eq("id",id);
+  if(error)return showError("Admin delete አልተሳካም።",error);
+  await loadAdmins();renderAll();
+}
+
+async function changeMasterCredentials(){
+  if(!currentUser||currentUser.role!=="MASTER")return;
+  const username=el("newMasterUser").value.trim();
+  const oldPass=el("oldMasterPass").value;
+  const newPass=el("newMasterPass").value;
+  const confirmPass=el("confirmMasterPass").value;
+  if(!username||!oldPass)return alert("Username እና የአሁኑ Password ያስገቡ።");
+  if(newPass&&newPass.length<6)return alert("አዲሱ Password ቢያንስ 6 ፊደል/ቁጥር ይሁን።");
+  if(newPass!==confirmPass)return alert("አዲሱ Password አልተመሳሰለም።");
+  try{
+    const email=authUser?.email;
+    const {error:verifyErr}=await sb.auth.signInWithPassword({email,password:oldPass});
+    if(verifyErr)throw new Error("የአሁኑ Password ትክክል አይደለም።");
+    const {error:uErr}=await sb.from("admins").update({username}).eq("id",currentUser.id);
+    if(uErr)throw uErr;
+    if(newPass){
+      const {error:pErr}=await sb.auth.updateUser({password:newPass});
+      if(pErr)throw pErr;
+    }
+    await loadCurrentAdmin();setupUser();await loadAdmins();renderAll();
+    el("oldMasterPass").value="";el("newMasterPass").value="";el("confirmMasterPass").value="";
+    alert("Master Admin Username / Password ተቀይሯል።");
+  }catch(err){showError("Settings update አልተሳካም።",err);}
+}
+
+function closeModal(id){el(id).classList.remove("show")}
+window.onclick=e=>{if(e.target.classList.contains("modal"))e.target.classList.remove("show")};
+
+(async function restoreSession(){
+  try{
+    const {data}=await sb.auth.getSession();
+    if(!data.session)return;
+    authUser=data.session.user;
+    await loadCurrentAdmin();
+    el("loginPage").classList.add("hidden");
+    el("adminApp").classList.remove("hidden");
+    setupUser();await loadAll();
+  }catch(err){
+    console.warn("Session restore failed",err);
+    await sb.auth.signOut();
+  }
+})();
+</script>
+
+</body>
+</html>
