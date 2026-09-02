@@ -7,6 +7,7 @@
 <title>CARAA — Carraa Argadhu</title>
 
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
@@ -194,6 +195,181 @@ button{cursor:pointer}
 .drawPhoneChoice.active{border:2px solid #685BFF;box-shadow:0 8px 25px rgba(104,91,255,.18)}.choiceImg{width:100%;height:105px;object-fit:contain;padding:7px;background:#eef1f5}
 .choiceBody{padding:8px}.choiceBody h3{font-size:11px;font-weight:1000;line-height:1.3}.choicePrice{margin-top:4px;color:#8B7BFF;font-size:10px;font-weight:1000}.choiceStats{display:flex;justify-content:space-between;margin-top:5px;color:#9fa9bd;font-size:8px;font-weight:900}
 
+
+/* =========================================================
+   SIMPLE LAUNCH DRAW PAGE — side phones, no draw button
+========================================================= */
+.simpleDrawPage{padding:0}
+.simpleDrawWrap{padding:16px;max-width:1120px;margin:auto}
+.simpleDrawTop{
+  display:flex;justify-content:space-between;align-items:flex-start;gap:12px;
+  padding:18px;border-radius:24px;
+  background:
+    radial-gradient(circle at 90% 15%,rgba(124,58,237,.28),transparent 32%),
+    radial-gradient(circle at 10% 90%,rgba(37,99,235,.25),transparent 35%),
+    linear-gradient(135deg,#061126,#111a42);
+  border:1px solid rgba(100,117,255,.20);
+  box-shadow:0 18px 45px rgba(0,0,0,.26);
+}
+.simpleBadge{
+  display:inline-flex;padding:7px 11px;border-radius:18px;
+  background:rgba(39,209,127,.10);border:1px solid rgba(39,209,127,.22);
+  color:#28f0a3;font-size:9px;font-weight:1000;letter-spacing:1.2px;
+}
+.simpleDrawTop h1{margin-top:12px;font-size:28px;line-height:1.1;font-weight:1000}
+.simpleDrawTop p{margin-top:8px;color:#b9c4dc;font-size:12px;line-height:1.45;font-weight:800}
+.simpleHistoryBtn{
+  flex:0 0 auto;border:1px solid rgba(255,255,255,.14);border-radius:15px;
+  padding:11px 13px;color:#fff;background:rgba(255,255,255,.07);
+  font-size:11px;font-weight:1000;
+}
+.simpleDrawLayout{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 255px;
+  gap:14px;
+  margin-top:14px;
+  align-items:start;
+}
+.simpleMainColumn{min-width:0}
+.simplePhoneSide{
+  padding:12px;border-radius:22px;
+  background:
+    radial-gradient(circle at 90% 8%,rgba(25,194,255,.13),transparent 34%),
+    rgba(255,255,255,.052);
+  border:1px solid rgba(255,255,255,.09);
+  position:sticky;top:12px;
+}
+.simpleSideHead{
+  padding:5px 4px 11px;border-bottom:1px solid rgba(255,255,255,.08);
+  margin-bottom:10px;
+}
+.simpleSideHead strong{display:block;font-size:16px;font-weight:1000}
+.simpleSideHead small{display:block;margin-top:4px;color:#96a6c5;font-size:9px;font-weight:900}
+.simplePhoneTabs{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  max-height:650px;
+  overflow-y:auto;
+  padding-right:2px;
+}
+.simplePhoneTabs .drawPhoneChoice{
+  width:100%;
+  border:1px solid rgba(255,255,255,.12);
+  background:rgba(255,255,255,.06);
+  border-radius:16px;
+  padding:11px;
+  cursor:pointer;
+  transition:.18s;
+}
+.simplePhoneTabs .drawPhoneChoice.active{
+  border-color:#19C2FF;
+  box-shadow:0 0 0 2px rgba(25,194,255,.10),0 10px 25px rgba(37,99,235,.18);
+  background:linear-gradient(135deg,rgba(37,99,235,.18),rgba(124,58,237,.14));
+}
+.simplePhoneTabs .choiceImg{display:block!important;width:100%;height:82px;object-fit:contain;padding:6px;border-radius:12px;background:#eef1f5;margin-bottom:8px}
+.simplePhoneTabs .choiceBody{padding:0!important}
+.simplePhoneTabs .choiceBody h3{font-size:12px;line-height:1.25}
+.simplePhoneTabs .choicePrice{margin-top:6px;color:#8fdcff;font-size:10px;font-weight:1000}
+.simplePhoneTabs .choiceStats{display:block;margin-top:5px;color:#aebbd1;font-size:9px;font-weight:900}
+.simpleProgressCard{
+  padding:18px;border-radius:28px;
+  background:
+    radial-gradient(circle at 50% 45%,rgba(25,194,255,.16),transparent 35%),
+    linear-gradient(145deg,rgba(8,17,42,.98),rgba(15,18,54,.98));
+  border:1px solid rgba(107,123,255,.18);
+  box-shadow:0 20px 50px rgba(0,0,0,.30);
+  display:grid;grid-template-columns:1fr auto 1fr;gap:16px;align-items:center;
+}
+.simpleSelected small{display:block;color:#9aa9c7;font-size:10px;font-weight:900}
+.simpleSelected strong{display:block;margin-top:7px;font-size:21px;font-weight:1000;line-height:1.15}
+.simpleSelected span{display:inline-flex;margin-top:9px;padding:7px 10px;border-radius:13px;background:rgba(255,255,255,.07);color:#8fdcff;font-size:11px;font-weight:1000}
+.simpleCircle{
+  --p:0;
+  width:230px;height:230px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  background:
+    conic-gradient(#19C2FF calc(var(--p)*1%),rgba(124,58,237,.85) calc(var(--p)*1%),rgba(255,255,255,.08) 0);
+  box-shadow:0 0 35px rgba(25,194,255,.18),inset 0 0 25px rgba(255,255,255,.05);
+  position:relative;
+}
+.simpleCircle:before{
+  content:"";position:absolute;inset:10px;border-radius:50%;
+  background:linear-gradient(145deg,#061126,#0b1029);
+  border:1px solid rgba(255,255,255,.10);
+}
+.simpleCircleInner{position:relative;z-index:2;text-align:center}
+.simpleCircleInner small{display:block;color:#9fb0cf;font-size:11px;font-weight:1000}
+.simpleCircleInner strong{display:block;margin-top:8px;font-size:32px;font-weight:1000}
+.simpleCircleInner b{display:block;margin-top:7px;color:#28f0a3;font-size:16px}
+.simpleStateBox{text-align:right}
+.simpleState{
+  display:inline-flex;padding:10px 15px;border-radius:18px;
+  background:rgba(39,209,127,.10);border:1px solid rgba(39,209,127,.22);
+  color:#28f0a3;font-size:12px;font-weight:1000;letter-spacing:1.3px;
+}
+.simpleCountdown{margin-top:12px;font-size:24px;font-weight:1000;color:#fff}
+.simpleStatsGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-top:12px}
+.simpleStat{
+  padding:14px 10px;border-radius:18px;text-align:center;
+  background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.09);
+}
+.simpleStat small{display:block;color:#9daac4;font-size:9px;font-weight:1000}
+.simpleStat strong{display:block;margin-top:7px;font-size:25px;font-weight:1000}
+.simpleStatus{
+  margin-top:12px;padding:14px 16px;border-radius:18px;
+  background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.09);
+}
+.simpleStatus strong{display:block;font-size:13px}
+.simpleStatus small{display:block;margin-top:6px;color:#9faecb;font-size:10px;line-height:1.45;font-weight:800}
+.simplePhaseRow{display:flex;gap:6px;overflow-x:auto;margin-top:10px}
+.simplePhaseRow span{
+  flex:1;min-width:90px;text-align:center;padding:9px 6px;border-radius:13px;
+  background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.08);
+  color:#8391ad;font-size:8px;font-weight:1000;
+}
+.simplePhaseRow span.active{color:#fff;border-color:#19C2FF;background:rgba(25,194,255,.10)}
+.simpleWinnerPanel{z-index:40}
+.simpleHiddenSystem{position:absolute!important;left:-9999px!important;top:-9999px!important;width:1px!important;height:1px!important;overflow:hidden!important;opacity:0!important;pointer-events:none!important}
+.simpleHiddenSystem canvas{width:1px;height:1px}
+.simpleHistoryModal{
+  position:fixed;inset:0;z-index:9000;display:none;align-items:flex-end;justify-content:center;
+  background:rgba(0,0,0,.68);
+}
+.simpleHistoryModal.show{display:flex}
+.simpleHistoryBox{
+  width:min(720px,100%);max-height:78vh;overflow:auto;padding:18px;
+  border-radius:25px 25px 0 0;background:linear-gradient(135deg,#061126,#160D38);
+  border:1px solid rgba(132,176,255,.18);
+}
+.simpleHistoryHead{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.simpleHistoryHead strong{font-size:18px}
+.simpleHistoryHead button{width:34px;height:34px;border:0;border-radius:50%;background:rgba(255,255,255,.10);color:#fff;font-size:21px}
+.simpleHistoryItem{
+  display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;margin-top:8px;padding:12px;
+  border-radius:14px;background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.08);
+}
+.simpleHistoryItem strong{display:block;font-size:13px}
+.simpleHistoryItem small{display:block;margin-top:4px;color:#b4c0d2;font-size:10px}
+.simpleHistoryItem b{font-size:22px;color:#F7C948}
+.simpleHistoryEmpty{text-align:center;color:#9dadc8;padding:22px}
+
+@media(max-width:760px){
+  .simpleDrawWrap{padding:12px}
+  .simpleDrawTop{padding:15px;border-radius:22px}
+  .simpleDrawTop h1{font-size:24px}
+  .simpleDrawLayout{grid-template-columns:1fr;gap:12px}
+  .simplePhoneSide{position:relative;top:auto;order:2}
+  .simplePhoneTabs{flex-direction:row;overflow-x:auto;max-height:none}
+  .simplePhoneTabs .drawPhoneChoice{min-width:150px}
+  .simplePhoneTabs .choiceImg{height:55px}
+  .simpleProgressCard{grid-template-columns:1fr;padding:16px;text-align:center}
+  .simpleSelected{text-align:center}
+  .simpleStateBox{text-align:center}
+  .simpleCircle{width:205px;height:205px;margin:auto}
+  .simpleStatsGrid{grid-template-columns:repeat(2,1fr)}
+}
+
 /* PROFILE */
 .profileWrap{padding:16px}
 .profileHero{position:relative;overflow:hidden;padding:20px;border-radius:26px;background:radial-gradient(circle at 90% 10%,rgba(124,58,237,.38),transparent 30%),radial-gradient(circle at 10% 90%,rgba(37,99,235,.3),transparent 35%),linear-gradient(135deg,#071127,#14134A);border:1px solid rgba(100,117,255,.2);box-shadow:0 18px 45px rgba(0,0,0,.3)}
@@ -262,6 +438,187 @@ button{cursor:pointer}
   .launchDisplay{margin:10px;border-radius:25px}.launchCountdownArea{padding:18px 8px 12px}.launchMainTitle{font-size:18px}.adSlider{height:285px;margin:0 9px 12px}
   .caraaMiniTag{display:none}.caraaWordmark{font-size:22px}.availablePreview{grid-template-columns:repeat(8,1fr)}
 }
+
+/* SUPABASE RAFFLE CARD PRESENTATION FIX */
+#supabaseRaffleCards .phoneCard{
+  overflow:hidden;
+}
+#supabaseRaffleCards .phoneInfo{
+  padding:16px 18px 18px;
+  background:rgba(8,12,28,.96);
+  border-top:1px solid rgba(255,255,255,.08);
+}
+#supabaseRaffleCards .phoneInfo h3{
+  margin:0 0 8px;
+  line-height:1.25;
+  color:#fff;
+}
+#supabaseRaffleCards .phoneInfo .specChips{
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+  margin:0 0 12px;
+}
+#supabaseRaffleCards .phoneInfo .specChip{
+  display:inline-flex;
+  align-items:center;
+  min-height:28px;
+  padding:5px 9px;
+  border-radius:9px;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.12);
+  color:rgba(255,255,255,.9);
+  font-size:12px;
+  line-height:1.2;
+}
+#supabaseRaffleCards .phonePrice{
+  margin:0 0 12px;
+  color:#fff;
+  font-weight:800;
+}
+#supabaseRaffleCards .confirm{
+  margin-top:4px;
+}
+
+
+.raffleCounts{display:flex;gap:8px;margin:0 0 10px}.raffleCounts span{flex:1;padding:8px;border-radius:9px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.10);font-size:10px;color:#cbd5e1;text-align:center}.raffleCounts b{color:#fff}.number.sold{cursor:not-allowed;pointer-events:none}.myTicket .ticketStatus{white-space:nowrap}
+
+/* =========================================================
+   SIMPLE LAUNCH DRAW PAGE — no image, no ball animation
+========================================================= */
+.simpleDrawPage{padding:0}
+.simpleDrawWrap{padding:16px;max-width:900px;margin:auto}
+.simpleDrawTop{
+  display:flex;justify-content:space-between;align-items:flex-start;gap:12px;
+  padding:18px;border-radius:24px;
+  background:
+    radial-gradient(circle at 90% 15%,rgba(124,58,237,.28),transparent 32%),
+    radial-gradient(circle at 10% 90%,rgba(37,99,235,.25),transparent 35%),
+    linear-gradient(135deg,#061126,#111a42);
+  border:1px solid rgba(100,117,255,.20);
+  box-shadow:0 18px 45px rgba(0,0,0,.26);
+}
+.simpleBadge{
+  display:inline-flex;padding:7px 11px;border-radius:18px;
+  background:rgba(39,209,127,.10);border:1px solid rgba(39,209,127,.22);
+  color:#28f0a3;font-size:9px;font-weight:1000;letter-spacing:1.2px;
+}
+.simpleDrawTop h1{margin-top:12px;font-size:28px;line-height:1.1;font-weight:1000}
+.simpleDrawTop p{margin-top:8px;color:#b9c4dc;font-size:12px;line-height:1.45;font-weight:800}
+.simpleHistoryBtn{
+  flex:0 0 auto;border:1px solid rgba(255,255,255,.14);border-radius:15px;
+  padding:11px 13px;color:#fff;background:rgba(255,255,255,.07);
+  font-size:11px;font-weight:1000;
+}
+.simplePhoneTabs{
+  display:flex;gap:8px;overflow-x:auto;padding:12px 2px 4px;margin-top:8px;
+}
+.simplePhoneTabs .drawPhoneChoice{
+  min-width:150px;border:1px solid rgba(255,255,255,.12);
+  background:rgba(255,255,255,.06);border-radius:16px;padding:11px;
+  cursor:pointer;transition:.18s;
+}
+.simplePhoneTabs .drawPhoneChoice.active{
+  border-color:#19C2FF;box-shadow:0 0 0 2px rgba(25,194,255,.10),0 10px 25px rgba(37,99,235,.18);
+  background:linear-gradient(135deg,rgba(37,99,235,.18),rgba(124,58,237,.14));
+}
+.simplePhoneTabs .choiceImg{display:none!important}
+.simplePhoneTabs .choiceBody{padding:0!important}
+.simplePhoneTabs .choiceBody h3{font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.simplePhoneTabs .choicePrice{margin-top:6px;color:#8fdcff;font-size:10px;font-weight:1000}
+.simplePhoneTabs .choiceStats{display:block;margin-top:5px;color:#aebbd1;font-size:9px;font-weight:900}
+.simpleProgressCard{
+  margin-top:14px;padding:18px;border-radius:28px;
+  background:
+    radial-gradient(circle at 50% 45%,rgba(25,194,255,.16),transparent 35%),
+    linear-gradient(145deg,rgba(8,17,42,.98),rgba(15,18,54,.98));
+  border:1px solid rgba(107,123,255,.18);
+  box-shadow:0 20px 50px rgba(0,0,0,.30);
+  display:grid;grid-template-columns:1fr auto 1fr;gap:16px;align-items:center;
+}
+.simpleSelected small{display:block;color:#9aa9c7;font-size:10px;font-weight:900}
+.simpleSelected strong{display:block;margin-top:7px;font-size:21px;font-weight:1000;line-height:1.15}
+.simpleSelected span{display:inline-flex;margin-top:9px;padding:7px 10px;border-radius:13px;background:rgba(255,255,255,.07);color:#8fdcff;font-size:11px;font-weight:1000}
+.simpleCircle{
+  --p:0;
+  width:230px;height:230px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  background:
+    conic-gradient(#19C2FF calc(var(--p)*1%),rgba(124,58,237,.85) calc(var(--p)*1%),rgba(255,255,255,.08) 0);
+  box-shadow:0 0 35px rgba(25,194,255,.18),inset 0 0 25px rgba(255,255,255,.05);
+  position:relative;
+}
+.simpleCircle:before{
+  content:"";position:absolute;inset:10px;border-radius:50%;
+  background:linear-gradient(145deg,#061126,#0b1029);
+  border:1px solid rgba(255,255,255,.10);
+}
+.simpleCircleInner{position:relative;z-index:2;text-align:center}
+.simpleCircleInner small{display:block;color:#9fb0cf;font-size:11px;font-weight:1000}
+.simpleCircleInner strong{display:block;margin-top:8px;font-size:32px;font-weight:1000}
+.simpleCircleInner b{display:block;margin-top:7px;color:#28f0a3;font-size:16px}
+.simpleStateBox{text-align:right}
+.simpleState{
+  display:inline-flex;padding:10px 15px;border-radius:18px;
+  background:rgba(39,209,127,.10);border:1px solid rgba(39,209,127,.22);
+  color:#28f0a3;font-size:12px;font-weight:1000;letter-spacing:1.3px;
+}
+.simpleCountdown{margin-top:12px;font-size:24px;font-weight:1000;color:#fff}
+.simpleStatsGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-top:12px}
+.simpleStat{
+  padding:14px 10px;border-radius:18px;text-align:center;
+  background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.09);
+}
+.simpleStat small{display:block;color:#9daac4;font-size:9px;font-weight:1000}
+.simpleStat strong{display:block;margin-top:7px;font-size:25px;font-weight:1000}
+.simpleStatus{
+  margin-top:12px;padding:14px 16px;border-radius:18px;
+  background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.09);
+}
+.simpleStatus strong{display:block;font-size:13px}
+.simpleStatus small{display:block;margin-top:6px;color:#9faecb;font-size:10px;line-height:1.45;font-weight:800}
+.simplePhaseRow{display:flex;gap:6px;overflow-x:auto;margin-top:10px}
+.simplePhaseRow span{
+  flex:1;min-width:90px;text-align:center;padding:9px 6px;border-radius:13px;
+  background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.08);
+  color:#8391ad;font-size:8px;font-weight:1000;
+}
+.simplePhaseRow span.active{color:#fff;border-color:#19C2FF;background:rgba(25,194,255,.10)}
+.simpleWinnerPanel{z-index:40}
+.simpleHiddenSystem{position:absolute!important;left:-9999px!important;top:-9999px!important;width:1px!important;height:1px!important;overflow:hidden!important;opacity:0!important;pointer-events:none!important}
+.simpleHiddenSystem canvas{width:1px;height:1px}
+.simpleHistoryModal{
+  position:fixed;inset:0;z-index:9000;display:none;align-items:flex-end;justify-content:center;
+  background:rgba(0,0,0,.68);
+}
+.simpleHistoryModal.show{display:flex}
+.simpleHistoryBox{
+  width:min(720px,100%);max-height:78vh;overflow:auto;padding:18px;
+  border-radius:25px 25px 0 0;background:linear-gradient(135deg,#061126,#160D38);
+  border:1px solid rgba(132,176,255,.18);
+}
+.simpleHistoryHead{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.simpleHistoryHead strong{font-size:18px}
+.simpleHistoryHead button{width:34px;height:34px;border:0;border-radius:50%;background:rgba(255,255,255,.10);color:#fff;font-size:21px}
+.simpleHistoryItem{
+  display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;margin-top:8px;padding:12px;
+  border-radius:14px;background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.08);
+}
+.simpleHistoryItem strong{display:block;font-size:13px}
+.simpleHistoryItem small{display:block;margin-top:4px;color:#b4c0d2;font-size:10px}
+.simpleHistoryItem b{font-size:22px;color:#F7C948}
+.simpleHistoryEmpty{text-align:center;color:#9dadc8;padding:22px}
+@media(max-width:680px){
+  .simpleDrawWrap{padding:12px}
+  .simpleDrawTop{padding:15px;border-radius:22px}
+  .simpleDrawTop h1{font-size:24px}
+  .simpleProgressCard{grid-template-columns:1fr;padding:16px;text-align:center}
+  .simpleSelected{text-align:center}
+  .simpleStateBox{text-align:center}
+  .simpleCircle{width:205px;height:205px;margin:auto}
+  .simpleStatsGrid{grid-template-columns:repeat(2,1fr)}
+}
+
 </style>
 </head>
 
@@ -378,120 +735,121 @@ button{cursor:pointer}
 <section class="section">
   <div class="sectionTitle"><h2 data-i18n="rafflePhones">በእጣ የሚገኙ ስልኮች</h2><span>1000</span></div>
 
-  <div class="phoneRow">
-  <div class="phoneCard">
-    <div class="phoneGallery">
-      <span class="phoneBadge">LIVE</span>
-      <button class="galleryArrow left" onclick="changeGallery(0,-1)">‹</button>
-      <img id="mainImage0" class="phoneMainImage" alt="Samsung Galaxy S22 Ultra">
-      <button class="galleryArrow right" onclick="changeGallery(0,1)">›</button>
-      <div class="galleryDots" id="dots0"></div>
-    </div>
-    <div class="phoneBody">
-      <h3>Samsung Galaxy S22 Ultra</h3>
-      <div class="phoneSub">Phantom Black • 12GB RAM • 256GB</div>
-      <div class="specs">
-        <div class="spec">📱 6.8" Dynamic AMOLED 2X</div>
-        <div class="spec">⚡ 120Hz • WQHD+</div>
-        <div class="spec">📷 108MP Main Camera</div>
-        <div class="spec">🤳 40MP Selfie</div>
-        <div class="spec">🔭 10x Optical Zoom</div>
-        <div class="spec">🔋 5000mAh • 45W</div>
-        <div class="spec">✍️ Built-in S Pen</div>
-        <div class="spec">💧 IP68 Water Resistant</div>
-        <div class="spec specWide">📶 5G • Wi‑Fi 6E • Stereo Speakers • USB‑C</div>
-      </div>
-      <div class="cardBottom"><div class="price">100 ብር</div><button class="cutBtn" onclick="openTickets(0)" data-i18n="cutRaffle">🎟️ እጣ ለመቁረጥ</button></div>
-    </div>
-  </div>
+  <div id="supabaseRaffleCards"></div>
 
-  <div class="phoneCard">
-    <div class="phoneGallery">
-      <span class="phoneBadge">LIVE</span>
-      <button class="galleryArrow left" onclick="changeGallery(1,-1)">‹</button>
-      <img id="mainImage1" class="phoneMainImage" alt="iPhone 15 Pro">
-      <button class="galleryArrow right" onclick="changeGallery(1,1)">›</button>
-      <div class="galleryDots" id="dots1"></div>
-    </div>
-    <div class="phoneBody">
-      <h3>iPhone 15 Pro</h3><div class="phoneSub">Natural Titanium • 256GB</div>
-      <div class="specs">
-        <div class="spec">📱 6.1" Super Retina XDR</div><div class="spec">⚡ A17 Pro</div>
-        <div class="spec">📷 48MP Main Camera</div><div class="spec">🎥 4K Dolby Vision</div>
-        <div class="spec">💾 256GB</div><div class="spec">🔌 USB‑C</div>
-      </div>
-      <div class="cardBottom"><div class="price">100 ብር</div><button class="cutBtn" onclick="openTickets(1)" data-i18n="cutRaffle">🎟️ እጣ ለመቁረጥ</button></div>
-    </div>
-  </div>
-
-  <div class="phoneCard">
-    <div class="phoneGallery">
-      <button class="galleryArrow left" onclick="changeGallery(2,-1)">‹</button>
-      <img id="mainImage2" class="phoneMainImage" alt="Google Pixel 9 Pro">
-      <button class="galleryArrow right" onclick="changeGallery(2,1)">›</button>
-      <div class="galleryDots" id="dots2"></div>
-    </div>
-    <div class="phoneBody">
-      <h3>Google Pixel 9 Pro</h3><div class="phoneSub">Porcelain • 256GB</div>
-      <div class="specs">
-        <div class="spec">📱 6.3" LTPO OLED</div><div class="spec">🧠 16GB RAM</div>
-        <div class="spec">📷 50MP Main Camera</div><div class="spec">🔭 5x Telephoto</div>
-        <div class="spec">🔋 4700mAh</div><div class="spec">💾 256GB</div>
-      </div>
-      <div class="cardBottom"><div class="price">100 ብር</div><button class="cutBtn" onclick="openTickets(2)" data-i18n="cutRaffle">🎟️ እጣ ለመቁረጥ</button></div>
-    </div>
-  </div>
-  </div>
 </section>
 <footer class="footer"><div class="footerBrand"><span>Lalix softwares</span></div><div class="footerPhone">0909444499 • 0799994445</div><div class="footerCreator">Designed &amp; Developed by Lalix softwares</div></footer>
 </main>
 
 <!-- DRAW -->
-<main id="draw" class="page">
-  <div class="drawHeader"><h1 data-i18n="drawPageTitle">የእጣ ማውጫ</h1><p data-i18n="drawPageText">የሚወዱትን ስልክ ይምረጡና የእጣ ሁኔታውን ይከታተሉ።</p></div>
-  <div class="drawLayout">
-    <div>
-      <div class="drawConsole">
-        <div class="consoleTop"><div class="consoleBadge"><span class="consoleDot"></span><span data-i18n="liveDigitalDraw">ቀጥታ ዲጂታል እጣ</span></div><div class="secureTag" data-i18n="digitalSystem">DIGITAL SYSTEM</div></div>
-        <div class="digitalMachine glassLottery" id="machine">
-          <div class="machineGlow"></div>
-          <div class="glassDrum">
-            <div class="glassHighlight"></div>
-            <canvas id="numberCanvas" class="numberCanvas"></canvas>
-            <div class="airJet air1"></div><div class="airJet air2"></div><div class="airJet air3"></div>
-            <div class="winnerBall" id="winnerBall">#---</div>
-          </div>
-          <div class="ballNeck"></div>
-          <div class="machineStand"><span>CARAA</span><small id="phaseText">READY</small></div>
-          <div class="drawPhases">
-            <div class="phaseStep active" id="stepReady" data-i18n="ready">READY</div>
-            <div class="phaseStep" id="stepLocked" data-i18n="locked">LOCKED</div>
-            <div class="phaseStep" id="stepDrawing" data-i18n="drawing">DRAWING</div>
-            <div class="phaseStep" id="stepVerify" data-i18n="verifying">VERIFYING</div>
-            <div class="phaseStep" id="stepWinner" data-i18n="winner">WINNER</div>
-          </div>
-          <div class="winnerPanel" id="winner"><div class="winnerCrown">🏆</div><div class="winnerLabel" data-i18n="winnerLabel">አሸናፊ ቁጥር</div><div class="winnerNumber" id="winnerNumber">#047</div><div class="winnerName" id="winnerName">Samsung Galaxy S22 Ultra</div></div>
-        </div>
-
-        <div class="statusGrid">
-          <div class="statusCard"><small data-i18n="sold">የተቆረጡ</small><strong id="soldStat">900</strong></div>
-          <div class="statusCard"><small data-i18n="remaining">ያልተቆረጡ</small><strong id="freeStat">100</strong></div>
-          <div class="statusCard"><small data-i18n="drawState">ሁኔታ</small><strong id="miniState">READY</strong></div>
-        </div>
-        <div class="drawStatus"><strong id="drawStatusText">እጣው ለመጀመር ዝግጁ ነው</strong><small id="drawStatusSub">1000/1000 ሲሞላ እና ካውንትዳውኑ ሲያልቅ ይጀምራል</small></div>
-        <div class="countdownBox"><div class="countdownLabel" data-i18n="drawCountdownLabel">እጣው ከመጀመሩ በፊት የሚቀረው</div><div class="countdown" id="countdown">00 ቀን 00:00:00</div></div>
+<main id="draw" class="page simpleDrawPage">
+  <div class="simpleDrawWrap">
+    <div class="simpleDrawTop">
+      <div>
+        <div class="simpleBadge">● LIVE DRAW</div>
+        <h1 data-i18n="drawPageTitle">የእጣ ማውጫ</h1>
+        <p data-i18n="drawPageText">ስልክ ይምረጡ፣ የተቆረጠውን እጣ ብዛት እና የእጣውን ሁኔታ ይከታተሉ።</p>
       </div>
+      <button class="simpleHistoryBtn" onclick="openDrawHistory()">🏆 History</button>
     </div>
 
-    <div class="drawPhones">
-      <div class="drawPhoneChoice active" onclick="selectDrawPhone(0)"><img class="choiceImg" id="choiceImg0"><div class="choiceBody"><h3>Samsung S22 Ultra</h3><div class="choicePrice">100 ብር</div><div class="choiceStats">900 ✓ <span>100 ○</span></div></div></div>
-      <div class="drawPhoneChoice" onclick="selectDrawPhone(1)"><img class="choiceImg" id="choiceImg1"><div class="choiceBody"><h3>iPhone 15 Pro</h3><div class="choicePrice">100 ብር</div><div class="choiceStats">650 ✓ <span>350 ○</span></div></div></div>
-      <div class="drawPhoneChoice" onclick="selectDrawPhone(2)"><img class="choiceImg" id="choiceImg2"><div class="choiceBody"><h3>Pixel 9 Pro</h3><div class="choicePrice">100 ብር</div><div class="choiceStats">420 ✓ <span>580 ○</span></div></div></div>
-      <div class="drawPhoneChoice" onclick="selectDrawPhone(3)"><img class="choiceImg" id="choiceImg3"><div class="choiceBody"><h3>Galaxy S24 Ultra</h3><div class="choicePrice">100 ብር</div><div class="choiceStats">720 ✓ <span>280 ○</span></div></div></div>
-      <div class="drawPhoneChoice" onclick="selectDrawPhone(4)"><img class="choiceImg" id="choiceImg4"><div class="choiceBody"><h3>iPhone 17 Pro Max</h3><div class="choicePrice">300 ብር</div><div class="choiceStats">530 ✓ <span>470 ○</span></div></div></div>
+    <div class="simpleDrawLayout">
+      <div class="simpleMainColumn">
+        <section class="simpleProgressCard">
+          <div class="simpleSelected">
+            <small>የተመረጠው ስልክ</small>
+            <strong id="winnerName">CARAA</strong>
+            <span id="simpleTicketPrice">0 ብር</span>
+          </div>
+
+          <div class="simpleCircle" id="simpleCircle">
+            <div class="simpleCircleInner">
+              <small>የተቆረጠ</small>
+              <strong><span id="simpleSoldBig">0</span>/<span id="simpleTotalBig">1000</span></strong>
+              <b id="simplePercent">0%</b>
+            </div>
+          </div>
+
+          <div class="simpleStateBox">
+            <div class="simpleState" id="miniState">READY</div>
+            <div class="simpleCountdown" id="countdown">--</div>
+          </div>
+        </section>
+
+        <section class="simpleStatsGrid">
+          <div class="simpleStat">
+            <small>የተቆረጠ</small>
+            <strong id="soldStat">0</strong>
+          </div>
+          <div class="simpleStat">
+            <small>ያልተቆረጠ</small>
+            <strong id="freeStat">1000</strong>
+          </div>
+          <div class="simpleStat">
+            <small>ጠቅላላ</small>
+            <strong id="totalStat">1000</strong>
+          </div>
+          <div class="simpleStat">
+            <small>አሸናፊ</small>
+            <strong id="simpleWinnerStat">---</strong>
+          </div>
+        </section>
+
+        <section class="simpleStatus">
+          <strong id="drawStatusText">እጣው ለመጀመር ዝግጁ ነው</strong>
+          <small id="drawStatusSub">1000/1000 ሲሞላ እና countdown ሲያልቅ አሸናፊው በserver ይመረጣል።</small>
+        </section>
+
+        <div class="simplePhaseRow">
+          <span class="active" id="stepReady">READY</span>
+          <span id="stepLocked">LOCKED</span>
+          <span id="stepDrawing">DRAWING</span>
+          <span id="stepVerify">VERIFYING</span>
+          <span id="stepWinner">WINNER</span>
+        </div>
+      </div>
+
+      <aside class="simplePhoneSide">
+        <div class="simpleSideHead">
+          <strong>ስልኮች</strong>
+          <small>ሲነኩት progress ይታያል</small>
+        </div>
+        <div class="simplePhoneTabs" id="supabaseDrawPhones"></div>
+      </aside>
+    </div>
+
+    <div class="winnerPanel simpleWinnerPanel" id="winner">
+      <div class="winnerCrown">🏆</div>
+      <div class="winnerLabel" data-i18n="winnerLabel">አሸናፊ ቁጥር</div>
+      <div class="winnerNumber" id="winnerNumber">#---</div>
+      <div class="winnerName" id="winnerNameAlt">CARAA</div>
+    </div>
+
+    <!-- Hidden compatibility elements for existing winner/countdown functions -->
+    <div class="simpleHiddenSystem" id="machine">
+      <canvas id="numberCanvas"></canvas>
+      <div id="winnerBall">#---</div>
+      <div id="phaseText">READY</div>
     </div>
   </div>
-  <footer class="footer"><div class="footerBrand"><span>Lalix softwares</span></div><div class="footerPhone">0909444499 • 0799994445</div><div class="footerCreator">Designed &amp; Developed by Lalix softwares</div></footer>
+
+  <div class="simpleHistoryModal" id="drawHistoryModal">
+    <div class="simpleHistoryBox">
+      <div class="simpleHistoryHead">
+        <strong>🏆 የወጡ እጣዎች History</strong>
+        <button onclick="closeDrawHistory()">×</button>
+      </div>
+      <div class="simpleHistoryList" id="drawHistoryList">
+        <div class="simpleHistoryEmpty">History ገና የለም</div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="footerBrand"><span>Lalix softwares</span></div>
+    <div class="footerPhone">0909444499 • 0799994445</div>
+    <div class="footerCreator">Designed &amp; Developed by Lalix softwares</div>
+  </footer>
 </main>
 
 <!-- PROFILE -->
@@ -530,11 +888,7 @@ button{cursor:pointer}
 <div class="modal" id="ticketModal">
   <div class="modalBox">
     <div class="modalHead"><h2 data-i18n="selectNumber">ቁጥር ይምረጡ</h2><button class="close" onclick="closeTickets()">×</button></div>
-    <div class="ticketPhoneChooser" id="ticketPhoneChooser">
-      <button class="ticketPhoneOption" type="button" onclick="chooseTicketPhone(0,this)">Samsung S22 Ultra</button>
-      <button class="ticketPhoneOption" type="button" onclick="chooseTicketPhone(1,this)">iPhone 15 Pro</button>
-      <button class="ticketPhoneOption" type="button" onclick="chooseTicketPhone(2,this)">Pixel 9 Pro</button>
-    </div>
+    <div class="ticketPhoneChooser" id="ticketPhoneChooser"></div>
     <div class="numberInfo"><span data-i18n="thousandTickets">1000 እጣዎች</span><span><span id="modalSold">900</span> / <span id="modalFree">100</span></span></div>
     <div class="legend"><span><i class="dot redDot"></i><span data-i18n="taken">የተቆረጠ</span></span><span><i class="dot whiteDot"></i><span data-i18n="available">ያልተቆረጠ</span></span></div>
     <div class="numberGrid" id="numberGrid"></div>
@@ -564,6 +918,12 @@ button{cursor:pointer}
 </nav>
 
 <script>
+const SUPABASE_URL="https://knwnxmxzlleuizchxbgn.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY="sb_publishable_yiFBmF7yzA_VBROGwFvNiQ_HbnVoLep";
+const sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY);
+let supabaseRaffles=[];
+let approvedByRaffle=new Map();
+
 /* =========================
    STATE + DEMO STORAGE
 ========================= */
@@ -665,11 +1025,20 @@ function renderProfile(){
   let displayName="CARAA User",username="@guest",photo="";
   if(tgUser){displayName=[tgUser.first_name,tgUser.last_name].filter(Boolean).join(" ")||"CARAA User";username=tgUser.username?"@"+tgUser.username:"Telegram User";photo=tgUser.photo_url||"";badge.textContent="✈ Telegram Connected";}else{badge.textContent="✈ Browser Preview";}
   nameEl.textContent=displayName;userEl.textContent=username;avatar.innerHTML=photo?`<img src="${photo}" alt="Profile">`:(displayName.charAt(0)||"C").toUpperCase();
-  const pending=myTickets.filter(t=>(t.status||"pending")==="pending");
-  document.getElementById("myTicketCount").textContent=pending.length;document.getElementById("ticketCountLabel").textContent=pending.length+" PENDING";
+  const visible=myTickets.filter(t=>["pending","approved"].includes(String(t.status||"pending").toLowerCase()));
+  const pending=visible.filter(t=>String(t.status||"").toLowerCase()==="pending");
+  const approved=visible.filter(t=>String(t.status||"").toLowerCase()==="approved");
+  document.getElementById("myTicketCount").textContent=visible.length;
+  document.getElementById("ticketCountLabel").textContent=`${pending.length} PENDING • ${approved.length} APPROVED`;
   const list=document.getElementById("myTicketList");list.innerHTML="";
-  if(!pending.length){list.innerHTML=`<div class="emptyTickets">${T[language].noTickets}</div>`;return;}
-  [...pending].reverse().forEach(t=>{const div=document.createElement("div");div.className="myTicket";div.innerHTML=`<div class="ticketNo">#${String(t.number).padStart(3,"0")}</div><div class="ticketMeta"><h4>${escapeHtml(t.prize||drawNames[0])}</h4><p>${escapeHtml(t.name)} • ${escapeHtml(t.phone)}<br>${escapeHtml(t.date||"")}<br>${escapeHtml(T[language].pendingStatus)}</p></div><div class="ticketStatus">PENDING</div>`;list.appendChild(div);});
+  if(!visible.length){list.innerHTML=`<div class="emptyTickets">${T[language].noTickets}</div>`;return;}
+  [...visible].reverse().forEach(t=>{
+    const status=String(t.status||"pending").toLowerCase();
+    const label=status==="approved"?"APPROVED":"PENDING";
+    const div=document.createElement("div");div.className="myTicket";
+    div.innerHTML=`<div class="ticketNo">#${String(t.number).padStart(3,"0")}</div><div class="ticketMeta"><h4>${escapeHtml(t.prize||drawNames[0])}</h4><p>${escapeHtml(t.name)} • ${escapeHtml(t.phone)}<br>${escapeHtml(t.date||"")}<br>${label}</p></div><div class="ticketStatus">${label}</div>`;
+    list.appendChild(div);
+  });
 }
 function escapeHtml(s){return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));}
 
@@ -696,6 +1065,7 @@ const iphone17="https://fdn2.gsmarena.com/vv/pics/apple/apple-iphone-17-pro-max-
 const galleries=[samsung,iphone,pixel], galleryIndex=[0,0,0];
 
 function renderGallery(phone){
+  if(!document.getElementById("mainImage"+phone)) return;
   const image=document.getElementById("mainImage"+phone);
   image.src=galleries[phone][galleryIndex[phone]];
   image.onerror=function(){this.onerror=null;this.src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=800&q=80";};
@@ -710,7 +1080,9 @@ function renderGallery(phone){
 function changeGallery(phone,direction){galleryIndex[phone]=(galleryIndex[phone]+direction+galleries[phone].length)%galleries[phone].length;renderGallery(phone);}
 function loadDrawImages(){
   [samsung[0],iphone[0],pixel[0],s24,iphone17].forEach((src,i)=>{
-    const img=document.getElementById("choiceImg"+i);img.src=src;
+    const img=document.getElementById("choiceImg"+i);
+    if(!img) return;
+    img.src=src;
     img.onerror=function(){this.onerror=null;this.src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=600&q=80";};
   });
 }
@@ -739,8 +1111,10 @@ function showPage(page){
   document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
   document.getElementById(page).classList.add("active");
   document.querySelectorAll(".bottomBtn").forEach(b=>b.classList.remove("active"));
-  document.getElementById(page+"Btn").classList.add("active");
+  const navBtn=document.getElementById(page+"Btn");
+  if(navBtn) navBtn.classList.add("active");
   if(page==="profile") renderProfile();
+  if(page==="draw") setTimeout(()=>updateSupabaseDrawState(),50);
   window.scrollTo({top:0,behavior:"smooth"});
 }
 
@@ -754,7 +1128,7 @@ function openTickets(productIndex=drawPhoneIndex){
   else{ticketProductIndex=Number(productIndex)||0;chooser.classList.remove("show");}
   document.getElementById("ticketModal").classList.add("show");renderNumbers();
 }
-function chooseTicketPhone(index,btn){ticketProductIndex=index;document.querySelectorAll(".ticketPhoneOption").forEach(b=>b.classList.remove("active"));btn.classList.add("active");}
+function chooseTicketPhone(index,btn){ticketProductIndex=index;selectedNumber=null;document.querySelectorAll(".ticketPhoneOption").forEach(b=>b.classList.remove("active"));btn.classList.add("active");renderNumbers();}
 function closeTickets(){document.getElementById("ticketModal").classList.remove("show");}
 function closeCheckout(){document.getElementById("checkoutModal").classList.remove("show");}
 document.getElementById("ticketModal").addEventListener("click",e=>{if(e.target.id==="ticketModal")closeTickets();});
@@ -762,7 +1136,28 @@ document.getElementById("checkoutModal").addEventListener("click",e=>{if(e.targe
 function isPendingNumber(n){return myTickets.some(t=>Number(t.number)===n && (t.status||"pending")==="pending");}
 function renderNumbers(){
   const grid=document.getElementById("numberGrid");grid.innerHTML="";
-  for(let i=1;i<=1000;i++){const n=document.createElement("div");n.className="number";n.textContent=String(i).padStart(3,"0");n.onclick=()=>{selectedNumber=i;document.querySelectorAll(".number").forEach(x=>x.classList.remove("selected"));n.classList.add("selected");document.getElementById("continueTicketBtn").scrollIntoView({behavior:"smooth",block:"center"});};grid.appendChild(n);}updateStats();
+  const raffle=supabaseRaffles[ticketProductIndex]||supabaseRaffles[0];
+  const total=Math.max(1,Number(raffle?.total_tickets||1000));
+  const approved=raffle?(approvedByRaffle.get(raffle.id)||new Set()):new Set();
+  for(let i=1;i<=total;i++){
+    const n=document.createElement("div");
+    n.className="number";
+    n.textContent=String(i).padStart(3,"0");
+    if(approved.has(i)){
+      n.classList.add("sold");
+      n.title="APPROVED / SOLD";
+      n.onclick=null;
+    }else{
+      n.onclick=()=>{
+        selectedNumber=i;
+        document.querySelectorAll(".number").forEach(x=>x.classList.remove("selected"));
+        n.classList.add("selected");
+        document.getElementById("continueTicketBtn").scrollIntoView({behavior:"smooth",block:"center"});
+      };
+    }
+    grid.appendChild(n);
+  }
+  updateStats();
 }
 function continueCheckout(){
   if(selectedNumber===null){alert(T[language].noNumber);return;}
@@ -772,17 +1167,123 @@ function continueCheckout(){
 function normalizePhone(v){let p=String(v||"").replace(/[\s\-()]/g,"");if(/^0[79]\d{8}$/.test(p))return "+251"+p.slice(1);if(/^251[79]\d{8}$/.test(p))return "+"+p;if(/^\+251[79]\d{8}$/.test(p))return p;return null;}
 function previewScreenshot(input){const file=input.files&&input.files[0],box=document.getElementById("screenshotPreview"),name=document.getElementById("screenshotName");if(!file){box.className="screenshotPreview";box.innerHTML="";name.textContent="JPG / PNG";return;}if(!file.type.startsWith("image/")){input.value="";alert(T[language].screenshotRequired);return;}name.textContent=file.name;const r=new FileReader();r.onload=e=>{box.innerHTML=`<img src="${e.target.result}" alt="Payment screenshot">`;box.className="screenshotPreview show";};r.readAsDataURL(file);}
 async function copyAccount(value,btn){try{await navigator.clipboard.writeText(value);}catch(e){const x=document.createElement("textarea");x.value=value;document.body.appendChild(x);x.select();document.execCommand("copy");x.remove();}const old=btn.textContent;btn.textContent=T[language].copied;setTimeout(()=>btn.textContent=T[language].copy,1200);}
-function confirmTicket(){
-  const name=document.getElementById("customerName").value.trim(),phone=normalizePhone(document.getElementById("customerPhone").value),file=document.getElementById("paymentScreenshot").files[0];
-  if(!name || !phone){alert(T[language].fillCustomer);return;}if(!file){alert(T[language].screenshotRequired);return;}if(selectedNumber===null){alert(T[language].noNumber);closeCheckout();return;}
-  myTickets.push({number:selectedNumber,name,phone,telegram_id:tgUser?.id||null,telegram_username:tgUser?.username||null,prize:drawNames[ticketProductIndex]||drawNames[0],status:"pending",paymentScreenshot:file.name,date:new Date().toLocaleString()});persistTickets();selectedNumber=null;closeCheckout();document.getElementById("customerPhone").value="";updateStats();renderProfile();alert(T[language].ticketSuccess);showPage("profile");
+async function confirmTicket(){
+  const name=document.getElementById("customerName").value.trim();
+  const phone=normalizePhone(document.getElementById("customerPhone").value);
+  const file=document.getElementById("paymentScreenshot").files[0];
+
+  if(!name || !phone){alert(T[language].fillCustomer);return;}
+  if(!file){alert(T[language].screenshotRequired);return;}
+  if(selectedNumber===null){alert(T[language].noNumber);closeCheckout();return;}
+
+  const raffle=supabaseRaffles[ticketProductIndex]||supabaseRaffles[0];
+  if(!raffle){alert("ACTIVE raffle አልተገኘም።");return;}
+
+  const ticketId=crypto.randomUUID();
+  const safeName=String(file.name||"payment.jpg").replace(/[^a-zA-Z0-9._-]/g,"_");
+  const proofPath=`${raffle.id}/${Date.now()}_${crypto.randomUUID()}_${safeName}`;
+
+  try{
+    const {error:uploadError}=await sb.storage
+      .from("payment-proofs")
+      .upload(proofPath,file,{contentType:file.type||"image/jpeg",upsert:false});
+    if(uploadError) throw uploadError;
+
+    const {error:ticketError}=await sb.from("tickets").insert({
+      id:ticketId,
+      raffle_id:raffle.id,
+      ticket_number:selectedNumber,
+      customer_name:name,
+      customer_phone:phone,
+      telegram_user_id:tgUser?.id||null,
+      telegram_username:tgUser?.username||null,
+      status:"PENDING"
+    });
+    if(ticketError){
+      await sb.storage.from("payment-proofs").remove([proofPath]);
+      throw ticketError;
+    }
+
+    const {error:paymentError}=await sb.from("payments").insert({
+      ticket_id:ticketId,
+      amount:Number(raffle.ticket_price||0),
+      payment_method:"SCREENSHOT",
+      screenshot_url:proofPath,
+      status:"PENDING"
+    });
+    if(paymentError) throw paymentError;
+
+    myTickets.push({
+      id:ticketId,
+      raffle_id:raffle.id,
+      number:selectedNumber,
+      name,
+      phone,
+      telegram_id:tgUser?.id||null,
+      telegram_username:tgUser?.username||null,
+      prize:raffle.phone_name,
+      status:"pending",
+      paymentScreenshot:file.name,
+      date:new Date().toLocaleString()
+    });
+
+    persistTickets();
+    selectedNumber=null;
+    closeCheckout();
+    document.getElementById("customerPhone").value="";
+    updateStats();
+    renderProfile();
+    alert(T[language].ticketSuccess);
+    showPage("profile");
+  }catch(err){
+    console.error("CARAA ticket/payment submit:",err);
+    alert("እጣው አልተላከም። Console ላይ ያለውን error ይመልከቱ።");
+  }
+}
+
+
+async function syncTicketStatuses(){
+  try{
+    const ids=(myTickets||[]).map(t=>t.id).filter(Boolean);
+    if(!ids.length) return;
+
+    const {data,error}=await sb
+      .from("tickets")
+      .select("id,status")
+      .in("id",ids);
+
+    if(error) throw error;
+    if(!data || !data.length) return;
+
+    const statusMap=new Map(data.map(t=>[t.id,String(t.status||"").toUpperCase()]));
+    let changed=false;
+
+    myTickets=myTickets.map(t=>{
+      const dbStatus=statusMap.get(t.id);
+      if(dbStatus && String(t.status||"").toUpperCase()!==dbStatus){
+        changed=true;
+        return {...t,status:dbStatus.toLowerCase()};
+      }
+      return t;
+    });
+
+    if(changed){
+      persistTickets();
+      renderProfile();
+    }
+  }catch(err){
+    console.error("CARAA profile status sync:",err);
+  }
 }
 
 /* =========================
    STATS
 ========================= */
 function updateStats(){
-  const sold=soldNumbers.size, free=1000-sold;
+  const raffle=supabaseRaffles[ticketProductIndex]||supabaseRaffles[0];
+  const sold=raffle?(approvedByRaffle.get(raffle.id)||new Set()).size:soldNumbers.size;
+  const total=raffle?Number(raffle.total_tickets||1000):1000;
+  const free=Math.max(0,total-sold);
   ["modalSold","soldStat"].forEach(id=>document.getElementById(id).textContent=sold);
   ["modalFree","freeStat"].forEach(id=>document.getElementById(id).textContent=free);
   checkAutoDraw();
@@ -791,84 +1292,240 @@ function updateStats(){
 /* =========================
    DRAW CHOICE
 ========================= */
-const drawNames=["Samsung Galaxy S22 Ultra","iPhone 15 Pro","Google Pixel 9 Pro","Samsung Galaxy S24 Ultra","iPhone 17 Pro Max"];
+let drawNames=[];
 function selectDrawPhone(index){
   drawPhoneIndex=index;
   document.querySelectorAll(".drawPhoneChoice").forEach((card,i)=>card.classList.toggle("active",i===index));
-  document.getElementById("winnerName").textContent=drawNames[index];
+  if(drawNames[index]) document.getElementById("winnerName").textContent=drawNames[index];
+  renderedWinnerKey="";
+  updateSupabaseDrawState();
 }
 
 /* =========================
-   1000-NUMBER CANVAS
+   SIMPLE LAUNCH MODE
+   No ball/canvas animation. Exact numbers are shown in UI.
 ========================= */
 const canvas=document.getElementById("numberCanvas");
-const ctx=canvas.getContext("2d");
+const ctx=canvas ? canvas.getContext("2d") : null;
 let particles=[];
-let canvasAnimating=true;
+let canvasAnimating=false;
 let drawEnergy=0;
-
-function resizeCanvas(){
-  const rect=canvas.getBoundingClientRect();
-  const dpr=Math.min(window.devicePixelRatio||1,2);
-  canvas.width=Math.floor(rect.width*dpr); canvas.height=Math.floor(rect.height*dpr);
-  canvas.style.width=rect.width+"px"; canvas.style.height=rect.height+"px";
-  ctx.setTransform(dpr,0,0,dpr,0,0);
-  buildParticles(rect.width,rect.height);
-}
-function buildParticles(w,h){
-  particles=[];const cx=w/2,cy=h*.40,R=Math.min(w*.39,h*.31);
-  for(let i=1;i<=1000;i++){const a=Math.random()*Math.PI*2,r=Math.sqrt(Math.random())*R*.92;particles.push({n:i,x:cx+Math.cos(a)*r,y:cy+Math.sin(a)*r,vx:(Math.random()-.5)*.32,vy:(Math.random()-.5)*.32,rad:2.5+Math.random()*1.7,phase:Math.random()*6.28});}
-}
-function animateCanvas(t){
-  const rect=canvas.getBoundingClientRect(),w=rect.width,h=rect.height,cx=w/2,cy=h*.40,R=Math.min(w*.39,h*.31);ctx.clearRect(0,0,w,h);
-  particles.forEach((p,idx)=>{if(drawing){p.vy-=.012+Math.random()*.012;p.vx+=Math.sin(t*.004+p.phase)*.025;p.x+=p.vx*(1+drawEnergy*.12);p.y+=p.vy*(1+drawEnergy*.12);p.vx*=.994;p.vy*=.994;}else{p.x+=Math.sin(t*.0007+p.phase)*.025;p.y+=Math.cos(t*.0006+p.phase)*.018;}
-    let dx=p.x-cx,dy=p.y-cy,d=Math.hypot(dx,dy);if(d>R-p.rad){const nx=dx/d,ny=dy/d;p.x=cx+nx*(R-p.rad);p.y=cy+ny*(R-p.rad);const dot=p.vx*nx+p.vy*ny;p.vx-=1.85*dot*nx;p.vy-=1.85*dot*ny;}
-    ctx.beginPath();ctx.arc(p.x,p.y,p.rad,0,Math.PI*2);const hue=idx%3;ctx.fillStyle=hue===0?"rgba(25,194,255,.82)":hue===1?"rgba(124,58,237,.82)":"rgba(238,244,255,.78)";ctx.fill();ctx.font=`700 ${Math.max(2.2,p.rad*.78)}px Arial`;ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillStyle="rgba(3,7,18,.9)";ctx.fillText(String(p.n),p.x,p.y);});requestAnimationFrame(animateCanvas);
-}
+function resizeCanvas(){}
+function buildParticles(){}
+function animateCanvas(){}
 window.addEventListener("resize",resizeCanvas);
 
 /* =========================
    DRAW LOGIC
 ========================= */
 function setPhase(step,label){
-  ["stepReady","stepLocked","stepDrawing","stepVerify","stepWinner"].forEach(id=>document.getElementById(id).classList.remove("active"));
-  document.getElementById(step).classList.add("active");
-  document.getElementById("phaseText").textContent=label;
-  document.getElementById("miniState").textContent=label;
+  ["stepReady","stepLocked","stepDrawing","stepVerify","stepWinner"].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el) el.classList.remove("active");
+  });
+  const stepEl=document.getElementById(step);
+  if(stepEl) stepEl.classList.add("active");
+  const phaseText=document.getElementById("phaseText");
+  const miniState=document.getElementById("miniState");
+  if(phaseText) phaseText.textContent=label;
+  if(miniState) miniState.textContent=label;
 }
-function startDraw(){
-  if(drawing || soldNumbers.size<1) return;
+let renderedWinnerKey="";
+
+function animateDbWinner(finalNumber, raffle){
+  if(drawing || !finalNumber) return;
   drawing=true; drawEnergy=8;
-  const machine=document.getElementById("machine"),winner=document.getElementById("winner"),display=document.getElementById("winnerBall");
-  winner.classList.remove("show");display.classList.remove("show");machine.classList.add("drawing");
+
+  const machine=document.getElementById("machine");
+  const winner=document.getElementById("winner");
+  const display=document.getElementById("winnerBall");
+  const approved=Array.from(approvedByRaffle.get(raffle.id)||new Set());
+  const animationNumbers=approved.length?approved:[Number(finalNumber)];
+
+  winner.classList.remove("show");
+  display.classList.remove("show");
+  machine.classList.add("drawing");
   setPhase("stepLocked",T[language].locked);
   document.getElementById("drawStatusText").textContent=T[language].drawingStatus;
   document.getElementById("drawStatusSub").textContent=T[language].drawingSub;
 
-  const numbers=Array.from(soldNumbers);
-  /* DEMO ONLY: production winner must be chosen securely on a backend */
-  const finalNumber=numbers[Math.floor(Math.random()*numbers.length)];
-
   setTimeout(()=>setPhase("stepDrawing",T[language].drawing),650);
+
   let count=0;
   const roll=setInterval(()=>{
-    display.textContent="#"+String(numbers[Math.floor(Math.random()*numbers.length)]).padStart(3,"0");
+    const preview=animationNumbers[Math.floor(Math.random()*animationNumbers.length)];
+    display.textContent="#"+String(preview).padStart(3,"0");
     count++;
     if(count===35) setPhase("stepVerify",T[language].verifying);
+
     if(count>=48){
       clearInterval(roll);
-      display.textContent="#"+String(finalNumber).padStart(3,"0");display.classList.add("show");
+      display.textContent="#"+String(finalNumber).padStart(3,"0");
+      display.classList.add("show");
+
       setTimeout(()=>{
-        machine.classList.remove("drawing");drawEnergy=0;
+        machine.classList.remove("drawing");
+        drawEnergy=0;
         setPhase("stepWinner",T[language].winner);
         document.getElementById("winnerNumber").textContent="#"+String(finalNumber).padStart(3,"0");
+        document.getElementById("winnerName").textContent=raffle.phone_name||"CARAA";
         winner.classList.add("show");
         document.getElementById("drawStatusText").textContent=T[language].winnerStatus;
-        document.getElementById("drawStatusSub").textContent=T[language].winnerSubPrefix+String(finalNumber).padStart(3,"0")+T[language].winnerSubSuffix;
+        document.getElementById("drawStatusSub").textContent=
+          T[language].winnerSubPrefix+String(finalNumber).padStart(3,"0")+T[language].winnerSubSuffix;
         drawing=false;
       },700);
     }
   },70);
+}
+
+function updateSupabaseDrawState(){
+  const raffle=supabaseRaffles[drawPhoneIndex]||supabaseRaffles[0];
+  if(!raffle) return;
+
+  const approved=(approvedByRaffle.get(raffle.id)||new Set()).size;
+  const total=Number(raffle.total_tickets||1000);
+  const remaining=Math.max(0,total-approved);
+
+  document.getElementById("soldStat").textContent=approved;
+  document.getElementById("freeStat").textContent=remaining;
+  const totalStat=document.getElementById("totalStat");
+  if(totalStat) totalStat.textContent=total;
+  document.getElementById("winnerName").textContent=raffle.phone_name||"CARAA";
+  const winnerAlt=document.getElementById("winnerNameAlt");
+  if(winnerAlt) winnerAlt.textContent=raffle.phone_name||"CARAA";
+
+  const percent=total>0?Math.min(100,Math.round((approved/total)*100)):0;
+  const circle=document.getElementById("simpleCircle");
+  const soldBig=document.getElementById("simpleSoldBig");
+  const totalBig=document.getElementById("simpleTotalBig");
+  const percentEl=document.getElementById("simplePercent");
+  const priceEl=document.getElementById("simpleTicketPrice");
+  const winnerStat=document.getElementById("simpleWinnerStat");
+
+  if(circle) circle.style.setProperty("--p",percent);
+  if(soldBig) soldBig.textContent=approved.toLocaleString();
+  if(totalBig) totalBig.textContent=total.toLocaleString();
+  if(percentEl) percentEl.textContent=percent+"%";
+  if(priceEl) priceEl.textContent=Number(raffle.ticket_price||0).toLocaleString()+" ብር";
+  if(winnerStat) winnerStat.textContent=raffle.winner_ticket_number ? "#"+String(raffle.winner_ticket_number).padStart(3,"0") : "---";
+
+  const state=String(raffle.draw_status||"WAITING").toUpperCase();
+  const countdownEl=document.getElementById("countdown");
+
+  if(state==="DRAWN" && raffle.winner_ticket_number){
+    countdownEl.textContent="00 ቀን 00:00:00";
+    const key=raffle.id+":"+raffle.winner_ticket_number;
+    if(renderedWinnerKey!==key && !drawing){
+      renderedWinnerKey=key;
+      animateDbWinner(Number(raffle.winner_ticket_number),raffle);
+    }
+    return;
+  }
+
+  const winnerPanelEl=document.getElementById("winner"); if(winnerPanelEl) winnerPanelEl.classList.remove("show");
+
+  if(state==="COUNTDOWN" && raffle.draw_at){
+    const diff=Math.max(0,new Date(raffle.draw_at).getTime()-Date.now());
+    const d=Math.floor(diff/86400000);
+    const h=Math.floor((diff%86400000)/3600000);
+    const m=Math.floor((diff%3600000)/60000);
+    const sec=Math.floor((diff%60000)/1000);
+    const dayWord=language==="am"?"ቀን":"Guyyaa";
+    countdownEl.textContent=
+      `${String(d).padStart(2,"0")} ${dayWord} ${String(h).padStart(2,"0")}:${String(m).padStart(2,"0")}:${String(sec).padStart(2,"0")}`;
+    setPhase("stepLocked",T[language].locked);
+    document.getElementById("drawStatusText").textContent=
+      language==="am"?"⏳ የእጣው ቆጠራ ተጀምሯል":"⏳ Yeroon baafataa jalqabeera";
+    document.getElementById("drawStatusSub").textContent=
+      language==="am"?"ጊዜው ሲያልቅ አሸናፊው በራሱ ይመረጣል":"Yeroon yoo xumurame mo'ataan ofumaan filatama";
+    return;
+  }
+
+  countdownEl.textContent="--";
+  setPhase("stepReady",T[language].ready);
+  document.getElementById("drawStatusText").textContent=T[language].readyStatus;
+  document.getElementById("drawStatusSub").textContent=
+    `${approved}/${total} `+(language==="am"?"APPROVED ነው። ሁሉም ሲሞላ countdown ይጀምራል።":"APPROVED dha. Hundi yoo guutame countdown jalqaba.");
+}
+
+
+async function loadSupabaseRaffles(){
+  try{
+    const {data,error}=await sb.from("raffles").select("*").order("created_at",{ascending:false});
+    if(error)throw error;
+    supabaseRaffles=(data||[]).filter(r=>String(r.status||"").trim().toUpperCase()==="ACTIVE");
+    approvedByRaffle=new Map();
+    if(supabaseRaffles.length){
+      const raffleIds=supabaseRaffles.map(r=>r.id);
+      const {data:approved,error:approvedError}=await sb
+        .from("tickets").select("raffle_id,ticket_number,status")
+        .in("raffle_id",raffleIds).eq("status","APPROVED");
+      if(approvedError) throw approvedError;
+      (approved||[]).forEach(t=>{
+        if(!approvedByRaffle.has(t.raffle_id)) approvedByRaffle.set(t.raffle_id,new Set());
+        approvedByRaffle.get(t.raffle_id).add(Number(t.ticket_number));
+      });
+    }
+    drawNames=supabaseRaffles.map(r=>r.phone_name);
+    const ticketChooser=document.getElementById("ticketPhoneChooser");
+    if(ticketChooser){
+      ticketChooser.innerHTML=supabaseRaffles.map((r,i)=>`
+        <button class="ticketPhoneOption" type="button" onclick="chooseTicketPhone(${i},this)">
+          ${escapeHtml(r.phone_name)}
+        </button>`).join("");
+    }
+    const drawWrap=document.getElementById("supabaseDrawPhones");
+    if(drawPhoneIndex>=supabaseRaffles.length) drawPhoneIndex=0;
+    if(drawWrap){
+      drawWrap.innerHTML=supabaseRaffles.map((r,i)=>{
+        const approvedCount=(approvedByRaffle.get(r.id)||new Set()).size;
+        const totalCount=Number(r.total_tickets||1000);
+        const remainCount=Math.max(0,totalCount-approvedCount);
+        return `
+        <div class="drawPhoneChoice ${i===drawPhoneIndex?"active":""}" onclick="selectDrawPhone(${i})">
+          ${r.phone_image_url?`<img class="choiceImg" src="${escapeHtml(r.phone_image_url)}" alt="${escapeHtml(r.phone_name)}">`:""}
+          <div class="choiceBody">
+            <h3>${escapeHtml(r.phone_name)}</h3>
+            <div class="choicePrice">${Number(r.ticket_price||0).toLocaleString()} ብር</div>
+            <div class="choiceStats">${approvedCount}/${totalCount} ተቆርጧል • ቀሪ ${remainCount}</div>
+          </div>
+        </div>`;
+      }).join("");
+      if(drawNames[drawPhoneIndex]) document.getElementById("winnerName").textContent=drawNames[drawPhoneIndex];
+    }
+    const wrap=document.getElementById("supabaseRaffleCards");
+    if(!wrap)return;
+    wrap.innerHTML=supabaseRaffles.map((r,i)=>`
+      <div class="phoneRow">
+        <div class="phoneCard">
+          <div class="phoneGallery">
+            <span class="phoneBadge">LIVE</span>
+            ${r.phone_image_url?`<img class="phoneMainImage" src="${escapeHtml(r.phone_image_url)}" alt="${escapeHtml(r.phone_name)}">`:""}
+          </div>
+          <div class="phoneInfo">
+            <h3>${escapeHtml(r.phone_name)}</h3>
+            <div class="specChips">${
+              String(r.specification||"")
+                .split(/[\n,•|]+/)
+                .map(x=>x.trim())
+                .filter(Boolean)
+                .map(x=>`<span class="specChip">${escapeHtml(x)}</span>`)
+                .join("")
+            }</div>
+            <div class="phonePrice">${Number(r.ticket_price||0).toLocaleString()} ብር</div>
+            <div class="raffleCounts">
+              <span>የተቆረጠ: <b>${(approvedByRaffle.get(r.id)||new Set()).size}</b></span>
+              <span>ቀሪ: <b>${Math.max(0,Number(r.total_tickets||1000)-(approvedByRaffle.get(r.id)||new Set()).size)}</b></span>
+            </div>
+            <button class="confirm" type="button" onclick="openTickets(${i})" data-i18n="cutRaffle">🎟️ እጣ ለመቁረጥ</button>
+          </div>
+        </div>
+      </div>`).join("");
+    updateSupabaseDrawState();
+  }catch(err){
+    console.error("CARAA Supabase raffle load:",err);
+  }
 }
 
 /* =========================
@@ -892,21 +1549,11 @@ function updateHomeCountdown(){
   if(x.done){launchCountdownFinished=true;checkAutoDraw();}
 }
 function updateCountdown(){
-  const x=getDiff(),dayWord=language==="am"?"ቀን":"Guyyaa";
-  document.getElementById("countdown").textContent=`${String(x.d).padStart(2,"0")} ${dayWord} ${String(x.h).padStart(2,"0")}:${String(x.m).padStart(2,"0")}:${String(x.s).padStart(2,"0")}`;
-  if(x.done){
-    launchCountdownFinished=true;
-    if(!drawing&&!document.getElementById("winner").classList.contains("show")){
-      document.getElementById("drawStatusText").textContent=T[language].activeStatus;
-      document.getElementById("drawStatusSub").textContent=T[language].activeSub;
-    }
-    checkAutoDraw();
-  }
+  updateSupabaseDrawState();
 }
 function checkAutoDraw(){
-  if(launchCountdownFinished && soldNumbers.size>=1000 && !autoDrawDone && !drawing){
-    autoDrawDone=true;setTimeout(startDraw,1000);
-  }
+  // Winner selection is server-side only. The customer app only displays Supabase state.
+  updateSupabaseDrawState();
 }
 function refreshDynamicLanguage(){
   updateCountdown();
@@ -917,13 +1564,62 @@ function refreshDynamicLanguage(){
   }
 }
 
+
+function manualSimpleDrawClick(){
+  const raffle=supabaseRaffles[drawPhoneIndex]||supabaseRaffles[0];
+  if(!raffle){
+    alert("እባክዎ መጀመሪያ እጣ ያለው ስልክ በAdmin ይፍጠሩ።");
+    return;
+  }
+  const state=String(raffle.draw_status||"WAITING").toUpperCase();
+  if(state==="DRAWN" && raffle.winner_ticket_number){
+    document.getElementById("winnerNumber").textContent="#"+String(raffle.winner_ticket_number).padStart(3,"0");
+    document.getElementById("winnerName").textContent=raffle.phone_name||"CARAA";
+    const winnerAlt=document.getElementById("winnerNameAlt");
+    if(winnerAlt) winnerAlt.textContent=raffle.phone_name||"CARAA";
+    document.getElementById("winner").classList.add("show");
+  }else{
+    alert("እጣው ገና አልወጣም። 100% ሲሞላ እና countdown ሲያልቅ በserver ይወጣል።");
+  }
+}
+
+function openDrawHistory(){
+  const modal=document.getElementById("drawHistoryModal");
+  const list=document.getElementById("drawHistoryList");
+  if(!modal||!list)return;
+
+  const drawn=supabaseRaffles
+    .filter(r=>String(r.draw_status||"").toUpperCase()==="DRAWN" || r.winner_ticket_number)
+    .sort((a,b)=>String(b.drawn_at||b.updated_at||"").localeCompare(String(a.drawn_at||a.updated_at||"")));
+
+  if(!drawn.length){
+    list.innerHTML='<div class="simpleHistoryEmpty">History ገና የለም</div>';
+  }else{
+    list.innerHTML=drawn.map(r=>{
+      const when=r.drawn_at?new Date(r.drawn_at).toLocaleString():"";
+      const winner=r.winner_ticket_number?("#"+String(r.winner_ticket_number).padStart(3,"0")):"---";
+      return `<div class="simpleHistoryItem">
+        <div><strong>${escapeHtml(r.phone_name||"CARAA")}</strong><small>${escapeHtml(when)}</small></div>
+        <b>${winner}</b>
+      </div>`;
+    }).join("");
+  }
+  modal.classList.add("show");
+}
+
+function closeDrawHistory(){
+  const modal=document.getElementById("drawHistoryModal");
+  if(modal) modal.classList.remove("show");
+}
+
 /* =========================
    START
 ========================= */
 renderGallery(0);renderGallery(1);renderGallery(2);
-loadDrawImages();renderAd();initTelegram();updateStats();renderProfile();applyLanguage();
+loadDrawImages();renderAd();initTelegram();updateStats();renderProfile();applyLanguage();loadSupabaseRaffles();syncTicketStatuses();
 updateHomeCountdown();updateCountdown();
 setInterval(()=>{updateHomeCountdown();updateCountdown();},1000);
+setInterval(()=>{loadSupabaseRaffles();},5000);
 setTimeout(()=>{resizeCanvas();requestAnimationFrame(animateCanvas);},100);
 </script>
 
