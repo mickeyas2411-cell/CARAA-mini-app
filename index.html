@@ -1587,6 +1587,75 @@ body{
 }
 </style>
 
+
+<style>
+/* =========================================================
+   CARAA — TELEGRAM/iOS WIDTH ROOT FIX ONLY
+   Removes viewport-width overflow from launchDisplay.
+   No language / Supabase / payment / draw logic changes.
+========================================================= */
+html, body{
+  width:100%!important;
+  max-width:100%!important;
+  overflow-x:hidden!important;
+}
+
+.app,
+.page,
+.page.active{
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  margin-left:0!important;
+  margin-right:0!important;
+  overflow-x:hidden!important;
+}
+
+.launchDisplay{
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  margin-left:0!important;
+  margin-right:0!important;
+  box-sizing:border-box!important;
+}
+
+.launchDisplay>*:not(.launchCountdownArea){
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  box-sizing:border-box!important;
+}
+
+.simpleDrawPage,
+.simpleDrawWrap,
+.simpleDrawLayout,
+.simpleMainColumn,
+.simpleProgressCard,
+.simpleStatsGrid,
+.simpleStatus,
+.simplePhoneSide{
+  box-sizing:border-box!important;
+  min-width:0!important;
+  max-width:100%!important;
+}
+
+@media(max-width:760px){
+  .launchDisplay{
+    width:100%!important;
+    max-width:100%!important;
+    margin:0!important;
+    padding:12px!important;
+  }
+  .simpleDrawWrap{
+    width:100%!important;
+    max-width:100%!important;
+    margin:0!important;
+    padding:10px!important;
+  }
+}
+</style>
+
 </head>
 
 <body>
