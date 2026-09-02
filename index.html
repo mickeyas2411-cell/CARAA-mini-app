@@ -799,7 +799,7 @@ button{cursor:pointer}
   .drawLayout{grid-template-columns:minmax(0,1fr) 105px}.digitalMachine{height:430px}.quantumRing.r1{width:220px;height:220px}.quantumRing.r2{width:178px;height:178px}.quantumRing.r3{width:140px;height:140px}
   .core{width:112px;height:112px}.drawNumber{font-size:31px}.number{font-size:9px;padding:7px 1px}.phoneGallery{height:245px}
   .homeCountdown{gap:4px}.timeUnit{min-width:50px;padding:8px 3px}.timeValue{font-size:18px}.timeName{font-size:6px}
-  .launchDisplay{margin:10px;border-radius:25px}.launchCountdownArea{padding:18px 8px 12px}.launchMainTitle{font-size:18px}.adSlider{height:285px;margin:0 9px 12px}
+  .launchDisplay{margin:8px 10px 12px!important;min-height:0!important;height:auto!important;padding:0!important;border-radius:22px!important}.launchCountdownArea{display:none!important}.adSlider{height:285px!important;margin:0!important}
   .caraaMiniTag{display:none}.caraaWordmark{font-size:22px}.availablePreview{grid-template-columns:repeat(8,1fr)}
 }
 
@@ -1117,34 +1117,38 @@ button{cursor:pointer}
 }
 
 
-/* === LAUNCH START: COUNTDOWN OFF + FULL-SCREEN DISPLAY === */
+/* === LAUNCH START: COUNTDOWN OFF — COMPACT AD DISPLAY === */
 .launchCountdownArea{display:none!important}
 .launchDisplay{
-  width:100vw!important;
+  width:auto!important;
   max-width:none!important;
-  min-height:100dvh!important;
-  margin:0 calc(50% - 50vw)!important;
-  border-radius:0!important;
-  display:flex!important;
-  align-items:center!important;
-  justify-content:center!important;
-  padding:24px!important;
+  min-height:0!important;
+  height:auto!important;
+  margin:10px 12px 14px!important;
+  padding:0!important;
+  border-radius:22px!important;
+  display:block!important;
   overflow:hidden!important;
-  background:
-    radial-gradient(circle at 82% 10%,rgba(25,194,255,.22),transparent 35%),
-    radial-gradient(circle at 10% 90%,rgba(124,58,237,.28),transparent 40%),
-    linear-gradient(145deg,#020817,#071733 55%,#12082f)!important;
 }
-.launchDisplay>*:not(.launchCountdownArea){
-  width:min(1100px,100%)!important;
+.launchDisplay>*:not(.launchCountdownArea){width:100%!important;max-width:100%!important}
+.launchDisplay .adSlider{
+  width:100%!important;
+  height:300px!important;
+  margin:0!important;
+  border-radius:22px!important;
 }
 @media(max-width:680px){
   .launchDisplay{
-    min-height:100dvh!important;
-    padding:16px!important;
+    min-height:0!important;
+    height:auto!important;
+    margin:8px 10px 12px!important;
+    padding:0!important;
+  }
+  .launchDisplay .adSlider{
+    height:285px!important;
+    margin:0!important;
   }
 }
-
 
 /* CARAA — 3 PHONE PHOTOS FULL SLIDE
    Slider presentation only. Language and app logic intentionally untouched. */
@@ -1588,192 +1592,36 @@ body{
 </style>
 
 
-<style>
-/* =========================================================
-   CARAA — TELEGRAM/iOS WIDTH ROOT FIX ONLY
-   Removes viewport-width overflow from launchDisplay.
-   No language / Supabase / payment / draw logic changes.
-========================================================= */
-html, body{
-  width:100%!important;
-  max-width:100%!important;
-  overflow-x:hidden!important;
-}
-
-.app,
-.page,
-.page.active{
-  width:100%!important;
-  max-width:100%!important;
-  min-width:0!important;
-  margin-left:0!important;
-  margin-right:0!important;
-  overflow-x:hidden!important;
-}
-
-.launchDisplay{
-  width:100%!important;
-  max-width:100%!important;
-  min-width:0!important;
-  margin-left:0!important;
-  margin-right:0!important;
-  box-sizing:border-box!important;
-}
-
-.launchDisplay>*:not(.launchCountdownArea){
-  width:100%!important;
-  max-width:100%!important;
-  min-width:0!important;
-  box-sizing:border-box!important;
-}
-
-.simpleDrawPage,
-.simpleDrawWrap,
-.simpleDrawLayout,
-.simpleMainColumn,
-.simpleProgressCard,
-.simpleStatsGrid,
-.simpleStatus,
-.simplePhoneSide{
-  box-sizing:border-box!important;
-  min-width:0!important;
-  max-width:100%!important;
-}
-
-@media(max-width:760px){
-  .launchDisplay{
-    width:100%!important;
-    max-width:100%!important;
-    margin:0!important;
-    padding:12px!important;
-  }
-  .simpleDrawWrap{
-    width:100%!important;
-    max-width:100%!important;
-    margin:0!important;
-    padding:10px!important;
-  }
-}
-</style>
-
 
 <style>
-/* =========================================================
-   CARAA — AD DISPLAY SLIDER ONLY FIX
-   Keeps the advertisement slider directly under its heading,
-   removes the large empty vertical space, and preserves slider logic.
-========================================================= */
-.launchDisplay{
-  min-height:0!important;
-  height:auto!important;
-  display:block!important;
-  padding:12px!important;
-}
-
-.launchDisplay .adSlider{
-  width:100%!important;
-  max-width:100%!important;
-  height:clamp(285px,68vw,390px)!important;
-  margin:0!important;
-  border-radius:23px!important;
-}
-
-.launchDisplay .adSlides,
-.launchDisplay .adSlide{
-  height:100%!important;
-}
-
-.launchDisplay .adSlide img{
-  width:100%!important;
-  height:100%!important;
-}
-
-@media(max-width:680px){
-  .launchDisplay{
-    min-height:0!important;
-    height:auto!important;
-    padding:10px!important;
-  }
-
-  .launchDisplay .adSlider{
-    height:clamp(285px,72vw,360px)!important;
-    margin:0!important;
-  }
-}
-</style>
-
-
-<style>
-/* CARAA — ONLY AD DISPLAY SLIDER + SPECIFICATION BOX FIX */
-
-/* Remove the tall launch-display wrapper completely from layout styling.
-   The advertisement slider itself stays as the visible card. */
-.launchDisplay{
-  display:block!important;
-  width:auto!important;
-  max-width:none!important;
-  min-width:0!important;
-  min-height:0!important;
-  height:auto!important;
-  margin:10px 12px 14px!important;
-  padding:0!important;
-  border:0!important;
-  border-radius:0!important;
-  box-shadow:none!important;
-  background:transparent!important;
-  overflow:visible!important;
-}
-.launchCountdownArea{display:none!important}
-.launchDisplay>*:not(.launchCountdownArea){
-  width:100%!important;
-  max-width:100%!important;
-}
-.launchDisplay .adSlider{
-  display:block!important;
-  position:relative!important;
-  width:100%!important;
-  max-width:100%!important;
-  height:315px!important;
-  min-height:0!important;
-  margin:0!important;
-  padding:0!important;
-  border-radius:22px!important;
-  overflow:hidden!important;
-}
-
-/* Every raffle specification uses the same neat iPhone-style boxes. */
+/* CARAA — SAME SPECIFICATION BOX STYLE FOR EVERY PHONE */
 #supabaseRaffleCards .phoneInfo .specChips{
   display:grid!important;
   grid-template-columns:repeat(2,minmax(0,1fr))!important;
   gap:7px!important;
   width:100%!important;
   margin:0 0 12px!important;
-  padding:8px 10px!important;
+  padding:10px 12px!important;
+  background:linear-gradient(180deg,rgba(7,18,43,.98),rgba(5,12,31,.98))!important;
 }
 #supabaseRaffleCards .phoneInfo .specChip{
-  width:100%!important;
-  min-width:0!important;
-  min-height:30px!important;
-  padding:6px 7px!important;
   display:flex!important;
   align-items:center!important;
   justify-content:center!important;
+  width:100%!important;
+  min-width:0!important;
+  min-height:31px!important;
+  padding:6px 8px!important;
+  border-radius:9px!important;
   text-align:center!important;
-  border-radius:8px!important;
-  font-size:8px!important;
-  line-height:1.25!important;
+  white-space:normal!important;
   overflow-wrap:anywhere!important;
-}
-
-@media(max-width:680px){
-  .launchDisplay{
-    margin:8px 10px 12px!important;
-    padding:0!important;
-  }
-  .launchDisplay .adSlider{
-    height:285px!important;
-    margin:0!important;
-  }
+  line-height:1.25!important;
+  font-size:9px!important;
+  font-weight:900!important;
+  color:#eef8ff!important;
+  background:linear-gradient(135deg,rgba(37,99,235,.20),rgba(124,58,237,.18))!important;
+  border:1px solid rgba(34,211,238,.22)!important;
 }
 </style>
 
@@ -3141,7 +2989,7 @@ async function loadSupabaseRaffles(){
             <div class="phoneInfo">
               <div class="specChips">${
                 String(r.specification||"")
-                  .split(/[\n,•|]+|\s+-\s+|\s*\.\s+(?=[A-Za-z0-9])|(?=\s+(?:\d+\s*(?:GB|TB|MP|mAh|Hz|inch|W)\b|(?:black|white|blue|green|red|orange|silver|gold|purple)\s+(?:color|colour)\b))/i)
+                  .split(/[\n,•|;,/]+|\s+-\s+|\s*\.\s+(?=[A-Za-z0-9])|(?=\s+(?:(?:RAM|ROM|Storage|Camera|Battery|Display|Screen|Color|Colour|Chip|Processor)\s*[:\-]?|\d+\s*(?:GB|TB|MP|mAh|Hz|inch|W)\b|(?:black|white|blue|green|red|orange|silver|gold|purple)\s+(?:color|colour)\b))/i)
                   .map(x=>x.trim().replace(/[.\-–—]+$/,"").trim())
                   .filter(Boolean)
                   .map(x=>`<span class="specChip">${escapeHtml(x)}</span>`)
