@@ -370,6 +370,265 @@ button{cursor:pointer}
   .simpleStatsGrid{grid-template-columns:repeat(2,1fr)}
 }
 
+
+/* FAST WINNER ROLL */
+.simpleRollOverlay{
+  position:fixed;
+  inset:0;
+  z-index:9500;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  background:rgba(0,0,0,.68);
+  backdrop-filter:blur(6px);
+}
+.simpleRollOverlay.show{display:flex}
+.simpleRollCard{
+  width:min(430px,88vw);
+  padding:26px 18px;
+  border-radius:30px;
+  text-align:center;
+  background:
+    radial-gradient(circle at 50% 20%,rgba(25,194,255,.22),transparent 32%),
+    linear-gradient(145deg,#061126,#121044);
+  border:1px solid rgba(25,194,255,.34);
+  box-shadow:0 0 55px rgba(37,99,235,.33),0 22px 60px rgba(0,0,0,.45);
+  transform:scale(.96);
+}
+.simpleRollCard.buzz{
+  animation:simpleBuzz .08s linear infinite;
+}
+.simpleRollTop{
+  display:inline-flex;
+  padding:7px 12px;
+  border-radius:999px;
+  background:rgba(39,209,127,.10);
+  border:1px solid rgba(39,209,127,.22);
+  color:#28f0a3;
+  font-size:10px;
+  font-weight:1000;
+  letter-spacing:2px;
+}
+.simpleRollNumber{
+  margin-top:16px;
+  font-size:72px;
+  line-height:1;
+  font-weight:1000;
+  color:#fff;
+  text-shadow:0 0 26px rgba(25,194,255,.45);
+  letter-spacing:1px;
+}
+.simpleRollSub{
+  margin-top:12px;
+  color:#b9c8e6;
+  font-size:12px;
+  font-weight:900;
+}
+.simpleRollMeta{
+  margin-top:16px;
+  display:grid;
+  gap:7px;
+}
+.simpleRollMeta span{
+  display:block;
+  padding:9px 11px;
+  border-radius:14px;
+  background:rgba(255,255,255,.07);
+  border:1px solid rgba(255,255,255,.08);
+  color:#eaf4ff;
+  font-size:13px;
+  font-weight:1000;
+}
+.winnerUserLine{
+  margin-top:9px;
+  color:#8fdcff;
+  font-size:14px;
+  font-weight:1000;
+}
+.winnerPhoneLine{
+  margin-top:5px;
+  color:#c4d0e4;
+  font-size:12px;
+  font-weight:900;
+}
+@keyframes simpleBuzz{
+  0%{transform:translate(0,0) rotate(0) scale(.98)}
+  25%{transform:translate(2px,-1px) rotate(.35deg) scale(1)}
+  50%{transform:translate(-1px,2px) rotate(-.35deg) scale(.99)}
+  75%{transform:translate(1px,1px) rotate(.2deg) scale(1)}
+  100%{transform:translate(0,0) rotate(0) scale(.98)}
+}
+@media(max-width:680px){
+  .simpleRollNumber{font-size:54px}
+  .simpleRollCard{border-radius:24px;padding:22px 14px}
+}
+
+
+/* ENDED RAFFLE / FULL WINNER INFO */
+.endedRaffle .phoneCard{opacity:.78;filter:saturate(.75)}
+.phoneBadge.endedBadge{
+  background:linear-gradient(135deg,#64748b,#334155)!important;
+  color:#fff!important;
+}
+.endedBtn{
+  background:#334155!important;
+  color:#cbd5e1!important;
+  box-shadow:none!important;
+  cursor:not-allowed!important;
+}
+.ticketPhoneOption.endedOption{
+  opacity:.55;
+  cursor:not-allowed;
+  background:#1f2937!important;
+}
+.winnerPhoneLine{
+  color:#fff!important;
+  font-size:14px!important;
+  letter-spacing:.3px;
+}
+.simpleHistoryItem small:last-child{
+  color:#e6f3ff;
+}
+
+
+/* HOME ENDED RAFFLE SLIDER */
+.endedHeroSlider{
+  margin-top:16px;
+  padding:13px;
+  border-radius:20px;
+  background:
+    radial-gradient(circle at 100% 0%,rgba(25,194,255,.16),transparent 34%),
+    rgba(255,255,255,.055);
+  border:1px solid rgba(255,255,255,.09);
+}
+.endedHeroHead{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:10px;
+}
+.endedHeroHead strong{
+  font-size:14px;
+  font-weight:1000;
+}
+.endedHeroHead small{
+  color:#8fdcff;
+  font-size:9px;
+  font-weight:900;
+}
+.endedHeroTrack{
+  display:flex;
+  gap:9px;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+  padding-bottom:2px;
+}
+.endedHeroCard{
+  flex:0 0 220px;
+  scroll-snap-align:start;
+  display:grid;
+  grid-template-columns:62px 1fr;
+  gap:10px;
+  align-items:center;
+  padding:10px;
+  border-radius:16px;
+  background:linear-gradient(135deg,rgba(37,99,235,.16),rgba(124,58,237,.13));
+  border:1px solid rgba(25,194,255,.16);
+}
+.endedHeroCard img{
+  width:62px;
+  height:62px;
+  object-fit:contain;
+  border-radius:13px;
+  background:#eef1f5;
+  padding:5px;
+}
+.endedHeroCard h4{
+  font-size:11px;
+  line-height:1.2;
+  margin:0;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.endedHeroCard .endedTag{
+  display:inline-flex;
+  margin-top:5px;
+  padding:4px 7px;
+  border-radius:999px;
+  background:rgba(239,68,68,.12);
+  border:1px solid rgba(239,68,68,.24);
+  color:#fecaca;
+  font-size:8px;
+  font-weight:1000;
+}
+.endedHeroCard p{
+  margin-top:5px;
+  color:#cdd8ee;
+  font-size:8px;
+  line-height:1.4;
+  font-weight:900;
+}
+.endedHeroEmpty{
+  width:100%;
+  text-align:center;
+  padding:14px;
+  color:#95a4c1;
+  font-size:10px;
+  font-weight:900;
+}
+.simpleWinnerPanel.autoCloseHint:after{
+  content:"5 ሰከንድ በኋላ ይዘጋል";
+  display:block;
+  margin-top:9px;
+  color:#8fdcff;
+  font-size:10px;
+  font-weight:900;
+}
+@media(max-width:680px){
+  .endedHeroCard{flex-basis:190px;grid-template-columns:54px 1fr}
+  .endedHeroCard img{width:54px;height:54px}
+}
+
+
+/* HOME ACTIVE LIST: ended raffles are removed and shown only in top History slider */
+.emptyActiveRaffle{
+  min-height:145px;
+  display:grid;
+  place-items:center;
+  text-align:center;
+  background:
+    radial-gradient(circle at 50% 0%,rgba(25,194,255,.13),transparent 35%),
+    rgba(255,255,255,.055)!important;
+}
+.emptyActiveText{
+  margin-top:8px;
+  color:#aebbd1;
+  font-size:12px;
+  line-height:1.45;
+  font-weight:800;
+}
+.endedDrawPhone{
+  opacity:.72;
+  border-color:rgba(148,163,184,.22)!important;
+  background:rgba(30,41,59,.32)!important;
+}
+.endedDrawPhone .choicePrice{
+  color:#fecaca!important;
+}
+
+
+/* PAYMENT ACCOUNT OWNER */
+.accountOwner{
+  display:block;
+  margin-top:4px;
+  color:#8fdcff;
+  font-size:9px;
+  font-weight:900;
+  letter-spacing:.2px;
+}
+
 /* PROFILE */
 .profileWrap{padding:16px}
 .profileHero{position:relative;overflow:hidden;padding:20px;border-radius:26px;background:radial-gradient(circle at 90% 10%,rgba(124,58,237,.38),transparent 30%),radial-gradient(circle at 10% 90%,rgba(37,99,235,.3),transparent 35%),linear-gradient(135deg,#071127,#14134A);border:1px solid rgba(100,117,255,.2);box-shadow:0 18px 45px rgba(0,0,0,.3)}
@@ -664,6 +923,17 @@ button{cursor:pointer}
 
 <!-- HOME -->
 <main id="home" class="page active">
+
+    <div class="endedHeroSlider" id="endedHeroSlider">
+      <div class="endedHeroHead">
+        <strong>ያለቁ እጣዎች</strong>
+        <small>የወጡ አሸናፊዎች</small>
+      </div>
+      <div class="endedHeroTrack" id="endedHeroTrack">
+        <div class="endedHeroEmpty">ገና የወጣ እጣ የለም</div>
+      </div>
+    </div>
+
 <section class="launchDisplay">
   <div class="launchCountdownArea">
     <div class="launchTop"><span class="launchPulse"></span><span data-i18n="bigAd">ታላቅ የCARAA ማስታወቂያ</span></div>
@@ -823,6 +1093,20 @@ button{cursor:pointer}
       <div class="winnerLabel" data-i18n="winnerLabel">አሸናፊ ቁጥር</div>
       <div class="winnerNumber" id="winnerNumber">#---</div>
       <div class="winnerName" id="winnerNameAlt">CARAA</div>
+      <div class="winnerUserLine" id="winnerUserLine">@---</div>
+      <div class="winnerPhoneLine" id="winnerPhoneLine">---</div>
+    </div>
+
+    <div class="simpleRollOverlay" id="simpleRollOverlay">
+      <div class="simpleRollCard" id="simpleRollCard">
+        <div class="simpleRollTop">FAST DRAW</div>
+        <div class="simpleRollNumber" id="simpleRollNumber">#---</div>
+        <div class="simpleRollSub" id="simpleRollSub">ቁጥሮች በፍጥነት እየተዘዋወሩ...</div>
+        <div class="simpleRollMeta">
+          <span id="simpleRollPrize">CARAA</span>
+          <span id="simpleRollUser">@---</span>
+        </div>
+      </div>
     </div>
 
     <!-- Hidden compatibility elements for existing winner/countdown functions -->
@@ -923,6 +1207,7 @@ const SUPABASE_PUBLISHABLE_KEY="sb_publishable_yiFBmF7yzA_VBROGwFvNiQ_HbnVoLep";
 const sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY);
 let supabaseRaffles=[];
 let approvedByRaffle=new Map();
+let approvedTicketInfoByKey=new Map();
 
 /* =========================
    STATE + DEMO STORAGE
@@ -1122,13 +1407,57 @@ function showPage(page){
    TICKETS + CHECKOUT
 ========================= */
 let ticketProductIndex=0;
+
+function raffleIsEnded(raffle){
+  if(!raffle) return false;
+  const approved=(approvedByRaffle.get(raffle.id)||new Set()).size;
+  const total=Number(raffle.total_tickets||1000);
+  const state=String(raffle.draw_status||"").trim().toUpperCase();
+  return Boolean(raffle.winner_ticket_number) || state==="DRAWN" || state==="COUNTDOWN" || (total>0 && approved>=total);
+}
+
+function firstOpenRaffleIndex(){
+  const idx=supabaseRaffles.findIndex(r=>!raffleIsEnded(r));
+  return idx>=0 ? idx : -1;
+}
+
 function openTickets(productIndex=drawPhoneIndex){
   const chooser=document.getElementById("ticketPhoneChooser");
-  if(productIndex==="choose"){ticketProductIndex=0;chooser.classList.add("show");document.querySelectorAll(".ticketPhoneOption").forEach((b,i)=>b.classList.toggle("active",i===0));}
-  else{ticketProductIndex=Number(productIndex)||0;chooser.classList.remove("show");}
-  document.getElementById("ticketModal").classList.add("show");renderNumbers();
+  if(productIndex==="choose"){
+    const firstOpen=firstOpenRaffleIndex();
+    if(firstOpen<0){
+      alert("ሁሉም እጣ አልቋል። አዲስ እጣ እስኪገባ ይጠብቁ።");
+      return;
+    }
+    ticketProductIndex=firstOpen;
+    chooser.classList.add("show");
+    document.querySelectorAll(".ticketPhoneOption").forEach((b,i)=>b.classList.toggle("active",i===firstOpen));
+  }else{
+    ticketProductIndex=Number(productIndex)||0;
+    chooser.classList.remove("show");
+  }
+
+  const raffle=supabaseRaffles[ticketProductIndex]||supabaseRaffles[0];
+  if(raffleIsEnded(raffle)){
+    alert("ይህ እጣ አልቋል።");
+    return;
+  }
+
+  document.getElementById("ticketModal").classList.add("show");
+  renderNumbers();
 }
-function chooseTicketPhone(index,btn){ticketProductIndex=index;selectedNumber=null;document.querySelectorAll(".ticketPhoneOption").forEach(b=>b.classList.remove("active"));btn.classList.add("active");renderNumbers();}
+function chooseTicketPhone(index,btn){
+  const raffle=supabaseRaffles[index];
+  if(raffleIsEnded(raffle)){
+    alert("ይህ እጣ አልቋል።");
+    return;
+  }
+  ticketProductIndex=index;
+  selectedNumber=null;
+  document.querySelectorAll(".ticketPhoneOption").forEach(b=>b.classList.remove("active"));
+  btn.classList.add("active");
+  renderNumbers();
+}
 function closeTickets(){document.getElementById("ticketModal").classList.remove("show");}
 function closeCheckout(){document.getElementById("checkoutModal").classList.remove("show");}
 document.getElementById("ticketModal").addEventListener("click",e=>{if(e.target.id==="ticketModal")closeTickets();});
@@ -1332,52 +1661,132 @@ function setPhase(step,label){
 }
 let renderedWinnerKey="";
 
-function animateDbWinner(finalNumber, raffle){
-  if(drawing || !finalNumber) return;
-  drawing=true; drawEnergy=8;
 
-  const machine=document.getElementById("machine");
+function maskWinnerPhone(phone){
+  const raw=String(phone||"").trim();
+  return raw;
+}
+
+function getWinnerInfo(raffleId, ticketNumber){
+  return approvedTicketInfoByKey.get(raffleId+":"+Number(ticketNumber)) || {username:"",name:"",phone:""};
+}
+
+function winnerDisplayUser(info){
+  if(info?.username) return "@"+String(info.username).replace(/^@/,"");
+  if(info?.name) return info.name;
+  return "@---";
+}
+
+function winnerDisplayPhone(info){
+  const masked=maskWinnerPhone(info?.phone);
+  return masked || "---";
+}
+
+function setWinnerVisibleInfo(raffle, finalNumber){
+  const info=getWinnerInfo(raffle.id, finalNumber);
+  const user=winnerDisplayUser(info);
+  const phone=winnerDisplayPhone(info);
+  const prize=raffle.phone_name||"CARAA";
+
+  const winnerName=document.getElementById("winnerName");
+  const winnerAlt=document.getElementById("winnerNameAlt");
+  const userLine=document.getElementById("winnerUserLine");
+  const phoneLine=document.getElementById("winnerPhoneLine");
+  const rollPrize=document.getElementById("simpleRollPrize");
+  const rollUser=document.getElementById("simpleRollUser");
+
+  if(winnerName) winnerName.textContent=prize;
+  if(winnerAlt) winnerAlt.textContent=prize;
+  if(userLine) userLine.textContent=user;
+  if(phoneLine) phoneLine.textContent="📞 "+phone;
+  if(rollPrize) rollPrize.textContent="🏆 "+prize;
+  if(rollUser) rollUser.textContent=user+" • 📞 "+phone;
+}
+
+
+function animateDbWinner(finalNumber, raffle){
+  if(drawing || !finalNumber || !raffle) return;
+  drawing=true;
+  drawEnergy=8;
+
   const winner=document.getElementById("winner");
-  const display=document.getElementById("winnerBall");
-  const approved=Array.from(approvedByRaffle.get(raffle.id)||new Set());
+  const overlay=document.getElementById("simpleRollOverlay");
+  const rollCard=document.getElementById("simpleRollCard");
+  const rollNumber=document.getElementById("simpleRollNumber");
+  const rollSub=document.getElementById("simpleRollSub");
+  const approved=Array.from(approvedByRaffle.get(raffle.id)||new Set()).map(Number);
   const animationNumbers=approved.length?approved:[Number(finalNumber)];
 
-  winner.classList.remove("show");
-  display.classList.remove("show");
-  machine.classList.add("drawing");
+  if(winner) winner.classList.remove("show");
+  setWinnerVisibleInfo(raffle,finalNumber);
+
+  if(overlay) overlay.classList.add("show");
+  if(rollCard) rollCard.classList.add("buzz");
+  if(rollSub) rollSub.textContent="ቁጥሮች በፍጥነት እየተዘዋወሩ...";
+  if(rollNumber) rollNumber.textContent="#---";
+
   setPhase("stepLocked",T[language].locked);
   document.getElementById("drawStatusText").textContent=T[language].drawingStatus;
   document.getElementById("drawStatusSub").textContent=T[language].drawingSub;
 
-  setTimeout(()=>setPhase("stepDrawing",T[language].drawing),650);
+  setTimeout(()=>setPhase("stepDrawing",T[language].drawing),250);
 
   let count=0;
+  let speed=28;
   const roll=setInterval(()=>{
     const preview=animationNumbers[Math.floor(Math.random()*animationNumbers.length)];
-    display.textContent="#"+String(preview).padStart(3,"0");
+    if(rollNumber) rollNumber.textContent="#"+String(preview).padStart(3,"0");
     count++;
-    if(count===35) setPhase("stepVerify",T[language].verifying);
 
-    if(count>=48){
+    if(count===38){
+      setPhase("stepVerify",T[language].verifying);
+      if(rollSub) rollSub.textContent="ቁጥሩ እየተረጋገጠ ነው...";
+    }
+
+    if(count>=70){
       clearInterval(roll);
-      display.textContent="#"+String(finalNumber).padStart(3,"0");
-      display.classList.add("show");
+      if(rollCard) rollCard.classList.remove("buzz");
+      if(rollNumber) rollNumber.textContent="#"+String(finalNumber).padStart(3,"0");
+      if(rollSub) rollSub.textContent="✅ አሸናፊ ተገኝቷል";
 
       setTimeout(()=>{
-        machine.classList.remove("drawing");
-        drawEnergy=0;
         setPhase("stepWinner",T[language].winner);
-        document.getElementById("winnerNumber").textContent="#"+String(finalNumber).padStart(3,"0");
-        document.getElementById("winnerName").textContent=raffle.phone_name||"CARAA";
-        winner.classList.add("show");
+        const winnerNumber=document.getElementById("winnerNumber");
+        if(winnerNumber) winnerNumber.textContent="#"+String(finalNumber).padStart(3,"0");
+        setWinnerVisibleInfo(raffle,finalNumber);
+        if(winner){
+          winner.classList.add("show");
+          winner.classList.add("autoCloseHint");
+        }
+        const simpleWinnerStat=document.getElementById("simpleWinnerStat");
+        if(simpleWinnerStat) simpleWinnerStat.textContent="#"+String(finalNumber).padStart(3,"0");
+        renderEndedHeroSlider();
+
         document.getElementById("drawStatusText").textContent=T[language].winnerStatus;
         document.getElementById("drawStatusSub").textContent=
           T[language].winnerSubPrefix+String(finalNumber).padStart(3,"0")+T[language].winnerSubSuffix;
+
+        setTimeout(()=>{
+          if(overlay) overlay.classList.remove("show");
+        },1300);
+
+        setTimeout(()=>{
+          if(winner){
+            winner.classList.remove("show");
+            winner.classList.remove("autoCloseHint");
+          }
+          setPhase("stepReady",T[language].ready);
+          document.getElementById("drawStatusText").textContent=T[language].winnerStatus;
+          document.getElementById("drawStatusSub").textContent="አሸናፊው History ውስጥ ተቀምጧል።";
+        },5000);
+
         drawing=false;
-      },700);
+        drawEnergy=0;
+      },850);
     }
-  },70);
+  },speed);
 }
+
 
 function updateSupabaseDrawState(){
   const raffle=supabaseRaffles[drawPhoneIndex]||supabaseRaffles[0];
@@ -1409,6 +1818,7 @@ function updateSupabaseDrawState(){
   if(percentEl) percentEl.textContent=percent+"%";
   if(priceEl) priceEl.textContent=Number(raffle.ticket_price||0).toLocaleString()+" ብር";
   if(winnerStat) winnerStat.textContent=raffle.winner_ticket_number ? "#"+String(raffle.winner_ticket_number).padStart(3,"0") : "---";
+  if(raffle.winner_ticket_number) setWinnerVisibleInfo(raffle,Number(raffle.winner_ticket_number));
 
   const state=String(raffle.draw_status||"WAITING").toUpperCase();
   const countdownEl=document.getElementById("countdown");
@@ -1450,27 +1860,68 @@ function updateSupabaseDrawState(){
 }
 
 
+
+function renderEndedHeroSlider(){
+  const track=document.getElementById("endedHeroTrack");
+  if(!track) return;
+
+  const ended=supabaseRaffles
+    .filter(r=>raffleIsEnded(r) || String(r.draw_status||"").toUpperCase()==="DRAWN" || r.winner_ticket_number)
+    .sort((a,b)=>String(b.drawn_at||b.updated_at||"").localeCompare(String(a.drawn_at||a.updated_at||"")));
+
+  if(!ended.length){
+    track.innerHTML='<div class="endedHeroEmpty">ገና የወጣ እጣ የለም</div>';
+    return;
+  }
+
+  track.innerHTML=ended.map(r=>{
+    const no=Number(r.winner_ticket_number||0);
+    const info=no?getWinnerInfo(r.id,no):{username:"",name:"",phone:""};
+    const user=no?winnerDisplayUser(info):"አሸናፊ በቅርብ";
+    const phone=no?winnerDisplayPhone(info):"";
+    const winner=no?("#"+String(no).padStart(3,"0")):"COUNTDOWN";
+    return `<div class="endedHeroCard">
+      ${r.phone_image_url?`<img src="${escapeHtml(r.phone_image_url)}" alt="${escapeHtml(r.phone_name||"CARAA")}">`:`<div></div>`}
+      <div>
+        <h4>${escapeHtml(r.phone_name||"CARAA")}</h4>
+        <span class="endedTag">ያለቀ እጣ</span>
+        <p>Winner: <b>${winner}</b><br>${escapeHtml(user)}${phone?`<br>📞 ${escapeHtml(phone)}`:""}</p>
+      </div>
+    </div>`;
+  }).join("");
+}
+
 async function loadSupabaseRaffles(){
   try{
     const {data,error}=await sb.from("raffles").select("*").order("created_at",{ascending:false});
     if(error)throw error;
     supabaseRaffles=(data||[]).filter(r=>String(r.status||"").trim().toUpperCase()==="ACTIVE");
     approvedByRaffle=new Map();
+    approvedTicketInfoByKey=new Map();
     if(supabaseRaffles.length){
       const raffleIds=supabaseRaffles.map(r=>r.id);
       const {data:approved,error:approvedError}=await sb
-        .from("tickets").select("raffle_id,ticket_number,status")
+        .from("tickets").select("raffle_id,ticket_number,status,telegram_username,customer_name,customer_phone")
         .in("raffle_id",raffleIds).eq("status","APPROVED");
       if(approvedError) throw approvedError;
       (approved||[]).forEach(t=>{
+        const no=Number(t.ticket_number);
         if(!approvedByRaffle.has(t.raffle_id)) approvedByRaffle.set(t.raffle_id,new Set());
-        approvedByRaffle.get(t.raffle_id).add(Number(t.ticket_number));
+        approvedByRaffle.get(t.raffle_id).add(no);
+        approvedTicketInfoByKey.set(t.raffle_id+":"+no,{
+          username:t.telegram_username||"",
+          name:t.customer_name||"",
+          phone:t.customer_phone||""
+        });
       });
     }
     drawNames=supabaseRaffles.map(r=>r.phone_name);
     const ticketChooser=document.getElementById("ticketPhoneChooser");
     if(ticketChooser){
-      ticketChooser.innerHTML=supabaseRaffles.map((r,i)=>`
+      ticketChooser.innerHTML=supabaseRaffles
+        .map((r,i)=>({r,i}))
+        .filter(x=>!raffleIsEnded(x.r))
+        .map(({r,i})=>`
         <button class="ticketPhoneOption" type="button" onclick="chooseTicketPhone(${i},this)">
           ${escapeHtml(r.phone_name)}
         </button>`).join("");
@@ -1478,17 +1929,20 @@ async function loadSupabaseRaffles(){
     const drawWrap=document.getElementById("supabaseDrawPhones");
     if(drawPhoneIndex>=supabaseRaffles.length) drawPhoneIndex=0;
     if(drawWrap){
-      drawWrap.innerHTML=supabaseRaffles.map((r,i)=>{
+      drawWrap.innerHTML=supabaseRaffles
+        .map((r,i)=>({r,i,ended:raffleIsEnded(r)}))
+        .sort((a,b)=>Number(a.ended)-Number(b.ended))
+        .map(({r,i,ended})=>{
         const approvedCount=(approvedByRaffle.get(r.id)||new Set()).size;
         const totalCount=Number(r.total_tickets||1000);
         const remainCount=Math.max(0,totalCount-approvedCount);
         return `
-        <div class="drawPhoneChoice ${i===drawPhoneIndex?"active":""}" onclick="selectDrawPhone(${i})">
+        <div class="drawPhoneChoice ${i===drawPhoneIndex?"active":""} ${ended?"endedDrawPhone":""}" onclick="selectDrawPhone(${i})">
           ${r.phone_image_url?`<img class="choiceImg" src="${escapeHtml(r.phone_image_url)}" alt="${escapeHtml(r.phone_name)}">`:""}
           <div class="choiceBody">
             <h3>${escapeHtml(r.phone_name)}</h3>
-            <div class="choicePrice">${Number(r.ticket_price||0).toLocaleString()} ብር</div>
-            <div class="choiceStats">${approvedCount}/${totalCount} ተቆርጧል • ቀሪ ${remainCount}</div>
+            <div class="choicePrice">${ended?"ያለቀ እጣ":Number(r.ticket_price||0).toLocaleString()+" ብር"}</div>
+            <div class="choiceStats">${approvedCount}/${totalCount} ተቆርጧል • ${ended?"History ውስጥ ገብቷል":"ቀሪ "+remainCount}</div>
           </div>
         </div>`;
       }).join("");
@@ -1496,32 +1950,54 @@ async function loadSupabaseRaffles(){
     }
     const wrap=document.getElementById("supabaseRaffleCards");
     if(!wrap)return;
-    wrap.innerHTML=supabaseRaffles.map((r,i)=>`
-      <div class="phoneRow">
-        <div class="phoneCard">
-          <div class="phoneGallery">
-            <span class="phoneBadge">LIVE</span>
-            ${r.phone_image_url?`<img class="phoneMainImage" src="${escapeHtml(r.phone_image_url)}" alt="${escapeHtml(r.phone_name)}">`:""}
-          </div>
-          <div class="phoneInfo">
-            <h3>${escapeHtml(r.phone_name)}</h3>
-            <div class="specChips">${
-              String(r.specification||"")
-                .split(/[\n,•|]+/)
-                .map(x=>x.trim())
-                .filter(Boolean)
-                .map(x=>`<span class="specChip">${escapeHtml(x)}</span>`)
-                .join("")
-            }</div>
-            <div class="phonePrice">${Number(r.ticket_price||0).toLocaleString()} ብር</div>
-            <div class="raffleCounts">
-              <span>የተቆረጠ: <b>${(approvedByRaffle.get(r.id)||new Set()).size}</b></span>
-              <span>ቀሪ: <b>${Math.max(0,Number(r.total_tickets||1000)-(approvedByRaffle.get(r.id)||new Set()).size)}</b></span>
+    const openHomeRaffles=supabaseRaffles
+      .map((r,i)=>({r,i}))
+      .filter(x=>!raffleIsEnded(x.r));
+
+    if(!openHomeRaffles.length){
+      wrap.innerHTML=`
+        <div class="phoneRow">
+          <div class="phoneCard emptyActiveRaffle">
+            <div class="phoneInfo">
+              <h3>አዲስ እጣ በቅርብ</h3>
+              <p class="emptyActiveText">አሁን ያሉት እጣዎች አልቀዋል። የወጡትን ከላይ በHistory slider ይመልከቱ።</p>
             </div>
-            <button class="confirm" type="button" onclick="openTickets(${i})" data-i18n="cutRaffle">🎟️ እጣ ለመቁረጥ</button>
           </div>
-        </div>
-      </div>`).join("");
+        </div>`;
+    }else{
+      wrap.innerHTML=openHomeRaffles.map(({r,i})=>{
+        const approvedCount=(approvedByRaffle.get(r.id)||new Set()).size;
+        const totalCount=Number(r.total_tickets||1000);
+        const remainCount=Math.max(0,totalCount-approvedCount);
+        return `
+        <div class="phoneRow">
+          <div class="phoneCard">
+            <div class="phoneGallery">
+              <span class="phoneBadge">LIVE</span>
+              ${r.phone_image_url?`<img class="phoneMainImage" src="${escapeHtml(r.phone_image_url)}" alt="${escapeHtml(r.phone_name)}">`:""}
+            </div>
+            <div class="phoneInfo">
+              <h3>${escapeHtml(r.phone_name)}</h3>
+              <div class="specChips">${
+                String(r.specification||"")
+                  .split(/[\n,•|]+/)
+                  .map(x=>x.trim())
+                  .filter(Boolean)
+                  .map(x=>`<span class="specChip">${escapeHtml(x)}</span>`)
+                  .join("")
+              }</div>
+              <div class="phonePrice">${Number(r.ticket_price||0).toLocaleString()} ብር</div>
+              <div class="raffleCounts">
+                <span>የተቆረጠ: <b>${approvedCount}</b></span>
+                <span>ቀሪ: <b>${remainCount}</b></span>
+              </div>
+              <button class="confirm" type="button" onclick="openTickets(${i})">🎟️ እጣ ለመቁረጥ</button>
+            </div>
+          </div>
+        </div>`;
+      }).join("");
+    }
+    renderEndedHeroSlider();
     updateSupabaseDrawState();
   }catch(err){
     console.error("CARAA Supabase raffle load:",err);
@@ -1573,15 +2049,12 @@ function manualSimpleDrawClick(){
   }
   const state=String(raffle.draw_status||"WAITING").toUpperCase();
   if(state==="DRAWN" && raffle.winner_ticket_number){
-    document.getElementById("winnerNumber").textContent="#"+String(raffle.winner_ticket_number).padStart(3,"0");
-    document.getElementById("winnerName").textContent=raffle.phone_name||"CARAA";
-    const winnerAlt=document.getElementById("winnerNameAlt");
-    if(winnerAlt) winnerAlt.textContent=raffle.phone_name||"CARAA";
-    document.getElementById("winner").classList.add("show");
+    animateDbWinner(Number(raffle.winner_ticket_number),raffle);
   }else{
     alert("እጣው ገና አልወጣም። 100% ሲሞላ እና countdown ሲያልቅ በserver ይወጣል።");
   }
 }
+
 
 function openDrawHistory(){
   const modal=document.getElementById("drawHistoryModal");
@@ -1597,15 +2070,24 @@ function openDrawHistory(){
   }else{
     list.innerHTML=drawn.map(r=>{
       const when=r.drawn_at?new Date(r.drawn_at).toLocaleString():"";
-      const winner=r.winner_ticket_number?("#"+String(r.winner_ticket_number).padStart(3,"0")):"---";
+      const no=Number(r.winner_ticket_number||0);
+      const info=no?getWinnerInfo(r.id,no):{username:"",name:"",phone:""};
+      const user=winnerDisplayUser(info);
+      const phone=winnerDisplayPhone(info);
+      const winner=no?("#"+String(no).padStart(3,"0")):"---";
       return `<div class="simpleHistoryItem">
-        <div><strong>${escapeHtml(r.phone_name||"CARAA")}</strong><small>${escapeHtml(when)}</small></div>
+        <div>
+          <strong>${escapeHtml(r.phone_name||"CARAA")}</strong>
+          <small>${escapeHtml(when)}</small>
+          <small>${escapeHtml(user)} • 📞 ${escapeHtml(phone)}</small>
+        </div>
         <b>${winner}</b>
       </div>`;
     }).join("");
   }
   modal.classList.add("show");
 }
+
 
 function closeDrawHistory(){
   const modal=document.getElementById("drawHistoryModal");
